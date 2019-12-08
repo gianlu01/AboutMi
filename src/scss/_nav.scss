@@ -1,0 +1,68 @@
+@import "_variables.scss";
+
+nav {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  padding: 20px 0;
+  .nav-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .nav-logo {
+      padding: 20px 40px;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      .nav-image {
+        height: 50px;
+        width: 50px;
+        display: block;
+      }
+    }
+    .nav-items {
+      margin: 0;
+      padding: 0 40px;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      li {
+        display: inline-block;
+        padding: 20px 0;
+        &:first-child {
+          .nav-link {
+            padding-left: 0;
+          }
+        }
+        .nav-link {
+          cursor: pointer;
+          display: inline-block;
+          padding: 15px 12.5px;
+          color: #777;
+          font-size: 15px;
+          font-weight: 400;
+          text-decoration: none;
+          &.btn-login {
+            margin-left: 10px;
+            padding: 10px 25px;
+            border-radius: 4px;
+            background: $colorPrimary;
+            color: #fff;
+            font-size: 14px;
+            box-shadow: 3px 3px 20px rgba(0, 76, 255, 0.4);
+            transition: ease-in-out all 0.5s;
+            &:hover {
+              background: $colorSecondary;
+            }
+          }
+        }
+      }
+    }
+  }
+}
