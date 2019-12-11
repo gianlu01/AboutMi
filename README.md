@@ -33,4 +33,5 @@ I Dataset utilizzati provengono dal sito del Comune di Milano, esso li mette a d
   - aiuto back-end
 - **Simone Bagliesi**:
   - front-end
+  - aiuto back-end
 
