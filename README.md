@@ -24,9 +24,9 @@ I Dataset utilizzati provengono dal sito del Comune di Milano, esso li mette a d
 ### Ripartizione dei Lavori:
 - **Gianluca Parpanesi**:
   - front-end
-  - back-end (in caso utilizzo di SQL)
+  - aiuto back-end
 - **Banfi Michele**:
-  - back-end (in caso utilizzo MongoDB)
+  - back-end
   - aiuto front-end
 - **Ernesto Pastori**:
   - front-end
