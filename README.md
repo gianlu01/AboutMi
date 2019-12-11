@@ -12,8 +12,8 @@ Sviluppato per dare possibilità ai Milanesi di divertirsi e conoscere al meglio
 - JavaScript
 
 ### Linguaggi utilizzati per il back-end:
-- MongoDB
-I Dataset utilizzati provengono dal sito del Comune di Milano, esso li mette a disponsizione per poterli utilizzare per svolgere analisi o, come nel nostro caso, sviluppare un appplicazione (web).
+- MongoDB, database in JSON
+I Dataset utilizzati provengono dal sito del Comune di Milano, esso li mette a disponsizione per poterli utilizzare per svolgere analisi o, come nel nostro caso, sviluppare un appplicazione web.
 
 ### Link ai Dataset:
 - http://dati.comune.milano.it/dataset
@@ -32,4 +32,6 @@ I Dataset utilizzati provengono dal sito del Comune di Milano, esso li mette a d
 - **Simone Bagliesi**:
   - front-end
   - aiuto back-end
+
+
 
