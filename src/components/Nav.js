@@ -2,26 +2,68 @@ import React from 'react';
 import logo from '../icons/logo.png';
 
 
-function Login(){
-  alert("Schiacciato il login");
-}
 
-function Nav() {
-  return (
-    <nav>
+
+
+class Nav extends React.Component {
+  
+  constructor(props){
+    super(props);
+
+    /*Lo stato è un oggetto e
+      permette di modificare lo stato delle
+      variabili al suo interno potendo anche
+      fornzare il re-render della pagina (this.setState()) 
+    */
+    this.state = {
+      showModal: false
+    };
+  }
+
+  
+
+  render() {
+    return (
+      <nav>
         <div className="nav-container">
-        <div className="nav-logo">
+          <div className="nav-logo">
             <img className="nav-image" src={logo} alt="Logo AboutMI" />
+          </div>
+          <ul className="nav-items">
+            <li><a href="" className="nav-link" OnClick={() => {
+
+              //FUNZIONE COSA FACCIAMO, LINK A FONDO PAGINA
+
+              this.setState({
+                showModal: true
+              });
+
+              alert(this.state.showModal + "asd");
+
+            }}>Cosa facciamo</a></li>
+
+            <li><a href="" className="nav-link" onClick={() => {
+
+              //MODAL CONTATTI
+
+            }}>Contatti</a></li>
+
+            <li><a href="" className="nav-link" onClick={() => {
+
+              //MODAL LAVORA CON NOI
+
+            }}>Lavora con noi </a></li>
+
+            <li><a href="" className="nav-link btn-login" onClick={()=> {
+              
+              //FUNZIONE DI LOGIN
+              alert("Login Schiacciato");
+            }}>Login</a></li>
+          </ul>
         </div>
-        <ul className="nav-items">
-            <li><a href="" className="nav-link">Cosa facciamo</a></li>
-            <li><a href="" className="nav-link">Contatti</a></li>
-            <li><a href="" className="nav-link">Lavora con noi</a></li>
-            <li><a href="" className="nav-link btn-login" onClick={Login()}>Login</a></li>
-        </ul>
-        </div>
-    </nav>
-  );
+      </nav >
+    );
+  }
 }
 
 export default Nav;
