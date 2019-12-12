@@ -35,5 +35,25 @@ I Dataset utilizzati provengono dal sito del Comune di Milano, esso li mette a d
   - front-end
   - aiuto back-end
 
+  ### Comandi Git
+
+  #### Scaricare la cartella da GitHub per avere tutto aggiornato all'ultima versione
+
+  git pull 
+
+  git status (controlla se è tutto uguale)
+
+  #### Aggiorno sile su GitHub
+  git add -p (seleziono le modifiche nel file, stampa dal cmd le modifiche uno ad uno)
+
+  git add -A (seleziona tutte le cartelle)
+
+  git add <nome-file1> <nome-file2>...  (posso selezionare  file)
+  
+  #### Creo il commit
+  
+  git commit -m"<nome-commit>" 
+  git push (upload delle modifiche)
+
 
 

@@ -34,12 +34,6 @@ class Nav extends React.Component {
 
               //FUNZIONE COSA FACCIAMO, LINK A FONDO PAGINA
 
-              this.setState({
-                showModal: true
-              });
-
-              alert(this.state.showModal + "asd");
-
             }}>Cosa facciamo</a></li>
 
             <li><a href="" className="nav-link" onClick={() => {
