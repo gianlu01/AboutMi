@@ -2,9 +2,6 @@ import React from 'react';
 import logo from '../icons/logo.png';
 
 
-
-
-
 class Nav extends React.Component {
   
   constructor(props){

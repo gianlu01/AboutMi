@@ -1,8 +1,10 @@
 import React from 'react';
 import Nav from './Nav.js';
 
-function Header() {
-  return (
+class Header extends React.Component {
+
+  render() {
+    return (
       <header>
         <Nav />
         <div className="cover">
@@ -16,7 +18,11 @@ function Header() {
               <div className="card-wrapper">
                 <div className="card">
                   <p>Scopri gli eventi più adatti a te nella tua zona!</p>
-                  <div className="btn">Vedi mappa</div>
+                  <div className="btn" onClick={() => {
+
+                    //Link alla pagine della mappa
+
+                  }}>Vedi mappa</div>
                 </div>
               </div>
             </div>
@@ -30,9 +36,10 @@ function Header() {
               <span>down</span>
             </div>
           </div>
-        </div> 
+        </div>
       </header>
-  );
-}
+    );
+  }
 
+}
 export default Header;
