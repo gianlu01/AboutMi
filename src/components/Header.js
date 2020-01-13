@@ -13,7 +13,7 @@ class Header extends React.Component {
               <div className="text-wrapper">
                 <span className="brand">ABOUTMI</span>
                 <h1>Esplora Milano tra Bar, Pub, Ristoranti e Discoteche.</h1>
-                <div className="btn">Visita il sito</div>
+                <div className="btn">Visita il si to</div>
               </div>
               <div className="card-wrapper">
                 <div className="card">

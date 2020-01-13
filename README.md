@@ -37,7 +37,7 @@ I Dataset utilizzati provengono dal sito del Comune di Milano, esso li mette a d
 
   ### Comandi Git
 
-  #### Scaricare la cartella da GitHub per avere tutto aggiornato all'ultima versione
+  #### Scaricare la cartella da GitHub per averse tutto aggiornato all'ultima versione
 
   git pull 
 
