@@ -1,4 +1,5 @@
 import React from 'react';
+import Methods from '../js/methods.js';
 import logo from '../icons/logo.png';
 
 
@@ -19,6 +20,8 @@ class Nav extends React.Component {
 
   
 
+  
+
   render() {
     return (
       <nav>
@@ -27,28 +30,31 @@ class Nav extends React.Component {
             <img className="nav-image" src={logo} alt="Logo AboutMI" />
           </div>
           <ul className="nav-items">
-            <li><a href="" className="nav-link" OnClick={() => {
+            <li><a className="nav-link" OnClick={() => {
 
               //FUNZIONE COSA FACCIAMO, LINK A FONDO PAGINA
 
             }}>Cosa facciamo</a></li>
 
-            <li><a href="" className="nav-link" onClick={() => {
+            <li><a className="nav-link" onClick={() => {
 
               //MODAL CONTATTI
 
             }}>Contatti</a></li>
 
-            <li><a href="" className="nav-link" onClick={() => {
+            <li><a className="nav-link" onClick={() => {
 
               //MODAL LAVORA CON NOI
 
             }}>Lavora con noi </a></li>
 
-            <li><a href="" className="nav-link btn-login" onClick={()=> {
+            <li><a className="nav-link btn-login" onClick={()=> {
               
               //FUNZIONE DI LOGIN
-              alert("Login Schiacciato");
+              const modal = document.querySelector('.modal-wrapper');
+              modal.classList.add('d-flex');
+              const modalContent = document.querySelector('.modal');
+
             }}>Login</a></li>
           </ul>
         </div>
@@ -58,3 +64,22 @@ class Nav extends React.Component {
 }
 
 export default Nav;
+
+/**
+ * CLose modal with key 'esc' press
+ * 
+ */
+
+document.addEventListener('keydown', function (e) {
+  const modal = document.querySelector('.modal-wrapper');
+  if(hasClass(modal, 'd-flex')) {
+      let keyCode = e.keyCode;
+      if (keyCode === 27) {
+          modal.classList.remove('d-flex');
+      }
+  }
+});
+
+function hasClass(element, cls) {
+    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+}

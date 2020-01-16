@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './components/Header.js';
-import './main.css';
+import '../src/css/main.min.css';
 
 
 class App extends React.Component {

@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from './Nav.js';
+import LoginModal from './LoginModal.js';
 
 class Header extends React.Component {
 
@@ -37,6 +38,7 @@ class Header extends React.Component {
             </div>
           </div>
         </div>
+        <LoginModal />
       </header>
     );
   }
