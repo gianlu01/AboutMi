@@ -27,6 +27,7 @@ class Maps extends React.Component {
         return (
             <div>
                 <h1>PROVA</h1>
+                <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD9txqoQcldz6dlRlGxeDCDQUPBYz51lZM&q=Eiffel+Tower,Paris+France"></iframe>
             </div> 
         );
     }
