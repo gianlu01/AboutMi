@@ -14,7 +14,7 @@ class Maps extends React.Component {
     }
 
     /*
-    GOOGLE MAPS KEY: AIzaSyD9txqoQcldz6dlRlGxeDCDQUPBYz51lZM
+    GOOGLE MAPS KEY: AIzaSyAkIIny_Su6sONvSIcxWXDQf-vsRtFkgsQ
     */
 
     /*
@@ -27,7 +27,7 @@ class Maps extends React.Component {
         return (
             <div>
                 <h1>PROVA</h1>
-                <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD9txqoQcldz6dlRlGxeDCDQUPBYz51lZM&q=Eiffel+Tower,Paris+France"></iframe>
+                <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAkIIny_Su6sONvSIcxWXDQf-vsRtFkgsQ&q=Eiffel+Tower,Paris+France"></iframe>
             </div> 
         );
     }
