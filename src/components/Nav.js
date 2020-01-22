@@ -1,5 +1,4 @@
 import React from 'react';
-import Methods from '../js/methods.js';
 import logo from '../icons/logo.png';
 
 
@@ -53,7 +52,6 @@ class Nav extends React.Component {
               //FUNZIONE DI LOGIN
               const modal = document.querySelector('.modal-wrapper');
               modal.classList.add('d-flex');
-              const modalContent = document.querySelector('.modal');
 
             }}>Login</a></li>
           </ul>
