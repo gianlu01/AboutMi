@@ -1,5 +1,6 @@
 import React from 'react';
-import {Map, GoogleApiWrapper} from 'google-maps-react';
+
+/*import {Map, GoogleApiWrapper} from 'google-maps-react';*/
 
 class Maps extends React.Component {
 
@@ -28,13 +29,9 @@ class Maps extends React.Component {
     render() {
         return (
             <div>
-              <Map
-                google = {this.props.google}
-                zoom = {8}
-              />
             </div>
         );
     }
 
 }
-export default GoogleApiWrapper({apiKey: 'AIzaSyADjFyOefLYCsSpXF6PIDWCZozIjxmpMNg'}) (Maps);
+export default Maps;
