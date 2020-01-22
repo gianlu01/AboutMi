@@ -1,8 +1,9 @@
 import React from 'react';
+import {Map, GoogleApiWrapper} from 'google-maps-react';
 
 class Maps extends React.Component {
 
-    
+
 
     constructor(props) {
         super(props);
@@ -15,6 +16,7 @@ class Maps extends React.Component {
 
     /*
     GOOGLE MAPS KEY: AIzaSyAkIIny_Su6sONvSIcxWXDQf-vsRtFkgsQ
+    benf AIzaSyADjFyOefLYCsSpXF6PIDWCZozIjxmpMNg
     */
 
     /*
@@ -26,11 +28,13 @@ class Maps extends React.Component {
     render() {
         return (
             <div>
-                <h1>PROVA</h1>
-                <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAkIIny_Su6sONvSIcxWXDQf-vsRtFkgsQ&q=Eiffel+Tower,Paris+France"></iframe>
-            </div> 
+              <Map
+                google = {this.props.google}
+                zoom = {8}
+              />
+            </div>
         );
     }
 
 }
-export default Maps;
+export default GoogleApiWrapper({apiKey: 'AIzaSyADjFyOefLYCsSpXF6PIDWCZozIjxmpMNg'}) (Maps);

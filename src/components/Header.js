@@ -61,8 +61,6 @@ class Header extends React.Component {
       case "maps":
         return(maps);
         break;
-      default:
-
     }
   }
 

@@ -4,23 +4,23 @@ import logo from '../icons/logo.png';
 
 
 class Nav extends React.Component {
-  
+
   constructor(props){
     super(props);
 
     /*Lo stato è un oggetto e
       permette di modificare lo stato delle
       variabili al suo interno potendo anche
-      fornzare il re-render della pagina (this.setState()) 
+      fornzare il re-render della pagina (this.setState())
     */
     this.state = {
       showModal: false
     };
   }
 
-  
 
-  
+
+
 
   render() {
     return (
@@ -30,7 +30,7 @@ class Nav extends React.Component {
             <img className="nav-image" src={logo} alt="Logo AboutMI" />
           </div>
           <ul className="nav-items">
-            <li><a className="nav-link" OnClick={() => {
+            <li><a className="nav-link" onClick={() => {
 
               //FUNZIONE COSA FACCIAMO, LINK A FONDO PAGINA
 
@@ -49,7 +49,7 @@ class Nav extends React.Component {
             }}>Lavora con noi </a></li>
 
             <li><a className="nav-link btn-login" onClick={()=> {
-              
+
               //FUNZIONE DI LOGIN
               const modal = document.querySelector('.modal-wrapper');
               modal.classList.add('d-flex');
@@ -64,22 +64,3 @@ class Nav extends React.Component {
 }
 
 export default Nav;
-
-/**
- * CLose modal with key 'esc' press
- * 
- */
-
-document.addEventListener('keydown', function (e) {
-  const modal = document.querySelector('.modal-wrapper');
-  if(hasClass(modal, 'd-flex')) {
-      let keyCode = e.keyCode;
-      if (keyCode === 27) {
-          modal.classList.remove('d-flex');
-      }
-  }
-});
-
-function hasClass(element, cls) {
-    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-}

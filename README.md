@@ -1,5 +1,5 @@
 # AboutMi
- 
+
 Progetto scolastico di Informatica per creare un sito che permetta di esplorare Milano tramite una mappa, visualizzando i locali di pubblico spettacolo, ristoranti e pizzerie.
 
 Il sito permette all'utente di utilizzarlo senza un'account, o con account nel caso si volgia lasciare un commento.
@@ -39,7 +39,7 @@ I Dataset utilizzati provengono dal sito del Comune di Milano, esso li mette a d
 
   #### Scaricare la cartella da GitHub per averse tutto aggiornato all'ultima versione
 
-  git pull 
+  git pull
 
   git status (controlla se è tutto uguale)
 
@@ -49,11 +49,9 @@ I Dataset utilizzati provengono dal sito del Comune di Milano, esso li mette a d
   git add -A (seleziona tutte le cartelle)
 
   git add <nome-file1> <nome-file2>...  (posso selezionare  file)
-  
+
   #### Creo il commit
+
+  git commit -m"<nome-commit>"
   
-  git commit -m"<nome-commit>" 
   git push (upload delle modifiche)
-
-
-
