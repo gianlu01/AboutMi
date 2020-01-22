@@ -13,22 +13,24 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-
-//get, example requests on /get
-app.get('/get', (req, res) => {
-    res.send("200");
+//login handler
+app.get('/login', (req, res) => {
+  db.collection.findOne({username: req.body.username, password: req.body.password}, (err, doc)=>{
+    if(err) res.send("400");
+    else res.send("200");
+  })
 });
-
-//post, example request on /post
-app.get('/post', (req, res) => {
-    res.send("200");
-});
-
-app.get('/mongo', (req, res) => {
-    db.collection.findOne({ property1: 10 }, (err, doc) => {
-        if (err) console.log(err);
-        else console.log(doc);
-    })
+//register handler
+app.get('/register', (req, res) => {
+  db.collection.findOne({username:req.body.username, password: req.body.password}, (err, doc) => {
+    if (err) res.send("400");
+    else {
+      db.collection.insertOne({username: req.body.username, req.body.password}, (err, doc) => {
+        if (err) res.send("400");
+        else res.send("200");
+      });
+    }
+  })
 })
 
 //specify the port were listen to
