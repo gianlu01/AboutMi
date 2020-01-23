@@ -10,6 +10,7 @@ MongoClient.connect("mongodb+srv://Michele:Arancione6@cluster0-0jqkz.mongodb.net
 
 //this is the default route and send back the content of the react build command
 app.use(express.static(path.join(__dirname, 'build')));
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
@@ -32,6 +33,13 @@ app.get('/register', (req, res) => {
     }
   })
 })
+//search local by name
+app.get('/search/name', (req, res) => {
+  db.collection.findOne({name: req.body.name}, (err, doc) => {
+    if (err) res.send("400");
+    else res.send(doc);
+  });
+});
 
 //specify the port were listen to
 app.listen(80, () => {
