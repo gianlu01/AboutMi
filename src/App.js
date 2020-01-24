@@ -11,16 +11,15 @@ class App extends React.Component {
 
     this.state = {
       newVisitor:true
-      
+
     };
   }
 
-  
+
 
   render() {
     return (
-     <Header />
-     //<Main />
+     <Main />
     );
   }
 }

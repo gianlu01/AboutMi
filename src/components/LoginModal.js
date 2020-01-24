@@ -2,6 +2,24 @@
 
 class LoginModal extends React.Component {
 
+  /*login = (rotta: string, content: string) => {
+    const t = fetch(/login, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        name: content
+      })
+    }).then(response => {
+      response.text().then((text: string) => {
+        console.log(text);
+        return text;
+      });
+    });
+    return t;
+  };
+*/
   render() {
     return (
         <div className="modal-wrapper">
