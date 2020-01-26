@@ -1,11 +1,24 @@
-  import React from 'react';
+import React from 'react';
 
 class LoginModal extends React.Component {
 
-  render() {
+    render() {
+
+        var uscita = document.getElementsByClassName("close")[0];
+
+        uscita.onclick = function(){
+            modal.style.display="none";
+        }
+
+        function EventoUscita(){
+            modal.style.display="none";
+        }
+
+    //Aggiunta span per uscire dal Modal
     return (
         <div className="modal-wrapper">
-          <div className="modal">
+          <div onmousedown="EventoUscita()" className="modal">
+          <span class="close">&times</span> 
             <label>Nome utente: </label>
             <input placeholder="Scrivi il tuo nome utente"></input>
             <label>Password: </label>

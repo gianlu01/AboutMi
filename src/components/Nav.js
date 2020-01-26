@@ -47,7 +47,9 @@ class Nav extends React.Component {
 
             }}>Lavora con noi </a></li>
 
-            <li><a className="nav-link btn-login" onClick={()=> {
+            
+
+            <li><a id="animazione" className="nav-link btn-login" onClick={()=> {  //Aggiunta dell'id animazione per entrata ed uscita Modal
 
               //FUNZIONE DI LOGIN
               const modal = document.querySelector('.modal-wrapper');
