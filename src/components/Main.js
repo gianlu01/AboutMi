@@ -1,4 +1,8 @@
 import React from 'react';
+import HomePage from './HomePage.js';
+import Header from './Header.js';
+import Maps from './Maps.js';
+
 
 class Main extends React.Component {
 
@@ -8,35 +12,41 @@ class Main extends React.Component {
           components: "main"
         }
       }
-    
+
+/*
+      componentWillMount (){
+        document.addEventListener('mousedown', ,false);
+      }
+
+      componentWillUnmount (){
+        document.removeEventListener('mousedown', , false);
+      }
+
+      handleOutsideClick = e =>{
+        if(this.node.container(e.target))
+      }
+
+*/
+
+      //Cambia lo stato daglia altri componenti
+      router = (route) => {
+        this.setState({components: route});
+      }
 
     render() {
-        return (
+      const hompage = <HomePage router={this.router} />;
+      const header = <Header router={this.router}/>;
+      const maps = <Maps router={this.router}/>;
 
-            <main>
-                <section className="section-bar">
-                    <div className="bg-filter"></div>
-                    <div className="container">
-                        <div className="text-wrapper">
-                            <h2>I migliori bar di Milano!</h2>
-                            <p>Visita i migliori bar della città. Trova il giusto locale per i tuoi gusti. Now for manners use has company believe parlors. Least nor party who wrote while did. Excuse formed as is agreed admire so on.</p>
-                            <div className="btn">Vedi mappa</div>
-                        </div>
-                    </div>
-                </section>
-                <section className="section-discoteche">
-                    <div className="bg-filter"></div>
-                    <div className="container">
-                        <div className="text-wrapper">
-                            <h2>Sabato sera a Milano?</h2>
-                            <p>Visita i migliori bar della città. Trova il giusto locale per i tuoi gusti. Now for manners use has company believe parlors. Least nor party who wrote while did. Excuse formed as is agreed admire so on.</p>
-                            <div className="btn">Vedi mappa</div>
-                        </div>
-                    </div>
-                </section>
-            </main>
+      switch (this.state.components){
+        case "main":
+          return(<React.Fragment>{header}{hompage}</React.Fragment>);
+          break;
+        case "maps":
+          return(<React.Fragment>{maps}</React.Fragment>);
+          break;
+      }
 
-        );
     }
 }
 

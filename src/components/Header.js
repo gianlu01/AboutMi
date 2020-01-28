@@ -34,7 +34,7 @@ class Header extends React.Component {
                 <div className="card">
                   <p>Scopri gli eventi più adatti a te nella tua zona!</p>
                   <div className="btn" onClick={() => {
-                    this.setState({ components: "maps" });
+                    this.props.router("maps");
                   }}
                   >Vedi mappa</div>
                 </div>
