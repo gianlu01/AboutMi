@@ -1,29 +1,45 @@
 import React from 'react';
-
-/*import {Map, GoogleApiWrappe  r} from 'google-maps-react';*/
 import OlMap from "ol/Map";
 import OlView from "ol/View";
 import OlLayerTile from "ol/layer/Tile";
 import OlSourceOSM from "ol/source/OSM";
+import * as olProj from 'ol/proj';
+import {transform} from 'ol/proj';
+
 
 class Maps extends React.Component {
   constructor(props) {
       super(props);
 
-      this.state = { center: [0, 0], zoom: 1 };
+      // Milano: 1023068.820178505, 5694894.828017104
+      //OSMStandard
 
+      this.state = {
+        center: [1023068.820178505, 5694894.828017104],
+        zoom: 13
+      }
+
+      //const Milan = new transform ([45.466944, 9.19], 'ESPG:4326', 'ESPG:4357');
+
+      
       this.olmap = new OlMap({
         target: null,
         layers: [
           new OlLayerTile({
-            source: new OlSourceOSM()
+            source: new OlSourceOSM(),
           })
         ],
         view: new OlView({
           center: this.state.center,
-          zoom: this.state.zoom
+          zoom: this.state.zoom,
+          maxZoom: 18,
+          minZoom: 11
         })
       });
+
+      this.olmap.on('click', function(evento){
+          console.log(evento.coordinate);
+      })
     }
 
     updateMap() {
@@ -48,17 +64,13 @@ class Maps extends React.Component {
       if (center === nextState.center && zoom === nextState.zoom) return false;
       return true;
     }
-
-    userAction() {
-      this.setState({ center: [546000, 6868000], zoom: 5 });
-    }
+    
+// <button onClick={e => this.updateMap    ()}>setState on click</button>
 
     render() {
       this.updateMap(); // Update map on render?
       return (
-        <div id="map" style={{ width: "100%", height: "360px" }}>
-          <button onClick={e => this.userAction()}>setState on click</button>
-        </div>
+        <div id="map" style={{ width: "100%", height: "100%" }}></div>
       );
     }
   }
