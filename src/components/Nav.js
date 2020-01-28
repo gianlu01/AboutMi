@@ -47,6 +47,8 @@ class Nav extends React.Component {
 
             }}>Lavora con noi </a></li>
 
+
+
             <li><a className="nav-link btn-login" onClick={()=> {
 
               //FUNZIONE DI LOGIN

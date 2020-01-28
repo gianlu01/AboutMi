@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const helmet = require('helmet');
 const path = require('path');
 var db = {};
 var MongoClient = require('mongodb').MongoClient;
@@ -10,6 +11,9 @@ MongoClient.connect("mongodb+srv://Michele:Arancione6@cluster0-0jqkz.mongodb.net
 
 //this is the default route and send back the content of the react build command
 app.use(express.static(path.join(__dirname, 'build')));
+
+//helmet provides a security features
+app.use(helmet());
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
@@ -26,7 +30,7 @@ app.get('/register', (req, res) => {
   db.collection.findOne({username:req.body.username, password: req.body.password}, (err, doc) => {
     if (err) res.send("400");
     else {
-      db.collection.insertOne({username: req.body.username, req.body.password}, (err, doc) => {
+      db.collection.insertOne({username: req.body.username, password: req.body.password}, (err, doc) => {
         if (err) res.send("400");
         else res.send("200");
       });
