@@ -20,7 +20,9 @@ class HomePage extends React.Component {
                         <div className="text-wrapper">
                             <h2>I migliori bar di Milano!</h2>
                             <p>Visita i migliori bar della città. Trova il giusto locale per i tuoi gusti. Now for manners use has company believe parlors. Least nor party who wrote while did. Excuse formed as is agreed admire so on.</p>
-                            <div className="btn">Vedi mappa</div>
+                            <div className="btn" onClick={()=>{
+                              this.props.router("maps");
+                            }}>Vedi mappa</div>
                         </div>
                     </div>
                 </section>
@@ -30,7 +32,9 @@ class HomePage extends React.Component {
                         <div className="text-wrapper">
                             <h2>Sabato sera a Milano?</h2>
                             <p>Visita i migliori bar della città. Trova il giusto locale per i tuoi gusti. Now for manners use has company believe parlors. Least nor party who wrote while did. Excuse formed as is agreed admire so on.</p>
-                            <div className="btn">Vedi mappa</div>
+                            <div className="btn" onClick={()=>{
+                              this.props.router("maps");
+                            }}>Vedi mappa</div>
                         </div>
                     </div>
                 </section>
