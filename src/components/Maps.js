@@ -1,6 +1,11 @@
 import React from 'react';
 
 /*import {Map, GoogleApiWrapper} from 'google-maps-react';*/
+import {
+  interaction, layer, custom, control, //name spaces
+  Interactions, Overlays, Controls,     //group
+  Map, Layers, Overlay, Util    //objects
+} from "react-openlayers";
 
 class Maps extends React.Component {
 
@@ -22,15 +27,10 @@ class Maps extends React.Component {
 
     render() {
         return (
-            <div>
-            <iframe
-              width="100%"
-              height="100%"
-              frameborder="0" style="border:0"
-              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA9B_7XajHjzmvysfrrCm5xQ4_44NF500Q
-              &q=Space+Needle,Seattle+WA">
-            </iframe>
-            </div>
+          <div>
+          <Map view={{center: [0,0], zoom: 2}}>
+          </Map>
+  </div>
         );
     }
 
