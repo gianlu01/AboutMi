@@ -1,77 +1,25 @@
-import React from 'react';
-import OlMap from "ol/Map";
-import OlView from "ol/View";
-import OlLayerTile from "ol/layer/Tile";
-import OlSourceOSM from "ol/source/OSM";
-import * as olProj from 'ol/proj';
-import {transform} from 'ol/proj';
+import React, {useState} from 'react';
+import ReactDOM from 'react-dom';
+import ReactMapGL from 'react-map-gl';
+
+//mapboxgl.accessToken = 'pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A';
 
 
-class Maps extends React.Component {
-  constructor(props) {
-      super(props);
 
-      // Milano: 1023068.820178505, 5694894.828017104
-      //OSMStandard
+export default function Maps(){
+  const [viewport, setViewport] = useState({
+    width: '100%',
+    height: '100vh',
+    latitude: 45.466944,
+    longitude: 9.19,
+    zoom: 8
+  });
 
-      this.state = {
-        center: [1023068.820178505, 5694894.828017104],
-        zoom: 13
-      }
-
-      //const Milan = new transform ([45.466944, 9.19], 'ESPG:4326', 'ESPG:4357');
-
-      
-      this.olmap = new OlMap({
-        target: null,
-        layers: [
-          new OlLayerTile({
-            source: new OlSourceOSM(),
-          })
-        ],
-        view: new OlView({
-          center: this.state.center,
-          zoom: this.state.zoom,
-          maxZoom: 18,
-          minZoom: 11
-        })
-      });
-
-      this.olmap.on('click', function(evento){
-          console.log(evento.coordinate);
-      })
-    }
-
-    updateMap() {
-      this.olmap.getView().setCenter(this.state.center);
-      this.olmap.getView().setZoom(this.state.zoom);
-    }
-
-    componentDidMount() {
-      this.olmap.setTarget("map");
-
-      // Listen to map changes
-      this.olmap.on("moveend", () => {
-        let center = this.olmap.getView().getCenter();
-        let zoom = this.olmap.getView().getZoom();
-        this.setState({ center, zoom });
-      });
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-      let center = this.olmap.getView().getCenter();
-      let zoom = this.olmap.getView().getZoom();
-      if (center === nextState.center && zoom === nextState.zoom) return false;
-      return true;
-    }
-    
-// <button onClick={e => this.updateMap    ()}>setState on click</button>
-
-    render() {
-      this.updateMap(); // Update map on render?
+      //const Milan = transform([45.466944, 9.19], 'ESPG:4326', 'ESPG:4357');
       return (
-        <div id="map" style={{ width: "100%", height: "100%" }}></div>
+        <div>
+        <ReactMapGL   {...viewport} onViewportChange={setViewport} mapboxApiAccessToken={'pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A'}>
+        </ReactMapGL>
+        </div>
       );
-    }
   }
-export default Maps;
