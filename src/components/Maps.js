@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import ReactDOM from 'react-dom';
-import ReactMapGL from 'react-map-gl';
-import { Editor, EditorModes } from 'react-map-gl-draw';
+import React from "react";
+import ReactDOM from "react-dom";
+import ReactMapboxGl from "react-mapbox-gl";
+import DrawControl from "react-mapbox-gl-draw";
+import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 
 //accessToken: 'pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A';
 //site URL: mapbox://styles/gianlu01/ck5z9olku3d2r1jov9drsa1uu
@@ -30,7 +31,7 @@ import { Editor, EditorModes } from 'react-map-gl-draw';
         </ReactMapGL>
         </div>
       );
-  }*/
+  }
   const MODES = [
   { id: EditorModes.EDITING, text: 'Select and Edit Feature'},
   { id: EditorModes.DRAW_POINT, text: 'Draw Point'},
@@ -38,63 +39,33 @@ import { Editor, EditorModes } from 'react-map-gl-draw';
   { id: EditorModes.DRAW_POLYGON, text: 'Draw Polygon'},
   { id: EditorModes.DRAW_RECTANGLE, text: 'Draw Rectangle'}
 ];
+*/
+const Map = ReactMapboxGl({
+  accessToken:
+    "pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A"
+});
 
-const DEFAULT_VIEWPORT = {
-  width: '100vh',
-  height: '100%',
-  longitude: 9.19,
-  latitude: 45.466944,
-  zoom: 11
-};
-
-class Maps extends React.Component {
-  state = {
-    // map
-    viewport: DEFAULT_VIEWPORT,
-    // editor
-    selectedMode: EditorModes.DRAW_POLYGON
+export default function App() {
+  const onDrawCreate = ({ features }) => {
+    console.log(features);
   };
 
-  _switchMode = evt => {
-    const selectedMode = evt.target.id;
-    this.setState({
-     selectedMode: selectedMode === this.state.selectedMode ? null : selectedMode
-    });
+  const onDrawUpdate = ({ features }) => {
+    console.log(features);
   };
 
-  _renderToolbar = () => {
-    return (
-      <div style={{position: 'absolute', top: 0, right: 0, maxWidth: '320px'}}>
-        <select onChange={this._switchMode}>
-          <option value="">--Please choose a mode--</option>
-          {MODES.map(mode => <option value={mode.id}>{mode.text}</option>)}
-        </select>
-      </div>
-    );
-  };
-  _onViewportChange = viewport => {
-        this.setState({viewport});
-    };
-
-  render() {
-    const { viewport, selectedMode } = this.state;
-    return (
-      <ReactMapGL
-        {...viewport}
-        width="100%"
-        height="100%"
-        mapboxApiAccessToken={'pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A'}
-        mapStyle={'mapbox://styles/gianlu01/ck5z9olku3d2r1jov9drsa1uu'  }
-        onViewportChange={this._onViewportChange}
-        onSelect={console.log("a")}
+  return (
+    <div>
+      <Map
+        style="mapbox://styles/mapbox/streets-v9" // eslint-disable-line
+        containerStyle={{
+          height: "100vh",
+          width: "100%"
+        }}
+        center={[9.19,45.466944]}
       >
-        <Editor
-          clickRadius={12}
-          mode={selectedMode}
-        />
-        {this._renderToolbar()}
-      </ReactMapGL>
-    );
-  }
+        <DrawControl onDrawCreate={onDrawCreate} onDrawUpdate={onDrawUpdate} />
+      </Map>
+    </div>
+  );
 }
-export default Maps;
