@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ReactMapboxGl, {Layer, Marker} from "react-mapbox-gl";
+import ReactMapboxGl, {Layer, Marker, Feature} from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import * as turf from '@turf/turf';
@@ -21,11 +21,16 @@ class Maps extends React.Component{
         markers: []
       }
     }
+
+
+
     render (){
+
       var points = turf.points([
           [9.19,45.466944],
           [9.1792887,45.4704962]
       ]);
+
       const controls = {
         polygon: true,
         trash: true,
@@ -34,13 +39,32 @@ class Maps extends React.Component{
         combine_features:false,
         uncombine_features:false
       }
+
+      const MM=()=>{
+        if(this.state.stato){
+          console.log(this.state.markers)
+        return(
+          <Layer
+                type="symbol"
+                id="marker"
+                layout={{ "icon-image": "marker-15" }}>
+                <Feature coordinates={[
+                  this.state.markers[0].geometry.coordinates[0],
+                  this.state.markers[0].geometry.coordinates[1]
+                ]}/>}
+              </Layer>
+        );
+      }
+      }
         const onDrawCreate = ({ features }) => {
             var poly = features[0].geometry.coordinates;
             poly = turf.polygon(poly);
             var result = turf.pointsWithinPolygon(points, poly);
+            //se trovo i locali
             if (result.features.length <= 0) {
                 alert("Locals not founds")
             }else{
+              console.log(result)
               this.setState({stato: true});
               this.setState({markers: result.features});
             }
@@ -49,7 +73,7 @@ class Maps extends React.Component{
           const onDrawUpdate = ({ features }) => {
             console.log(features);
           };
-          if(this.state.stato){
+
       return(
         <div>
           <Map
@@ -64,18 +88,18 @@ class Maps extends React.Component{
             <div style={{textAlign: 'center'}}>
               <input type='text' placeholder='ahhhhhhhhh' style={{position: 'absolute'}}></input>
               </div>
-              <DrawControl onDrawCreate={onDrawCreate} onDrawUpdate={onDrawUpdate} controls={controls} />
-                  <Marker coordinates={this.state.markers} />
-              </Map>
-              </div>
-            );
-          }else{
-            return(
+              <DrawControl
+                onDrawCreate={onDrawCreate}
+                onDrawUpdate={onDrawUpdate}
+                controls={controls}
+              />
+              {MM()}
+            </Map>
+            </div>
+          );
+        }
+      }
 
-            );
-          }
-          }
-}
 
 export default Maps;
 
@@ -87,4 +111,5 @@ export default Maps;
     coordinates={[-0.2416815, 51.5285582]}
     anchor="bottom">
   </Marker>
+  //onClick={this.onMarkerClick.bind(this, feature.geometry.coordinates)}>
 }}*/
