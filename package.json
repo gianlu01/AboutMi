@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@mapbox/mapbox-gl-draw": "^1.1.2",
+    "@turf/turf": "^5.1.6",
     "helmet": "^3.21.2",
     "mapbox-gl": "^1.7.0",
     "mongodb": "^3.4.1",

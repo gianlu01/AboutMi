@@ -40,6 +40,10 @@ export default function App() {
         }}
         center={[9.19,45.466944]}
       >
+      //@TODO pasto sai cosa devi fare ahahaha
+      <div style={{textAlign: 'center'}}>
+        <input type='text' placeholder='ahhhhhhhhh' style={{position: 'absolute'}}></input>
+        </div>
         <DrawControl onDrawCreate={onDrawCreate} onDrawUpdate={onDrawUpdate} controls={controls} />
       </Map>
     </div>
