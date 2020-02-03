@@ -28,18 +28,24 @@ class Maps extends React.Component {
     }
   }
 
-  componentWillMount(){
-      fetch('http://dati.comune.milano.it/dataset/ds252-economia-locali-pubblico-spettacolo/resource/e5e1c5ed-03b9-415e-9880-a2c163e4973f/view/76fa6876-f208-440f-a57c-6b3d71e52278', {
-        method: "GET",
-        headers: {
-          "content-type": "application/json"
-        }
+  geoJsonRetriever(){
+      fetch('https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson', {
+        method: "GET"
       }).then(response => {
+        return(response.text())
+      }).then(a =>{
         this.setState({
-          markers: response
+          markers: a
         });
-      });
+      })
 }
+  componentWillMount(){
+    const a = this.geoJsonRetriever();
+    this.setState({
+      markers: a
+    });
+  }
+
   render() {
     const controls = {
       polygon: true,
@@ -51,7 +57,10 @@ class Maps extends React.Component {
     }
 
     const onDrawCreate = ({features}) => {
-      var result = turf.pointsWithinPolygon(this.state.markers, this.drawControl.draw.getAll());
+      console.log(JSON.parse(this.state.markers));
+      console.log(this.drawControl.draw.getAll());
+      var result = turf.pointsWithinPolygon(JSON.parse(this.state.markers), this.drawControl.draw.getAll());
+      console.log(result)
       if (result.features.length <= 0) {
         alert("Locals not founds")
       } else {
@@ -89,7 +98,7 @@ class Maps extends React.Component {
             </input>
           </div>
             <GeoJSONLayer
-              data={this.state.markers}
+              data={'https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson'}
               symbolLayout={{
                 'text-field': "A"
                 }}
