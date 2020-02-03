@@ -27,16 +27,13 @@ class Header extends React.Component {
             <div className="flex-wrapper">
               <div className="text-wrapper">
                 <span className="brand">ABOUTMI</span>
-                <h1>Esplora Milano tra Bar, Pub, Ristoranti e Discoteche.</h1>
+                <h1 className="h1-title-dark">Esplora Milano tra Bar, Pub, Ristoranti e Discoteche.</h1>
                 <div className="btn">Visita il sito</div>
               </div>
               <div className="card-wrapper">
                 <div className="card">
                   <p>Scopri gli eventi più adatti a te nella tua zona!</p>
-                  <div className="btn" onClick={() => {
-                    this.props.router("maps");
-                  }}
-                  >Vedi mappa</div>
+                  <div className="btn" onClick={() => {this.props.router("maps");}}>Vedi mappa</div>
                 </div>
               </div>
             </div>
