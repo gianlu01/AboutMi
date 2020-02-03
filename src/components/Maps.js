@@ -57,9 +57,8 @@ class Maps extends React.Component {
     }
 
     const onDrawCreate = ({features}) => {
-      console.log(JSON.parse(this.state.markers));
-      console.log(this.drawControl.draw.getAll());
-      var result = turf.pointsWithinPolygon(JSON.parse(this.state.markers), this.drawControl.draw.getAll());
+      var c = JSON.parse(this.state.markers);
+      var result = turf.pointsWithinPolygon(c, this.drawControl.draw.getAll());
       console.log(result)
       if (result.features.length <= 0) {
         alert("Locals not founds")
