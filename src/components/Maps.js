@@ -25,26 +25,20 @@ class Maps extends React.Component {
     super(props);
     this.state = {
       stato: false,
-      markers: {}
+      markers: this.mounter
     }
   }
 
-  geoJsonRetriever(){
-      fetch('https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson', {
-        method: "GET"
-      }).then(response => {
-        return(response.text())
-      }).then(a =>{
-        this.setState({
-          markers: a
-        });
-      })
-}
-  componentWillMount(){
-    const a = this.geoJsonRetriever();
-    this.setState({
-      markers: a
-    });
+  componentDidMount(){
+    fetch('https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson', {
+      method: "GET"
+    }).then(response => {
+      return(response.text())
+    }).then(a =>{
+      this.setState({
+        markers: JSON.parse(a)
+      });
+    })
   }
 
   render() {
@@ -63,8 +57,10 @@ class Maps extends React.Component {
       else return {}
     }
 
+
+
     const onDrawCreate = ({features}) => {
-      var c = JSON.parse(this.state.markers);
+      var c = this.state.markers;
       for (var u =0 ; u< c.features.length; u++){
         if (c.features[u].geometry.coordinates.length == 0)  c.features.splice(u,1);
       }
@@ -81,7 +77,34 @@ class Maps extends React.Component {
 
     const onDrawUpdate = ({ features}) => {
             //onDrawCreate(features);
-        };
+    };
+
+    /*
+    <GeoJSONLayer
+      data={'https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson'}
+      symbolLayout={{
+        'text-field': "A"
+        }}
+      ></GeoJSONLayer>
+      this.state.markers.features.map(point=>(
+        <Marker
+          coordinates={point.coordinates}
+        >
+        </Marker>
+      ))
+*/
+
+  const MM=()=>{
+      if(this.state.stato){
+            console.log(this.state.markers.features);
+        return this.state.markers.features.map(point=>(
+          <Marker
+            coordinates={point.geometry.coordinates}
+          >A
+          </Marker>
+        ))
+      }
+    }
 
     return (
       <div>
@@ -104,16 +127,7 @@ class Maps extends React.Component {
                     }} >
             </input>
           </div>
-            /*<GeoJSONLayer
-              data={'https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson'}
-              symbolLayout={{
-                'text-field': "A"
-                }}
-              >
-            </GeoJSONLayer>*/
-            <Cluster>
-
-            </Cluster>
+          {MM()}
             <DrawControl
               onDrawCreate={onDrawCreate}
               onDrawUpdate={onDrawUpdate}
