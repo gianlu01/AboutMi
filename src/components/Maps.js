@@ -4,7 +4,8 @@ import ReactMapboxGl, {
   Layer,
   Marker,
   Feature,
-  GeoJSONLayer
+  GeoJSONLayer,
+  Cluster
 } from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
@@ -56,10 +57,18 @@ class Maps extends React.Component {
       uncombine_features: false
     }
 
+    const checker = () => {
+      console.log("chiamato")
+      if (this.state.stato) return this.state.markers
+      else return {}
+    }
+
     const onDrawCreate = ({features}) => {
       var c = JSON.parse(this.state.markers);
+      for (var u =0 ; u< c.features.length; u++){
+        if (c.features[u].geometry.coordinates.length == 0)  c.features.splice(u,1);
+      }
       var result = turf.pointsWithinPolygon(c, this.drawControl.draw.getAll());
-      console.log(result)
       if (result.features.length <= 0) {
         alert("Locals not founds")
       } else {
@@ -67,7 +76,6 @@ class Maps extends React.Component {
           stato: true,
           markers: result
         });
-        //MM();
       }
     };
 
@@ -96,13 +104,16 @@ class Maps extends React.Component {
                     }} >
             </input>
           </div>
-            <GeoJSONLayer
+            /*<GeoJSONLayer
               data={'https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson'}
               symbolLayout={{
                 'text-field': "A"
                 }}
               >
-            </GeoJSONLayer>
+            </GeoJSONLayer>*/
+            <Cluster>
+
+            </Cluster>
             <DrawControl
               onDrawCreate={onDrawCreate}
               onDrawUpdate={onDrawUpdate}
