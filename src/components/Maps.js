@@ -10,13 +10,16 @@ import ReactMapboxGl, {
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import * as turf from '@turf/turf';
+import mIcon from '../icons/marker.svg';
 //import Dati from '../data/Dati.json'
 //accessToken: 'pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A';
 //site URL: mapbox://styles/gianlu01/ck5z9olku3d2r1jov9drsa1uu
 //geoJson URL: http://dati.comune.milano.it/dataset/ds252-economia-locali-pubblico-spettacolo/resource/e5e1c5ed-03b9-415e-9880-a2c163e4973f/view/76fa6876-f208-440f-a57c-6b3d71e52278
 
 const Map = ReactMapboxGl({
-  accessToken: "pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A"
+  accessToken: "pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A",
+  minZoom: 8,
+  maxZoom: 17
 });
 
 class Maps extends React.Component {
@@ -25,7 +28,9 @@ class Maps extends React.Component {
     super(props);
     this.state = {
       stato: false,
-      markers: this.mounter
+      markers: {},
+      appoggio: {},
+      mapCenter: [9.19, 45.466944]
     }
   }
 
@@ -36,7 +41,8 @@ class Maps extends React.Component {
       return(response.text())
     }).then(a =>{
       this.setState({
-        markers: JSON.parse(a)
+        markers: JSON.parse(a),
+        appoggio: JSON.parse(a)
       });
     })
   }
@@ -50,14 +56,6 @@ class Maps extends React.Component {
       combine_features: false,
       uncombine_features: false
     }
-
-    const checker = () => {
-      console.log("chiamato")
-      if (this.state.stato) return this.state.markers
-      else return {}
-    }
-
-
 
     const onDrawCreate = ({features}) => {
       var c = this.state.markers;
@@ -75,8 +73,16 @@ class Maps extends React.Component {
       }
     };
 
+    const onDrawDelete = ({feature}) => {
+      console.log(this.state.appoggio)
+      /*this.setState({
+        markers: this.state.appoggio
+      });*/
+    }
+
     const onDrawUpdate = ({ features}) => {
-            //onDrawCreate(features);
+      console.log("up to date")
+            //this.onDrawCreate(features);
     };
 
     /*
@@ -96,13 +102,13 @@ class Maps extends React.Component {
 
   const MM=()=>{
       if(this.state.stato){
-            console.log(this.state.markers.features);
         return this.state.markers.features.map(point=>(
           <Marker
             coordinates={point.geometry.coordinates}
-          >A
+          ><img src={mIcon} style={{width:'10%', height:'10%'}}/>
           </Marker>
         ))
+        //S Map.flyTo({center: [0, 0], zoom: 9});
       }
     }
 
@@ -113,9 +119,7 @@ class Maps extends React.Component {
             height: "100vh",
             width: "100%"
           }}
-          center={
-          [9.19, 45.466944]
-          } >
+          center= {this.state.mapCenter }>
               //@TODO pasto sai cosa devi fare ahahaha
           <div style={{
             textAlign: 'center'
@@ -131,6 +135,7 @@ class Maps extends React.Component {
             <DrawControl
               onDrawCreate={onDrawCreate}
               onDrawUpdate={onDrawUpdate}
+              onDrawDelete={onDrawDelete}
               controls={controls}
               ref={(drawControl) => { this.drawControl = drawControl; }}
             />
