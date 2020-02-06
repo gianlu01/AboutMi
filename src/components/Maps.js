@@ -74,16 +74,11 @@ class Maps extends React.Component {
     };
 
     const onDrawDelete = ({feature}) => {
-      console.log(this.state.appoggio)
-      /*this.setState({
+      this.setState({
+        stato: false,
         markers: this.state.appoggio
-      });*/
+      });
     }
-
-    const onDrawUpdate = ({ features}) => {
-      console.log("up to date")
-            //this.onDrawCreate(features);
-    };
 
     /*
     <GeoJSONLayer
@@ -120,21 +115,9 @@ class Maps extends React.Component {
             width: "100%"
           }}
           center= {this.state.mapCenter }>
-              //@TODO pasto sai cosa devi fare ahahaha
-          <div style={{
-            textAlign: 'center'
-          }} >
-            <input type='text'
-              placeholder='ahhhhhhhhh'
-              style={{
-                position: 'absolute'
-                    }} >
-            </input>
-          </div>
           {MM()}
             <DrawControl
               onDrawCreate={onDrawCreate}
-              onDrawUpdate={onDrawUpdate}
               onDrawDelete={onDrawDelete}
               controls={controls}
               ref={(drawControl) => { this.drawControl = drawControl; }}
