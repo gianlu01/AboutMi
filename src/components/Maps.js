@@ -34,12 +34,12 @@ class Maps extends React.Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     fetch('https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson', {
       method: "GET"
     }).then(response => {
-      return(response.text())
-    }).then(a =>{
+      return (response.text())
+    }).then(a => {
       this.setState({
         markers: JSON.parse(a),
         appoggio: JSON.parse(a)
@@ -57,10 +57,10 @@ class Maps extends React.Component {
       uncombine_features: false
     }
 
-    const onDrawCreate = ({features}) => {
+    const onDrawCreate = ({ features }) => {
       var c = this.state.markers;
-      for (var u =0 ; u< c.features.length; u++){
-        if (c.features[u].geometry.coordinates.length == 0)  c.features.splice(u,1);
+      for (var u = 0; u < c.features.length; u++) {
+        if (c.features[u].geometry.coordinates.length == 0) c.features.splice(u, 1);
       }
       var result = turf.pointsWithinPolygon(c, this.drawControl.draw.getAll());
       if (result.features.length <= 0) {
@@ -73,7 +73,7 @@ class Maps extends React.Component {
       }
     };
 
-    const onDrawDelete = ({feature}) => {
+    const onDrawDelete = ({ feature }) => {
       this.setState({
         stato: false,
         markers: this.state.appoggio
@@ -95,12 +95,16 @@ class Maps extends React.Component {
       ))
 */
 
-  const MM=()=>{
-      if(this.state.stato){
-        return this.state.markers.features.map(point=>(
+    const MM = () => {
+      if (this.state.stato) {
+        return this.state.markers.features.map(point => (
           <Marker
             coordinates={point.geometry.coordinates}
-          ><img src={mIcon} style={{width:'10%', height:'10%'}}/>
+            anchor="bottom"
+          >
+            <button>
+              <img src={mIcon} style={{ width: '10%', height: '10%' }} />
+            </button>
           </Marker>
         ))
         //S Map.flyTo({center: [0, 0], zoom: 9});
@@ -114,14 +118,14 @@ class Maps extends React.Component {
             height: "100vh",
             width: "100%"
           }}
-          center= {this.state.mapCenter }>
+          center={this.state.mapCenter}>
           {MM()}
-            <DrawControl
-              onDrawCreate={onDrawCreate}
-              onDrawDelete={onDrawDelete}
-              controls={controls}
-              ref={(drawControl) => { this.drawControl = drawControl; }}
-            />
+          <DrawControl
+            onDrawCreate={onDrawCreate}
+            onDrawDelete={onDrawDelete}
+            controls={controls}
+            ref={(drawControl) => { this.drawControl = drawControl; }}
+          />
         </Map>
       </div>
     );
