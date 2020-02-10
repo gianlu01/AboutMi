@@ -1,18 +1,32 @@
-//Helper classes
+//GENERALS HELPER
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 10px;
   @media only screen and (max-width: 1200px) {
-    max-width: 950px;
+      max-width: 950px;
   }
   @media only screen and (max-width: 950px) {
-    max-width: 700px;
+      max-width: 700px;
   }
 }
 
 
-.d-flex {
-  display: flex !important;
+
+//ELEMENTS HELPER
+.btn-primary {
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 4px;
+  background: $colorPrimary;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+  transition: ease-in-out all 0.5s;
+  @include box-shadow-blue;
+  &:hover {
+    background: $colorSecondary;
+  }
 }

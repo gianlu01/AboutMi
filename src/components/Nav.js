@@ -6,12 +6,6 @@ class Nav extends React.Component {
 
   constructor(props){
     super(props);
-
-    /*Lo stato è un oggetto e
-      permette di modificare lo stato delle
-      variabili al suo interno potendo anche
-      fornzare il re-render della pagina (this.setState())
-    */
     this.state = {
       showModal: false
     };
@@ -23,42 +17,19 @@ class Nav extends React.Component {
 
   render() {
     return (
-      <nav>
-        <div className="nav-container">
-          <div className="nav-logo">
-            <img className="nav-image" src={logo} alt="Logo AboutMI" />
+        <nav>
+          <div className="nav-container">
+            <div className="nav-logo">
+              <img className="logo-img" src={logo} alt="Logo AboutMI" />
+            </div>
+            <ul className="nav-items">
+              <li className="nav-link"><a>Cosa Facciamo</a></li>
+              <li className="nav-link"><a>Contatti</a></li>
+              <li className="nav-link"><a>Lavora con noi</a></li>
+              <li className="nav-link"><a className="btn-login">Login</a></li>
+            </ul>
           </div>
-          <ul className="nav-items">
-            <li><a className="nav-link" onClick={() => {
-
-              //FUNZIONE COSA FACCIAMO, LINK A FONDO PAGINA
-
-            }}>Cosa facciamo</a></li>
-
-            <li><a className="nav-link" onClick={() => {
-
-              //MODAL CONTATTI
-
-            }}>Contatti</a></li>
-
-            <li><a className="nav-link" onClick={() => {
-
-              //MODAL LAVORA CON NOI
-
-            }}>Lavora con noi </a></li>
-
-
-
-            <li><a className="nav-link btn-login" onClick={()=> {
-
-              //FUNZIONE DI LOGIN
-              const modal = document.querySelector('.modal-wrapper');
-              modal.classList.add('d-flex');
-
-            }}>Login</a></li>
-          </ul>
-        </div>
-      </nav >
+        </nav>
     );
   }
 }

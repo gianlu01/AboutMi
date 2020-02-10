@@ -1,62 +1,58 @@
-@import "_variables.scss";
-
 nav {
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 999;
-  padding: 20px 0;
   .nav-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 10px;
+    padding: 20px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    @media only screen and (max-width: 1200px) {
+        max-width: 950px;
+    }
+    @media only screen and (max-width: 950px) {
+        max-width: 700px;
+    }
     .nav-logo {
-      padding: 20px 40px;
+      padding: 20px;
       border-radius: 10px;
-      background: #fff;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      .nav-image {
+      @include box-shadow;
+      img.logo-img {
         height: 50px;
         width: 50px;
-        display: block;
       }
     }
     .nav-items {
       margin: 0;
-      padding: 0 40px;
-      border-radius: 10px;
+      padding: 25px 40px;
       background: #fff;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      li {
+      border-radius: 10px;
+      @include box-shadow;
+      .nav-link {
         display: inline-block;
-        padding: 20px 0;
-        &:first-child {
-          .nav-link {
-            padding-left: 0;
-          }
-        }
-        .nav-link {
+        list-style: none;
+        padding: 0 10px;
+        a {
           cursor: pointer;
           display: inline-block;
-          padding: 15px 12.5px;
+          padding: 10px 5px;
           color: #777;
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 400;
           text-decoration: none;
           &.btn-login {
-            margin-left: 10px;
-            padding: 10px 25px;
+            padding: 10px 30px;
             border-radius: 4px;
             background: $colorPrimary;
             color: #fff;
-            font-size: 14px;
-            box-shadow: 3px 3px 20px rgba(0, 76, 255, 0.4);
-            transition: ease-in-out all 0.5s;
+            font-size: 13px;
+            @include standard-transition;
+            @include box-shadow-blue;
             &:hover {
               background: $colorSecondary;
             }

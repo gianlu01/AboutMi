@@ -4,99 +4,73 @@ header {
   background-image: url('../images/headerBackground.png');
   background-position: center center;
   background-size: cover;
-  .cover {
+  .container {
     height: 100%;
-    width: 100%;
-    position: relative;
-    .container {
-      height: 100%;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 10px;
-      .flex-wrapper {
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .text-wrapper {
-          span.brand {
-            display: inline-block;
-            color: #777;
-            font-size: 20px;
-            font-weight: 600;
-            &::before {
-              content: "";
-              height: 4px;
-              width: 35px;
-              display: inline-block;
-              vertical-align: middle;
-              margin-right: 18px;
-              margin-bottom: 3px;
-              background: $colorPrimary;
-            }
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .text-wrapper {
+      padding-top: 50px;
+      span.brand {
+        display: inline-block;
+        color: #777;
+        font-size: 18px;
+        font-weight: 500;
+        &::before {
+          content: "";
+          height: 4px;
+          width: 35px;
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 18px;
+          margin-bottom: 3px;
+          background: $colorPrimary;
+        }
+      }
+      h1.page-title {
+        width: 100%;
+        max-width: 350px;
+        margin: 10px 0 15px 0;
+        color: #777;
+        font-size: 30px;
+        font-weight: 300;
+      }
+      .card-wrapper {
+        .card {
+          width: 520px;
+          padding: 20px 30px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: center;
+          border-radius: 20px;
+          background: #fff;
+          box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
+          transition: ease-in-out all 0.5s;
+          &:hover {
+            transform: translateY(-5px);
+            box-shadow: 3px 3px 40px rgba(0, 0, 0, 0.2);
           }
-          h1 {
-            width: 100%;
-            max-width: 350px;
-            margin: 20px 0 25px 0;
+          p {
+            width: 65%;
             color: #777;
-            font-size: 35px;
-            font-weight: 300;
+            font-size: 25px;
+            font-weight: 400;
           }
           .btn {
             cursor: pointer;
+            width: 25.5%;
             display: inline-block;
-            padding: 10px 30px;
-            border-radius: 4px;
+            padding: 10px 0;
             background: $colorPrimary;
+            border-radius: 4px;
             text-align: center;
             color: #fff;
-            font-size: 15px;
+            font-size: 13.5px;
             transition: ease-in-out all 0.5s;
             box-shadow: 3px 3px 20px rgba(0, 76, 255, 0.4);
             &:hover {
               background: $colorSecondary;
-            }
-          }
-        }
-        .card-wrapper {
-          .card {
-            width: 520px;
-            padding: 20px 30px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-            border-radius: 20px;
-            background: #fff;
-            box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
-            transition: ease-in-out all 0.5s;
-            &:hover {
-              transform: translateY(-5px);
-              box-shadow: 3px 3px 40px rgba(0, 0, 0, 0.2);
-            }
-            p {
-              width: 65%;
-              color: #777;
-              font-size: 25px;
-              font-weight: 400;
-            }
-            .btn {
-              cursor: pointer;
-              width: 25.5%;
-              display: inline-block;
-              padding: 10px 0;
-              background: $colorPrimary;
-              border-radius: 4px;
-              text-align: center;
-              color: #fff;
-              font-size: 13.5px;
-              transition: ease-in-out all 0.5s;
-              box-shadow: 3px 3px 20px rgba(0, 76, 255, 0.4);
-              &:hover {
-                background: $colorSecondary;
-              }
             }
           }
         }

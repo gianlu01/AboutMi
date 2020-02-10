@@ -12,23 +12,6 @@ class Main extends React.Component {
           components: "main"
         }
       }
-
-/*
-      componentWillMount (){
-        document.addEventListener('mousedown', ,false);
-      }
-
-      componentWillUnmount (){
-        document.removeEventListener('mousedown', , false);
-      }
-
-      handleOutsideClick = e =>{
-        if(this.node.container(e.target))
-      }
-
-*/
-
-      //Cambia lo stato daglia altri componenti
       router = (route) => {
         this.setState({components: route});
       }
