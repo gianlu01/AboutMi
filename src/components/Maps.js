@@ -5,13 +5,13 @@ import ReactMapboxGl, {
   Marker,
   Feature,
   GeoJSONLayer,
-  Cluster
+  Cluster,
+  Popup
 } from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import * as turf from '@turf/turf';
 import mIcon from '../icons/marker.svg';
-import { Popup } from "mapbox-gl";
 //import Dati from '../data/Dati.json'
 //accessToken: 'pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A';
 //site URL: mapbox://styles/gianlu01/ck5z9olku3d2r1jov9drsa1uu
@@ -24,7 +24,7 @@ const Map = ReactMapboxGl({
 });
 
 class Maps extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -32,10 +32,10 @@ class Maps extends React.Component {
       markers: {},
       appoggio: {},
       mapCenter: [9.19, 45.466944],
-      geoLocation: navigator.geolocation.getCurrentPosition((posizione)=>{return ([posizione.coords.latitude, posizione.coords.longitude])})
+      geoLocation: navigator.geolocation.getCurrentPosition(posizione =>{return ([posizione.coords.latitude, posizione.coords.longitude])})
     }
   }
-  
+
 
   componentDidMount() {
     fetch('https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson', {
@@ -85,21 +85,15 @@ class Maps extends React.Component {
       });
     }
 
-    /*
-    <GeoJSONLayer
-      data={'https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson'}
-      symbolLayout={{
-        'text-field': "A"
-        }}
-      ></GeoJSONLayer>
-      this.state.markers.features.map(point=>(
-        <Marker
-          coordinates={point.coordinates}
-        >
-        </Marker>
-      ))
-*/
+    function renderPopup (point) {
+      return(
+        console.log(point.properties.insegna.toUpperCase())
+      );
+    }
 
+
+/*
+{point.properties.insegna.toUpperCase()}*/
     const MM = () => {
       if (this.state.stato) {
         return this.state.markers.features.map(point => (
@@ -107,26 +101,11 @@ class Maps extends React.Component {
             coordinates={point.geometry.coordinates}
             anchor="bottom"
           >
-            <button style={{background: 'none', border: 'none', cursor: 'pointer' }} onClick={apri =>{
-              apri.preventDefault();
-              console.log(point.geometry.coordinates)
-              return(
-                <Popup 
-                  latitude={point.geometry.coordinates[0]}
-                  longitude={point.geometry.coordinates[1]}
-                >
-                  <div>
-                    {point.properties.insegna.toUpperCase()}
-                  </div>
-                </Popup>
-              )
-            }}>
-              {point.properties.insegna.toUpperCase()}
+            <button style={{background: 'transparent', border: 'none', outline: 'none', boxShadow: 'none', cursor: 'allScroll'}}>
               <img src={mIcon} style={{ width: '10%', height: '10%' }} />
             </button>
           </Marker>
         ))
-        //S Map.flyTo({center: [0, 0], zoom: 9});
       }
     }
 
@@ -142,6 +121,7 @@ class Maps extends React.Component {
           <DrawControl
             onDrawCreate={onDrawCreate}
             onDrawDelete={onDrawDelete}
+            boxSelect={false}
             controls={controls}
             ref={(drawControl) => { this.drawControl = drawControl; }}
           />
