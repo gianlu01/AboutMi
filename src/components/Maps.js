@@ -1,12 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import ReactMapboxGl, {
-  Layer,
   Marker,
-  Feature,
-  GeoJSONLayer,
-  Cluster,
-  Popup
 } from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
@@ -32,7 +26,7 @@ class Maps extends React.Component {
       markers: {},
       appoggio: {},
       mapCenter: [9.19, 45.466944],
-      geoLocation: navigator.geolocation.getCurrentPosition(posizione =>{return ([posizione.coords.latitude, posizione.coords.longitude])})
+      geoLocation: navigator.geolocation.getCurrentPosition(posizione => { return ([posizione.coords.latitude, posizione.coords.longitude]) })
     }
   }
 
@@ -68,7 +62,7 @@ class Maps extends React.Component {
       var result = turf.pointsWithinPolygon(c, this.drawControl.draw.getAll());
       if (result.features.length <= 0) {
         alert("Nessun locale trovato")
-      } else if(result.features.length > 60){
+      } else if (result.features.length > 60) {
         alert("Hai selezionato un'area troppo grande")
       } else {
         this.setState({
@@ -85,15 +79,15 @@ class Maps extends React.Component {
       });
     }
 
-    function renderPopup (point) {
-      return(
+    function renderPopup(point) {
+      return (
         console.log(point.properties.insegna.toUpperCase())
       );
     }
 
 
-/*
-{point.properties.insegna.toUpperCase()}*/
+    /*
+    {point.properties.insegna.toUpperCase()}*/
     const MM = () => {
       if (this.state.stato) {
         return this.state.markers.features.map(point => (
@@ -101,7 +95,7 @@ class Maps extends React.Component {
             coordinates={point.geometry.coordinates}
             anchor="bottom"
           >
-            <button style={{background: 'transparent', border: 'none', outline: 'none', boxShadow: 'none', cursor: 'allScroll'}}>
+            <button style={{ background: 'transparent', border: 'none', outline: 'none', boxShadow: 'none', cursor: 'allScroll' }}>
               <img src={mIcon} style={{ width: '10%', height: '10%' }} />
             </button>
           </Marker>
