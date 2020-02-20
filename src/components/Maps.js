@@ -1,6 +1,8 @@
 import React from "react";
 import ReactMapboxGl, {
   Marker,
+  Layer,
+  Feature
 } from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
@@ -14,9 +16,14 @@ import mIcon from '../icons/marker.svg';
 const Map = ReactMapboxGl({
   accessToken: "pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A",
   minZoom: 8,
-  maxZoom: 17
+  maxZoom: 17,
+  dragRotate: false,
+  touchZoomRotate: false
 });
-
+const layout={'icon-image':'icon'}
+const image= new Image(20,20);
+image.src=mIcon;
+const images=['icon', image];
 class Maps extends React.Component {
 
   constructor(props) {
@@ -62,14 +69,13 @@ class Maps extends React.Component {
       var result = turf.pointsWithinPolygon(c, this.drawControl.draw.getAll());
       if (result.features.length <= 0) {
         alert("Nessun locale trovato")
-      } else if (result.features.length > 60) {
-        alert("Hai selezionato un'area troppo grande")
       } else {
         this.setState({
           stato: true,
           markers: result
         });
       }
+      this.drawControl.draw.delete(this.drawControl.draw.getAll().features[0].id);
     };
 
     const onDrawDelete = ({ feature }) => {
@@ -90,16 +96,21 @@ class Maps extends React.Component {
     {point.properties.insegna.toUpperCase()}*/
     const MM = () => {
       if (this.state.stato) {
-        return this.state.markers.features.map(point => (
+        return this.state.markers.features.map(point=>(
+          <Feature
+            coordinates={point.geometry.coordinates}
+          />
+        )
+      )
+        /*return this.state.markers.features.map(point => (
           <Marker
             coordinates={point.geometry.coordinates}
-            anchor="bottom"
           >
             <button style={{ background: 'transparent', border: 'none', outline: 'none', boxShadow: 'none', cursor: 'allScroll' }}>
               <img src={mIcon} style={{ width: '10%', height: '10%' }} />
             </button>
           </Marker>
-        ))
+        ))*/
       }
     }
 
@@ -111,7 +122,9 @@ class Maps extends React.Component {
             width: "100%"
           }}
           center={this.state.mapCenter}>
-          {MM()}
+          <Layer type="symbol" id="marker" layout={layout} images={images} >
+            {MM()}
+          </Layer>
           <DrawControl
             onDrawCreate={onDrawCreate}
             onDrawDelete={onDrawDelete}
