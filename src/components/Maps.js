@@ -2,7 +2,8 @@ import React from "react";
 import ReactMapboxGl, {
   Marker,
   Layer,
-  Feature
+  Feature,
+  Popup
 } from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
@@ -15,7 +16,7 @@ import mIcon from '../icons/marker.svg';
 
 const Map = ReactMapboxGl({
   accessToken: "pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A",
-  minZoom: 8,
+  minZoom: 11,
   maxZoom: 17,
   dragRotate: false,
   touchZoomRotate: false
@@ -33,6 +34,11 @@ class Maps extends React.Component {
       markers: {},
       appoggio: {},
       mapCenter: [9.19, 45.466944],
+      popup: {
+        status: false,
+        coordinates: []
+      },
+      zoom: [8],
       geoLocation: navigator.geolocation.getCurrentPosition(posizione => { return ([posizione.coords.latitude, posizione.coords.longitude]) })
     }
   }
@@ -90,8 +96,6 @@ class Maps extends React.Component {
         console.log(point.properties.insegna.toUpperCase())
       );
     }
-
-
     /*
     {point.properties.insegna.toUpperCase()}*/
     const MM = () => {
@@ -99,19 +103,22 @@ class Maps extends React.Component {
         return this.state.markers.features.map(point=>(
           <Feature
             coordinates={point.geometry.coordinates}
+            onClick={()=>{markerClicked(point.geometry.coordinates)}}
           />
         )
       )
-        /*return this.state.markers.features.map(point => (
-          <Marker
-            coordinates={point.geometry.coordinates}
-          >
-            <button style={{ background: 'transparent', border: 'none', outline: 'none', boxShadow: 'none', cursor: 'allScroll' }}>
-              <img src={mIcon} style={{ width: '10%', height: '10%' }} />
-            </button>
-          </Marker>
-        ))*/
       }
+    }
+
+    const markerClicked =(coo)=>{
+      this.setState({
+        mapCenter: coo,
+        zoom: [16],
+        popup: {
+          status: true,
+          coordinates: coo
+        }
+      });
     }
 
     return (
@@ -121,7 +128,8 @@ class Maps extends React.Component {
             height: "100vh",
             width: "100%"
           }}
-          center={this.state.mapCenter}>
+          center={this.state.mapCenter}
+          zoom={this.state.zoom}>
           <Layer type="symbol" id="marker" layout={layout} images={images} >
             {MM()}
           </Layer>
@@ -132,9 +140,23 @@ class Maps extends React.Component {
             controls={controls}
             ref={(drawControl) => { this.drawControl = drawControl; }}
           />
+          {this.state.popup.status && (
+            <Popup coordinates={this.state.popup.coordinates}>
+
+            </Popup>)}
         </Map>
       </div>
     );
   }
 }
 export default Maps;
+
+/*{this.state.stato && (
+  this.state.markers.features.map(point=>(
+    <Feature
+      coordinates={point.geometry.coordinates}
+      onClick={()=>{markerClicked(point.geometry.coordinates)}}
+    />
+  )
+)
+)}*/
