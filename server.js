@@ -58,6 +58,6 @@ app.get('/geojson', (req, res) => {
 });
 
 //specify the port were listen to
-app.listen(80, () => {
+app.listen(8081, () => {
     console.log('server started on port 80');
 });
