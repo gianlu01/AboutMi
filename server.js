@@ -22,6 +22,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 //helmet provides a security features
 app.use(helmet());
+app.use(express.json());
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));

@@ -1,11 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import ReactMapboxGl, {
-  Layer,
   Marker,
+  Layer,
   Feature,
-  GeoJSONLayer,
-  Cluster
+  Popup
 } from "react-mapbox-gl";
 import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
@@ -18,10 +16,15 @@ import mIcon from '../icons/marker.svg';
 
 const Map = ReactMapboxGl({
   accessToken: "pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A",
-  minZoom: 8,
-  maxZoom: 17
+  minZoom: 11,
+  maxZoom: 17,
+  dragRotate: false,
+  touchZoomRotate: false
 });
-
+const layout={'icon-image':'icon'}
+const image= new Image(20,20);
+image.src=mIcon;
+const images=['icon', image];
 class Maps extends React.Component {
 
   constructor(props) {
@@ -30,9 +33,16 @@ class Maps extends React.Component {
       stato: false,
       markers: {},
       appoggio: {},
-      mapCenter: [9.19, 45.466944]
+      mapCenter: [9.19, 45.466944],
+      popup: {
+        status: false,
+        coordinates: []
+      },
+      zoom: [8],
+      geoLocation: navigator.geolocation.getCurrentPosition(posizione => { return ([posizione.coords.latitude, posizione.coords.longitude]) })
     }
   }
+
 
   componentDidMount() {
     fetch('https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson', {
@@ -64,13 +74,14 @@ class Maps extends React.Component {
       }
       var result = turf.pointsWithinPolygon(c, this.drawControl.draw.getAll());
       if (result.features.length <= 0) {
-        alert("Locals not founds")
+        alert("Nessun locale trovato")
       } else {
         this.setState({
           stato: true,
           markers: result
         });
       }
+      this.drawControl.draw.delete(this.drawControl.draw.getAll().features[0].id);
     };
 
     const onDrawDelete = ({ feature }) => {
@@ -80,35 +91,34 @@ class Maps extends React.Component {
       });
     }
 
+    function renderPopup(point) {
+      return (
+        console.log(point.properties.insegna.toUpperCase())
+      );
+    }
     /*
-    <GeoJSONLayer
-      data={'https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson'}
-      symbolLayout={{
-        'text-field': "A"
-        }}
-      ></GeoJSONLayer>
-      this.state.markers.features.map(point=>(
-        <Marker
-          coordinates={point.coordinates}
-        >
-        </Marker>
-      ))
-*/
-
+    {point.properties.insegna.toUpperCase()}*/
     const MM = () => {
       if (this.state.stato) {
-        return this.state.markers.features.map(point => (
-          <Marker
+        return this.state.markers.features.map(point=>(
+          <Feature
             coordinates={point.geometry.coordinates}
-            anchor="bottom"
-          >
-            <button>
-              <img src={mIcon} style={{ width: '10%', height: '10%' }} />
-            </button>
-          </Marker>
-        ))
-        //S Map.flyTo({center: [0, 0], zoom: 9});
+            onClick={()=>{markerClicked(point.geometry.coordinates)}}
+          />
+        )
+      )
       }
+    }
+
+    const markerClicked =(coo)=>{
+      this.setState({
+        mapCenter: coo,
+        zoom: [16],
+        popup: {
+          status: true,
+          coordinates: coo
+        }
+      });
     }
 
     return (
@@ -118,17 +128,35 @@ class Maps extends React.Component {
             height: "100vh",
             width: "100%"
           }}
-          center={this.state.mapCenter}>
-          {MM()}
+          center={this.state.mapCenter}
+          zoom={this.state.zoom}>
+          <Layer type="symbol" id="marker" layout={layout} images={images} >
+            {MM()}
+          </Layer>
           <DrawControl
             onDrawCreate={onDrawCreate}
             onDrawDelete={onDrawDelete}
+            boxSelect={false}
             controls={controls}
             ref={(drawControl) => { this.drawControl = drawControl; }}
           />
+          {this.state.popup.status && (
+            <Popup coordinates={this.state.popup.coordinates}>
+
+            </Popup>)}
         </Map>
       </div>
     );
   }
 }
 export default Maps;
+
+/*{this.state.stato && (
+  this.state.markers.features.map(point=>(
+    <Feature
+      coordinates={point.geometry.coordinates}
+      onClick={()=>{markerClicked(point.geometry.coordinates)}}
+    />
+  )
+)
+)}*/
