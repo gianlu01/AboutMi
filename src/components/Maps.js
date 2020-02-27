@@ -23,8 +23,8 @@ const layout = { 'icon-image': 'icon' }
 const image = new Image(20, 20);
 image.src = mIcon;
 const images = ['icon', image];
-class Maps extends React.Component {
 
+class Maps extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,6 +39,7 @@ class Maps extends React.Component {
         description: ""
       },
       zoom: [8],
+      autocomplete: [],
       geoLocation: navigator.geolocation.getCurrentPosition(posizione => { return ([posizione.coords.latitude, posizione.coords.longitude]) })
     }
   }
@@ -81,7 +82,6 @@ class Maps extends React.Component {
           markers: result
         });
       }
-      //this.drawControl.draw.delete(this.drawControl.draw.getAll().features[0].id);
     };
 
     const onDrawDelete = ({ feature }) => {
@@ -114,9 +114,20 @@ class Maps extends React.Component {
       });
     }
 
+    const autocomplete = (e) => {
+      var c = [];
+      this.state.appoggio.features.map(f => {
+        if (f.properties.insegna.toUpperCase().search(e.target.value.toUpperCase()) != -1) {
+          c.push(f.properties.insegna);
+        }
+      })
+      this.setState({
+        autocomplete: c
+      })
+    }
     return (
       <div>
-        <Map style="mapbox://styles/mapbox/streets-v9" // eslint-disable-line
+        <Map style="mapbox://styles/mapbox/streets-v9"
           containerStyle={{
             height: "100vh",
             width: "100%"
@@ -126,7 +137,7 @@ class Maps extends React.Component {
           <Layer type="symbol" id="marker" layout={layout} images={images} >
             {this.state.stato && (
               this.state.markers.features.map(point => (
-                <Feature style={{cursor: 'pointer'}}
+                <Feature style={{ cursor: 'pointer' }}
                   coordinates={point.geometry.coordinates}
                   onClick={() => { markerClicked(point) }}
                 />
@@ -146,7 +157,18 @@ class Maps extends React.Component {
               <div>{this.state.popup.title}</div>
               <div>{this.state.popup.description}</div>
             </Popup>)}
+          <div style={{ textAlign: 'center' }}>
+            <input style={{ position: 'absolute' }} onChange={e => {
+              autocomplete(e);
+            }}></input>
+            <div>
+              {this.state.autocomplete.map(a => (
+                <div style={{position: 'absolute'}}>{a}</div>
+              ))}
+            </div>
+          </div>
         </Map>
+
       </div>
     );
   }
