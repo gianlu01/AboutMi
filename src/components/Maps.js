@@ -118,12 +118,16 @@ class Maps extends React.Component {
       var c = [];
       this.state.appoggio.features.map(f => {
         if (f.properties.insegna.toUpperCase().search(e.target.value.toUpperCase()) != -1) {
-          c.push(f.properties.insegna);
+          c.push(f);
         }
       })
-      this.setState({
-        autocomplete: c
-      })
+      if (e.target.value == '') {
+        this.setState({ autocomplete: [] })
+      } else {
+        this.setState({
+          autocomplete: c
+        })
+      }
     }
     return (
       <div>
@@ -158,13 +162,27 @@ class Maps extends React.Component {
               <div>{this.state.popup.description}</div>
             </Popup>)}
           <div style={{ textAlign: 'center' }}>
-            <input style={{ position: 'absolute' }} onChange={e => {
-              autocomplete(e);
-            }}></input>
-            <div>
-              {this.state.autocomplete.map(a => (
-                <div style={{position: 'absolute'}}>{a}</div>
-              ))}
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <input placeholder='Search local' onChange={e => {
+                autocomplete(e);
+              }}></input>
+              <div style={{ position: 'absolute', border: '1px solid #d4d4d4', borderBottom: 'none', borderTop: 'none', zIndex: 99, top: '100%', left: 0, right: 0 }}>
+                {this.state.autocomplete.map(a => (
+                  <div style={{ padding: '1px', cursor: 'pointer', backgroundColor: '#fff', borderBottom: '1px solid #d4d4d4' }} onClick={e => {
+                    this.setState({
+                      popup: {
+                        status: false
+                      },
+                      autocomplete: [],
+                      stato: true,
+                      markers: {
+                        type: "FeatureCollection",
+                        features: [a]
+                      }
+                    })
+                  }}>{a.properties.insegna}</div>
+                ))}
+              </div>
             </div>
           </div>
         </Map>
@@ -175,12 +193,3 @@ class Maps extends React.Component {
 }
 export default Maps;
 
-/*{this.state.stato && (
-  this.state.markers.features.map(point=>(
-    <Feature
-      coordinates={point.geometry.coordinates}
-      onClick={()=>{markerClicked(point.geometry.coordinates)}}
-    />
-  )
-)
-)}*/
