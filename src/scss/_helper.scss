@@ -1,18 +1,71 @@
-//Helper classes
+//GENERALS HELPER
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 10px;
   @media only screen and (max-width: 1200px) {
-    max-width: 950px;
+      max-width: 950px;
   }
   @media only screen and (max-width: 950px) {
-    max-width: 700px;
+      max-width: 700px;
+  }
+}
+
+.mt {
+  margin-top: .5rem !important;
+}
+
+.mt-2 {
+  margin-top: 1rem !important;
+}
+
+
+
+//TYPOGRAPHY HELPER
+.h1-title-dark {
+  color: #777;
+  font-size: 35px;
+  font-weight: 300;
+}
+
+.h2-title {
+  margin: 0;
+  color: #fff;
+  font-size: 35px;
+  font-weight: 300;
+}
+
+p.paragraph {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+
+
+//BUTTON ELEMENTS HELPER
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 4px;
+  background: $colorPrimary;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+  transition: ease-in-out all 0.5s;
+  @include standard-transition;
+  @include box-shadow;
+  &:hover {
+    background: $colorSecondary;
   }
 }
 
 
-.d-flex {
-  display: flex !important;
+
+//SECTION HELPER    
+section {
+  padding: 100px 0;
 }

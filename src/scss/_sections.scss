@@ -1,0 +1,108 @@
+section.section-bar {
+    position: relative;
+    padding: 150px 0;
+    background-image: url('../images/sectionBarBg.jpg');
+    background-position: center center;
+    background-size: cover;
+    .bg-filter {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background: #000;
+        opacity: 0.75;
+    }
+    .container {
+        .text-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 500px;
+        }
+    }
+}
+
+
+section.section-discoteche {
+    position: relative;
+    padding: 150px 0;
+    background-image: url('../images/sectionDiscotecheBg.jpg');
+    background-position: center center;
+    background-size: cover;
+    .bg-filter {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background: #000;
+        opacity: 0.75;
+    }
+    .container {
+        .text-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+        }
+    }
+}
+
+
+section.section-ristoranti {
+    position: relative;
+    padding: 150px 0;
+    background-image: url('../images/sectionRistorantiBg.jfif');
+    background-position: center center;
+    background-size: cover;
+    .bg-filter {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background: #000;
+        opacity: 0.75;
+    }
+    .container {
+        .text-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 500px;
+        }
+    }
+}
+
+
+section.section-eventi {
+    position: relative;
+    padding: 150px 0;
+    background-image: url('../images/sectionEventiBg.jfif');
+    background-position: center center;
+    background-size: cover;
+    .bg-filter {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background: #000;
+        opacity: 0.75;
+    }
+    .container {
+        .text-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+        }
+    }
+}

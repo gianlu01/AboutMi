@@ -4,16 +4,15 @@ header {
   background-image: url('../images/headerBackground.png');
   background-position: center center;
   background-size: cover;
+  @media only screen and (max-width: 950px) {
+    background-image: none;
+  }
   .cover {
     height: 100%;
     width: 100%;
     position: relative;
     .container {
       height: 100%;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 10px;
       .flex-wrapper {
         height: 100%;
         display: flex;
@@ -40,27 +39,12 @@ header {
             width: 100%;
             max-width: 350px;
             margin: 20px 0 25px 0;
-            color: #777;
-            font-size: 35px;
-            font-weight: 300;
-          }
-          .btn {
-            cursor: pointer;
-            display: inline-block;
-            padding: 10px 30px;
-            border-radius: 4px;
-            background: $colorPrimary;
-            text-align: center;
-            color: #fff;
-            font-size: 15px;
-            transition: ease-in-out all 0.5s;
-            box-shadow: 3px 3px 20px rgba(0, 76, 255, 0.4);
-            &:hover {
-              background: $colorSecondary;
-            }
           }
         }
         .card-wrapper {
+          @media only screen and (max-width: 950px) {
+            display: none;
+          }
           .card {
             width: 520px;
             padding: 20px 30px;
@@ -81,22 +65,6 @@ header {
               color: #777;
               font-size: 25px;
               font-weight: 400;
-            }
-            .btn {
-              cursor: pointer;
-              width: 25.5%;
-              display: inline-block;
-              padding: 10px 0;
-              background: $colorPrimary;
-              border-radius: 4px;
-              text-align: center;
-              color: #fff;
-              font-size: 13.5px;
-              transition: ease-in-out all 0.5s;
-              box-shadow: 3px 3px 20px rgba(0, 76, 255, 0.4);
-              &:hover {
-                background: $colorSecondary;
-              }
             }
           }
         }
