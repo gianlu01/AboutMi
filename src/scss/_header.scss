@@ -20,17 +20,8 @@ header {
         align-items: center;
         .text-wrapper {
           animation: fadeIn 1s forwards;
-          @keyframes fadeIn {
-            0% {
-              opacity: 0;
-              transform: translateX(-20px);
-            }
-            100% {
-              opacity: 1;
-              transform: translateX(0px);
-            }
-          }
           span.brand {
+            animation: fadeIn 1s forwards;
             display: inline-block;
             color: #777;
             font-size: 20px;
@@ -188,5 +179,17 @@ header {
         }
       }
     }
+  }
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
   }
 }
