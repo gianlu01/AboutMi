@@ -115,9 +115,9 @@ class Maps extends React.Component {
 
     const autocomplete = (e) => {
       var c = [];
-      this.state.appoggio.features.map(f => {
-        if (f.properties.insegna.toUpperCase().search(e.target.value.toUpperCase()) != -1) {
-          c.push(f);
+      this.state.appoggio.features.map(itemPlace => {
+        if (itemPlace.properties.insegna.toUpperCase().substring(0, e.target.value.length) == e.target.value.toUpperCase()) {
+          c.push(itemPlace);
         }
       })
       if (e.target.value == '') {
@@ -166,7 +166,7 @@ class Maps extends React.Component {
             </Popup>)}
           <div style={{ textAlign: 'center' }}>
             <div style={{ position: 'relative', display: 'inline-block' }}>
-              <input placeholder='Search local' id="search" onChange={e => {
+              <input placeholder='Search Places' id="search" onChange={e => {
                 autocomplete(e);
               }}></input>
               <div style={{ position: 'absolute', border: '1px solid #d4d4d4', borderBottom: 'none', borderTop: 'none', zIndex: 99, top: '100%', left: 0, right: 0 }}>
