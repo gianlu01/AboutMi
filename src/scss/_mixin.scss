@@ -1,0 +1,21 @@
+@mixin box-shadow {
+    box-shadow: 3px 3px 20px rgba(0, 76, 255, 0.4);
+    -webkit-box-shadow: 3px 3px 20px rgba(0, 76, 255, 0.4);
+    -moz-box-box-shadow: 3px 3px 20px rgba(0, 76, 255, 0.4);
+}
+
+@mixin standard-transition {
+    transition: ease-in-out all .5s;
+    -webkit-transition: ease-in-out all .5s;
+}
+
+@mixin custom-transition ($time) {
+    transition: ease-in-out all $time;
+    -webkit-transition: ease-in-out all $times;
+}
+
+@mixin translateY ($space) {
+    transform: translateY($space);
+    -webkit-transform: translateY($space);
+    -moz-transform: translateY($space);
+}

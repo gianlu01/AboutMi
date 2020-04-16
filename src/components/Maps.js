@@ -19,10 +19,10 @@ const Map = ReactMapboxGl({
   minZoom: 11,
   maxZoom: 17
 });
-const layout = { 'icon-image': 'icon' }
+const layout = { "icon-image": "icon" }
 const image = new Image(20, 20);
 image.src = mIcon;
-const images = ['icon', image];
+const images = ["icon", image];
 
 class Maps extends React.Component {
   constructor(props) {
@@ -35,8 +35,7 @@ class Maps extends React.Component {
       popup: {
         status: false,
         coordinates: [],
-        title: "",
-        description: ""
+        proprietaLocale: []
       },
       zoom: [8],
       autocomplete: [],
@@ -108,25 +107,25 @@ class Maps extends React.Component {
         popup: {
           status: true,
           coordinates: point.geometry.coordinates,
-          title: point.properties.insegna,
-          description: point.properties.tipo_locale
+          proprietaLocale: point.properties
         }
       });
+      document.getElementById('search').value = '';
     }
 
     const autocomplete = (e) => {
       var c = [];
-      this.state.appoggio.features.map(f => {
-        if (f.properties.insegna.toUpperCase().search(e.target.value.toUpperCase()) != -1) {
-          c.push(f);
+      this.state.appoggio.features.map(itemPlace => {
+        if (itemPlace.properties.insegna.toUpperCase().substring(0, e.target.value.length) == e.target.value.toUpperCase()) {
+          c.push(itemPlace);
         }
       })
       if (e.target.value == '') {
         this.setState({ autocomplete: [] })
       } else {
         this.setState({
-          autocomplete: c
-        })
+          autocomplete: c 
+        });
       }
     }
     return (
@@ -157,29 +156,33 @@ class Maps extends React.Component {
             ref={(drawControl) => { this.drawControl = drawControl; }}
           />
           {this.state.popup.status && (
-            <Popup coordinates={this.state.popup.coordinates}>
-              <div>{this.state.popup.title}</div>
-              <div>{this.state.popup.description}</div>
+            <Popup coordinates={this.state.popup.coordinates} /*chiudi il popup*/>
+              <div style={{fontWeight: 'bold'}}>{this.state.popup.proprietaLocale.insegna}</div>
+              <div>{this.state.popup.proprietaLocale.DescrizioneVia}</div>
+              <div>Civico: {this.state.popup.proprietaLocale.Civico}</div>
+              <div>Tipo Locale: {this.state.popup.proprietaLocale.tipo_locale} 
+                  - {this.state.popup.proprietaLocale.tipo_struttura}</div>
+              <div>Zona: {this.state.popup.proprietaLocale.MUNICIPIO}</div>
             </Popup>)}
           <div style={{ textAlign: 'center' }}>
             <div style={{ position: 'relative', display: 'inline-block' }}>
-              <input placeholder='Search local' onChange={e => {
+              <input placeholder='Search Places' id="search" onChange={e => {
                 autocomplete(e);
               }}></input>
               <div style={{ position: 'absolute', border: '1px solid #d4d4d4', borderBottom: 'none', borderTop: 'none', zIndex: 99, top: '100%', left: 0, right: 0, maxHeight: '200px', overflowX: 'hidden' }}>
                 {this.state.autocomplete.map(a => (
                   <div style={{ padding: '1px', cursor: 'pointer', backgroundColor: '#fff', borderBottom: '1px solid #d4d4d4' }} onClick={e => {
+                    document.getElementById('search').value = a.properties.insegna;
                     this.setState({
-                      popup: {
-                        status: false
-                      },
+                      mapCenter: a.geometry.coordinates,
                       autocomplete: [],
                       stato: true,
                       markers: {
                         type: "FeatureCollection",
                         features: [a]
-                      }
+                      } 
                     })
+                    markerClicked(a);
                   }}>{a.properties.insegna}</div>
                 ))}
               </div>
@@ -192,4 +195,3 @@ class Maps extends React.Component {
   }
 }
 export default Maps;
-

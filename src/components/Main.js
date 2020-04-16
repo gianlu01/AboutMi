@@ -45,8 +45,6 @@ class Main extends React.Component {
         case "maps":
           return(<React.Fragment>{maps}</React.Fragment>);
           break;
-        default:
-            return (<div></div>);
       }
 
     }
