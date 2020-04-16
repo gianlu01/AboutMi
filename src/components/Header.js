@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './Nav.js';
 import LoginModal from './LoginModal.js';
 import Maps from './Maps.js';
+import Signup from './Signup.js';
 
 class Header extends React.Component {
 
@@ -18,9 +19,9 @@ class Header extends React.Component {
   render() {
 
     const maps = (<Maps />);
-    const header =
+    const signup = (<Signup />);
 
-      (<header>
+    const header = (<header>
         <Nav />
         <div className="cover">
           <div className="container">
@@ -57,6 +58,9 @@ class Header extends React.Component {
         break;
       case "maps":
         return(maps);
+        break;
+      default:
+        return(header);
         break;
     }
   }
