@@ -166,7 +166,7 @@ class Maps extends React.Component {
               <input placeholder='Search local' onChange={e => {
                 autocomplete(e);
               }}></input>
-              <div style={{ position: 'absolute', border: '1px solid #d4d4d4', borderBottom: 'none', borderTop: 'none', zIndex: 99, top: '100%', left: 0, right: 0 }}>
+              <div style={{ position: 'absolute', border: '1px solid #d4d4d4', borderBottom: 'none', borderTop: 'none', zIndex: 99, top: '100%', left: 0, right: 0, maxHeight: '200px', overflowX: 'hidden' }}>
                 {this.state.autocomplete.map(a => (
                   <div style={{ padding: '1px', cursor: 'pointer', backgroundColor: '#fff', borderBottom: '1px solid #d4d4d4' }} onClick={e => {
                     this.setState({
