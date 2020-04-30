@@ -19,10 +19,8 @@ class Header extends React.Component {
   render() {
 
     const maps = (<Maps />);
-    const signup = (<Signup />);
-
     const header = (<header>
-        <Nav />
+        <Nav router={this.props.router}/>
         <div className="cover">
           <div className="container">
             <div className="flex-wrapper">

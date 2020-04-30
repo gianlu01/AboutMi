@@ -5,14 +5,18 @@ import Modal from './LoginModal.js';
 
 class Nav extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      component: "nav",
-      showModal: false
-    };
+        components: "main",
+        showModal: true
+    }
   }
+
   render() {
+
+
+    console.log(this.props);
 
     const modal = <Modal />;
     const nav = 
