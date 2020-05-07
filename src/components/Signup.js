@@ -14,6 +14,7 @@ class Signup extends React.Component {
         <main id="signup">
             <section className="signup-explain">
             <div className="container-title">
+              <div className="btn" onClick={() => {this.props.router("");}}>Torna indietro</div>
               <h1 className="title">Vantaggi che ricevi</h1>
             </div>
                 <div className="container">

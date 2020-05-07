@@ -9,7 +9,7 @@
             display: block;
             .title{
                 animation: fadeIn 1s forwards;
-                display: inline-block;
+                display: block;
                 color: #777;
                 font-size: 20px;
                 font-weight: 600;
@@ -69,6 +69,7 @@
                 border-radius: 5px;
                 box-shadow: 8px 8px 20px rgba(0,0,0, .1);
                 padding: 15px 20px;
+                transition-duration: 0.5s;
             }
             input:hover{
                 width: 525px;

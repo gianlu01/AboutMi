@@ -1,11 +1,33 @@
-input {
+.search-bar-container{
+  padding: 11px 0 0 0;
+  position: relative;
+  display: inline-block;
+  .search-bar{
+    height: 30px;
+    width: 250px;
+    max-width: 500px;
+    position: relative;
+    border-radius: 6px;
+    background: #fff;
+    border: solid 2px $colorPrimary;
+    transition-duration: 1s;
+    .result-set{
+      z-index: 99;
+      overflow-x: hidden;
+    }
+  }
+  
+}
+
+.search-bar:hover{
+  transition-duration: 1s;
+  width: 300px;
+  border: solid 2px $colorSecondary;
+}
+
+.go-back-container{
   width: 100%;
-  margin: 0 0 1.5rem 0;
-  padding: 15px;
-  border: none;
-  border-radius: 8px;
-  outline: none;
-  caret-color: $colorPrimary;
-  background: #f1f1f1;
-  font-size: .9rem;
+  height: 70px;
+  position: absolute;
+  padding: 11px 0 0 50px;
 }

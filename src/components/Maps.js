@@ -39,7 +39,7 @@ class Maps extends React.Component {
       },
       zoom: [8],
       autocomplete: [],
-      geoLocation: navigator.geolocation.getCurrentPosition(posizione => { return ([posizione.coords.latitude, posizione.coords.longitude]) })
+      geoLocation: []
     }
   }
 
@@ -55,6 +55,13 @@ class Maps extends React.Component {
         appoggio: JSON.parse(a)
       });
     })
+
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log(position.coords);
+      this.setState({geoLocation: [position.coords.longitude, position.coords.latitude]});
+      console.log(this.state.geoLocation);
+    });
+
   }
 
   render() {
@@ -128,8 +135,11 @@ class Maps extends React.Component {
         });
       }
     }
+
+
     return (
       <div>
+        
         <Map style="mapbox://styles/mapbox/streets-v9"
           containerStyle={{
             height: "100vh",
@@ -148,6 +158,13 @@ class Maps extends React.Component {
               )
             )}
           </Layer>
+          
+          {/*geolocalizzazione*/}
+
+          <Layer type="symbol" id="marker" layout={layout} images={images} >
+            <Feature style={{ cursor: 'pointer' }} coordinates={this.state.geoLocation}/>  
+          </Layer>
+
           <DrawControl
             onDrawCreate={onDrawCreate}
             onDrawDelete={onDrawDelete}
@@ -164,28 +181,33 @@ class Maps extends React.Component {
                   - {this.state.popup.proprietaLocale.tipo_struttura}</div>
               <div>Zona: {this.state.popup.proprietaLocale.MUNICIPIO}</div>
             </Popup>)}
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ position: 'relative', display: 'inline-block' }}>
-              <input placeholder='Search Places' id="search" onChange={e => {
-                autocomplete(e);
-              }}></input>
-              <div style={{ position: 'absolute', border: '1px solid #d4d4d4', borderBottom: 'none', borderTop: 'none', zIndex: 99, top: '100%', left: 0, right: 0, maxHeight: '200px', overflowX: 'hidden' }}>
-                {this.state.autocomplete.map(a => (
-                  <div style={{ padding: '1px', cursor: 'pointer', backgroundColor: '#fff', borderBottom: '1px solid #d4d4d4' }} onClick={e => {
-                    document.getElementById('search').value = a.properties.insegna;
-                    this.setState({
-                      mapCenter: a.geometry.coordinates,
-                      autocomplete: [],
-                      stato: true,
-                      markers: {
-                        type: "FeatureCollection",
-                        features: [a]
-                      } 
-                    })
-                    markerClicked(a);
-                  }}>{a.properties.insegna}</div>
-                ))}
-              </div>
+
+        <div className="go-back-container">
+          <div className="btn" onClick={() => {this.props.router("");}}>Torna indietro</div>
+        </div>
+        
+        <div style={{ textAlign: 'center' }}>
+          <div className="search-bar-container">
+            <input className="search-bar" placeholder='Search Places' id="search" onChange={e => {
+              autocomplete(e);
+            }}></input>
+            <div className="result-setz">
+              {this.state.autocomplete.map(a => (
+                <div style={{ padding: '1px', cursor: 'pointer', backgroundColor: '#fff', borderBottom: '1px solid #d4d4d4' }} onClick={e => {
+                  document.getElementById('search').value = a.properties.insegna;
+                  this.setState({
+                    mapCenter: a.geometry.coordinates,
+                    autocomplete: [],
+                    stato: true,
+                    markers: {
+                      type: "FeatureCollection",
+                      features: [a]
+                    } 
+                  })
+                  markerClicked(a);
+                }}>{a.properties.insegna}</div>
+              ))}
+            </div>
             </div>
           </div>
         </Map>
