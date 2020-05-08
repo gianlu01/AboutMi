@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './Nav.js';
 import LoginModal from './LoginModal.js';
 import Maps from './Maps.js';
+import Signup from './Signup.js';
 
 class Header extends React.Component {
 
@@ -18,10 +19,8 @@ class Header extends React.Component {
   render() {
 
     const maps = (<Maps />);
-    const header =
-
-      (<header>
-        <Nav />
+    const header = (<header>
+        <Nav router={this.props.router}/>
         <div className="cover">
           <div className="container">
             <div className="flex-wrapper">
@@ -57,6 +56,9 @@ class Header extends React.Component {
         break;
       case "maps":
         return(maps);
+        break;
+      default:
+        return(header);
         break;
     }
   }

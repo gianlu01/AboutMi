@@ -2,6 +2,7 @@ import React from 'react';
 import HomePage from './HomePage.js';
 import Header from './Header.js';
 import Maps from './Maps.js';
+import Signup from './Signup.js';
 
 
 class Main extends React.Component {
@@ -37,6 +38,7 @@ class Main extends React.Component {
       const hompage = <HomePage router={this.router} />;
       const header = <Header router={this.router}/>;
       const maps = <Maps router={this.router}/>;
+      const signup = <Signup router={this.router}/>;
 
       switch (this.state.components){
         case "main":
@@ -44,6 +46,12 @@ class Main extends React.Component {
           break;
         case "maps":
           return(<React.Fragment>{maps}</React.Fragment>);
+          break;
+        case "signup":
+          return(<React.Fragment>{signup}</React.Fragment>);
+          break;
+        default:
+          return(<React.Fragment>{header}{hompage}</React.Fragment>);
           break;
       }
 

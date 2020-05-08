@@ -1,4 +1,8 @@
 import React from 'react';
+<<<<<<< HEAD
+=======
+import Modal from 'react-bootstrap/Modal';
+>>>>>>> 7b53f23c207975598172962ecec41b540fa4977c
 
 class LoginModal extends React.Component {
 
@@ -19,10 +23,9 @@ class LoginModal extends React.Component {
     });
     return t;
   };
-*/
-  render() {
-    return (
-        <div className="modal-wrapper">
+
+
+  <div className="modal-wrapper">
           <div className="modal">
             <label>Nome utente: </label>
             <input placeholder="Scrivi il tuo nome utente"></input>
@@ -34,6 +37,12 @@ class LoginModal extends React.Component {
               </div>
           </div>
         </div>
+
+*/
+  render() {
+    
+    return ( 
+      <div></div> 
     );
   }
 

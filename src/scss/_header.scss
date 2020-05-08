@@ -4,23 +4,24 @@ header {
   background-image: url('../images/headerBackground.png');
   background-position: center center;
   background-size: cover;
+  @media only screen and (max-width: 950px) {
+    background-image: none;
+  }
   .cover {
     height: 100%;
     width: 100%;
     position: relative;
     .container {
       height: 100%;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 10px;
       .flex-wrapper {
         height: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
         .text-wrapper {
+          animation: fadeIn 1s forwards;
           span.brand {
+            animation: fadeIn 1s forwards;
             display: inline-block;
             color: #777;
             font-size: 20px;
@@ -43,6 +44,9 @@ header {
           }
         }
         .card-wrapper {
+          @media only screen and (max-width: 950px) {
+            display: none;
+          }
           .card {
             width: 520px;
             padding: 20px 30px;
@@ -175,5 +179,17 @@ header {
         }
       }
     }
+  }
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
   }
 }

@@ -8,6 +8,12 @@ class HomePage extends React.Component {
         }
     }
     render() {
+<<<<<<< HEAD
+=======
+
+        console.log(this.props);
+
+>>>>>>> 7b53f23c207975598172962ecec41b540fa4977c
         return (
             <main>
                 <section className="section-bar">

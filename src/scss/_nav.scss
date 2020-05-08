@@ -24,6 +24,31 @@ nav {
         height: 50px;
         width: 50px;
         display: block;
+        @media only screen and (max-width: 950px) {
+          height: 35px;
+          width: 35px;
+        }
+      }
+    }
+    .menu-icon {
+      cursor: pointer;
+      display: none;
+      @media only screen and (max-width: 950px) {
+        display: block;
+      }
+      span.bar {
+        height: 4px;
+        width: 30px;
+        display: block;
+        margin-bottom: 2px;
+        border-radius: 9999px;
+        background: $colorPrimary;
+        &.two {
+          width: 25px;
+        }
+        &.three {
+          width: 20px;
+        }
       }
     }
     .nav-items {
@@ -32,6 +57,9 @@ nav {
       border-radius: 10px;
       background: #fff;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      @media only screen and (max-width: 950px) {
+        display: none;
+      }
       li {
         display: inline-block;
         padding: 20px 0;
