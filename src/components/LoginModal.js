@@ -1,10 +1,12 @@
 import React from 'react';
-<<<<<<< HEAD
-=======
 import Modal from 'react-bootstrap/Modal';
->>>>>>> 7b53f23c207975598172962ecec41b540fa4977c
+import Button from 'react-bootstrap/Button';
 
 class LoginModal extends React.Component {
+
+  constructor(props){
+    super(props);
+  }
 
   /*login = (rotta: string, content: string) => {
     const t = fetch(/login, {
@@ -40,9 +42,33 @@ class LoginModal extends React.Component {
 
 */
   render() {
-    
+    console.log('render')
     return ( 
-      <div></div> 
+      
+        <Modal
+        {...this.props}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+              Modal heading
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>Centered Modal</h4>
+            <p>
+              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
+              consectetur ac, vestibulum at eros.
+            </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.props.onHide}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+       
     );
   }
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import logo from '../icons/logo.png';
+import Modal from './LoginModal.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header.js';
-import Modal from 'react-bootstrap/Modal';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import ModalTitle from 'react-bootstrap/ModalTitle';
 import ModalBody from 'react-bootstrap/ModalBody';
@@ -15,24 +16,6 @@ class Nav extends React.Component {
         show: false
     }
   }
-<<<<<<< HEAD
-  render() {
-    return (
-      <nav>
-        <div className="nav-container">
-          <div className="nav-logo">
-            <img className="nav-image" src={logo} alt="Logo AboutMI" />
-          </div>
-          <ul className="nav-items">
-            <li><a className="nav-link" onClick={() => {}}>Cosa facciamo</a></li>
-            <li><a className="nav-link" onClick={() => {}}>Contatti</a></li>
-            <li><a className="nav-link" onClick={() => {}}>Lavora con noi </a></li>
-            <li><a className="nav-link btn-login" onClick={()=> {}}>Login</a></li>
-          </ul>
-        </div>
-      </nav >
-    );
-=======
 
 
   render() {
@@ -64,6 +47,7 @@ class Nav extends React.Component {
               <li><a className="nav-link" onClick={() => {this.props.router("signup");}}>Lavora con noi </a></li>
               <li><a className="nav-link btn-login" onClick={showModal}>Login</a></li>
             </ul>
+            <Modal show={this.state.show} onHide={()=>this.setState({show: false})} ></Modal>
           </div>
         </nav >
       {/*
@@ -82,7 +66,6 @@ class Nav extends React.Component {
       </div>
       );
   }
->>>>>>> 7b53f23c207975598172962ecec41b540fa4977c
   }
 
 export default Nav;
