@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../icons/logo.png';
 import Modal from './LoginModal.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header.js';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import ModalTitle from 'react-bootstrap/ModalTitle';

@@ -15,7 +15,8 @@ class LoginModal extends React.Component {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        name: content
+        username: content,
+        password: psw
       })
     }).then(response => {
       response.text().then((text: string) => {
