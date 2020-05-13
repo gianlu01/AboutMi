@@ -30,4 +30,21 @@
   height: 70px;
   position: absolute;
   padding: 11px 0 0 50px;
+
+}
+
+.custom-popup{
+  width: 260px;
+  height: 300px;
+  display: block;
+  align-items: center;
+  font-family: "Montserrat";
+  flex-direction: column;
+  color: #777;
+  font-weight: 500;
+  .popup-title{
+    font-weight: 700;
+    font-size: 15px;
+    padding-bottom: 5px;
+  }
 }

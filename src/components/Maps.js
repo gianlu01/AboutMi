@@ -57,9 +57,7 @@ class Maps extends React.Component {
     })
 
     navigator.geolocation.getCurrentPosition(position => {
-      console.log(position.coords);
       this.setState({geoLocation: [position.coords.longitude, position.coords.latitude]});
-      console.log(this.state.geoLocation);
     });
 
   }
@@ -159,11 +157,13 @@ class Maps extends React.Component {
             )}
           </Layer>
           
-          {/*geolocalizzazione*/}
+          {/*geolocalizzazione
 
           <Layer type="symbol" id="marker" layout={layout} images={images} >
             <Feature style={{ cursor: 'pointer' }} coordinates={this.state.geoLocation}/>  
-          </Layer>
+          </Layer> 
+
+          */}
 
           <DrawControl
             onDrawCreate={onDrawCreate}
@@ -173,17 +173,21 @@ class Maps extends React.Component {
             ref={(drawControl) => { this.drawControl = drawControl; }}
           />
           {this.state.popup.status && (
-            <Popup coordinates={this.state.popup.coordinates} /*chiudi il popup*/>
-              <div style={{fontWeight: 'bold'}}>{this.state.popup.proprietaLocale.insegna}</div>
-              <div>{this.state.popup.proprietaLocale.DescrizioneVia}</div>
-              <div>Civico: {this.state.popup.proprietaLocale.Civico}</div>
-              <div>Tipo Locale: {this.state.popup.proprietaLocale.tipo_locale} 
-                  - {this.state.popup.proprietaLocale.tipo_struttura}</div>
-              <div>Zona: {this.state.popup.proprietaLocale.MUNICIPIO}</div>
+            <Popup coordinates={this.state.popup.coordinates}>
+              <div className="custom-popup">
+                
+                <div className="popup-title">{this.state.popup.proprietaLocale.insegna}</div>
+                <div>{this.state.popup.proprietaLocale.DescrizioneVia}</div>
+                <div>Civico: {this.state.popup.proprietaLocale.Civico}</div>
+                <div>Tipo Locale: {this.state.popup.proprietaLocale.tipo_locale} 
+                    - {this.state.popup.proprietaLocale.tipo_struttura}</div>
+                <div>Zona: {this.state.popup.proprietaLocale.MUNICIPIO}</div>
+                <div className="custom-btn" onClick={()=>{this.setState({popup:{status: false}})}}> chiudi popup</div>
+              </div>
             </Popup>)}
 
         <div className="go-back-container">
-          <div className="btn" onClick={() => {this.props.router("");}}>Torna indietro</div>
+          <div className="custom-btn" onClick={() => {this.props.router("");}}>Torna indietro</div>
         </div>
         
         <div style={{ textAlign: 'center' }}>

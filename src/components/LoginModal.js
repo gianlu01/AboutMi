@@ -50,23 +50,24 @@ class LoginModal extends React.Component {
         {...this.props}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
+          >
           <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-              Modal heading
-            </Modal.Title>
+            <Modal.Title id="contained-modal-title-vcenter"> Login </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Centered Modal</h4>
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-              consectetur ac, vestibulum at eros.
-            </p>
+            <div className="label-group">
+            <label className="custom-label">Nome utente: </label>
+            <input className="custom-input" placeholder="Scrivi il tuo nome utente"></input>
+            </div>
+            <div>
+              <label className="custom-label">Password: </label>
+              <input className="custom-input" placeholder="Scrivi qui la tua password"></input>
+            </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.props.onHide}>Close</Button>
+            <div className="custom-btn">Accedi</div>
+            <div className="custom-btn">Registrati</div>
+            {/*<div className="custom-btn" onClick={this.props.onHide}>Torna indietro</div>*/}
           </Modal.Footer>
         </Modal>
        
