@@ -49,11 +49,25 @@ app.get('/register', (req, res) => {
 })
 //search local by name
 app.get('/search/name', (req, res) => {
-  db.collection.findOne({name: req.body.name}, (err, doc) => {
+  db.collection.findOne({nomeLocale: req.body.name}, (err, doc) => {
     if (err) res.send("400");
     else res.send(doc);
   });
 });
+
+app.get('/add/valutation', (req,res)=>{
+  db.collection.findOne({nomeLocale: req.body.name}, (err, doc) => {
+    if (err) res.send("400");
+    else {
+      var comments = doc.comments;
+      comments.push({commento: req.body.commento, valutazione: req.body.valutazione, utente: req.body.utente})
+      db.collection.updateOne({nomeLocale: req.body.nome}, { $set: { comments: comments}}, (err,res)=>{
+        if(err) res.send("400")
+        else res.send("200")
+      })
+    }
+  });
+})
 
 app.get('/geojson', (req, res) => {
   res.send(getData());

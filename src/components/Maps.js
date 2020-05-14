@@ -37,7 +37,7 @@ class Maps extends React.Component {
         coordinates: [],
         proprietaLocale: []
       },
-      zoom: [8],
+      zoom: [11],
       autocomplete: [],
       geoLocation: []
     }
@@ -182,12 +182,38 @@ class Maps extends React.Component {
                 <div>Tipo Locale: {this.state.popup.proprietaLocale.tipo_locale} 
                     - {this.state.popup.proprietaLocale.tipo_struttura}</div>
                 <div>Zona: {this.state.popup.proprietaLocale.MUNICIPIO}</div>
-                <div className="custom-btn" onClick={()=>{this.setState({popup:{status: false}})}}> chiudi popup</div>
+                <div className="button-wrapper">
+                <div className="custom-btn" onClick={()=>{this.setState({popup:{status: false}})}}> Visualizza Recensioni</div>
+                  <div className="custom-btn" onClick={()=>{this.setState({popup:{status: false}})}}> Chiudi</div>
+                </div>
               </div>
             </Popup>)}
 
         <div className="go-back-container">
           <div className="custom-btn" onClick={() => {this.props.router("");}}>Torna indietro</div>
+        </div>
+            
+        <div className="zoom-btn-container">
+          <div className="custom-btn" onClick={() => {
+            var a = this.state.zoom[0];
+            if(a < 17){
+              a++;
+              this.setState({zoom: [a] });
+              console.log(this.state.zoom[0]);
+            } else {
+              console.log("ZOOM MASSIMO RAGGIUNTO");
+            }
+            }}>+</div>
+          <div className="custom-btn" onClick={ () => {
+            var a = this.state.zoom[0];
+            if(a > 11){
+              a--;
+              this.setState({zoom: [a] });
+              console.log(this.state.zoom[0]);
+            } else {
+              console.log("ZOOM MINIMO RAGGIUNTO");
+            }
+            }}>-</div>
         </div>
         
         <div style={{ textAlign: 'center' }}>
