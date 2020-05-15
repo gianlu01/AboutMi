@@ -5,9 +5,38 @@ class Signup extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      component: "signup"
+      component: "signup",
+      nome: "",
+      cognome: "",
+      username: "",
+      email: "",
+      password: "",
+      zona: "",
     };
   }
+
+  register = (content, psw) => {
+    const t = fetch("/register", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        nome: this.state.nome,
+        cognome: this.state.cognome,
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+        zona: this.state.zona,
+      })
+    }).then(response => {
+      response.text().then((text) => {
+        console.log(text);
+        return text;
+      });
+    });
+    return t;
+  };
 
   render() {
     return (
@@ -35,12 +64,13 @@ class Signup extends React.Component {
               <section className="signup-form">
               <div className="container">
                 <p>Registarsi è semplice e gratuito, ti basta solo Nome, Cognome e Email!</p>
-                <input placeholder="Nome"></input>
-                <input placeholder="Cognome"></input>
-                <input placeholder="Email"></input>
-                <input placeholder="Password"></input>
-                <input placeholder="Zona di Milano"></input>
-                <div className="custom-btn">Registrati</div>
+                <input placeholder="Nome" onChange={e => {this.setState({nome: e.target.value})}}></input>
+                <input placeholder="Cognome" onChange={e => {this.setState({cognome: e.target.value})}}></input>
+                <input placeholder="Username" onChange={e => {this.setState({username: e.target.value})}}></input>
+                <input placeholder="Email" onChange={e => {this.setState({email: e.target.value})}}></input>
+                <input type="password" placeholder="Password" onChange={e => {this.setState({password: e.target.value})}}></input>
+                <input placeholder="Zona di Milano" onChange={e => {this.setState({zona: e.target.value})}}></input>
+                <div className="custom-btn" onClick={()=> this.register()}>Registrati</div>
               </div>
               </section>
         </main>

@@ -35,14 +35,33 @@ class Maps extends React.Component {
       popup: {
         status: false,
         coordinates: [],
-        proprietaLocale: []
+        proprietaLocale: [],
       },
       zoom: [11],
       autocomplete: [],
-      geoLocation: []
+      geoLocation: [],
+      valutations: {}
     }
   }
 
+  search = (insegna) => {
+    fetch("/search/name", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        name: insegna
+      })
+    }).then(response => {
+      response.json().then((text) => {
+       this.setState({
+         valutations: text
+       });
+        return text;
+      });
+    });
+  };
 
   componentDidMount() {
     fetch('https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson', {
@@ -57,7 +76,7 @@ class Maps extends React.Component {
     })
 
     navigator.geolocation.getCurrentPosition(position => {
-      this.setState({geoLocation: [position.coords.longitude, position.coords.latitude]});
+      this.setState({ geoLocation: [position.coords.longitude, position.coords.latitude] });
     });
 
   }
@@ -106,13 +125,14 @@ class Maps extends React.Component {
     }
 
     const markerClicked = (point) => {
+      this.search(point.properties.insegna);
       this.setState({
         mapCenter: point.geometry.coordinates,
         zoom: [16],
         popup: {
           status: true,
           coordinates: point.geometry.coordinates,
-          proprietaLocale: point.properties
+          proprietaLocale: point.properties,
         }
       });
       document.getElementById('search').value = '';
@@ -129,7 +149,7 @@ class Maps extends React.Component {
         this.setState({ autocomplete: [] })
       } else {
         this.setState({
-          autocomplete: c 
+          autocomplete: c
         });
       }
     }
@@ -137,7 +157,7 @@ class Maps extends React.Component {
 
     return (
       <div>
-        
+
         <Map style="mapbox://styles/mapbox/streets-v9"
           containerStyle={{
             height: "100vh",
@@ -156,7 +176,7 @@ class Maps extends React.Component {
               )
             )}
           </Layer>
-          
+
           {/*geolocalizzazione
 
           <Layer type="symbol" id="marker" layout={layout} images={images} >
@@ -175,69 +195,72 @@ class Maps extends React.Component {
           {this.state.popup.status && (
             <Popup coordinates={this.state.popup.coordinates}>
               <div className="custom-popup">
-                
+
                 <div className="popup-title">{this.state.popup.proprietaLocale.insegna}</div>
                 <div>{this.state.popup.proprietaLocale.DescrizioneVia}</div>
                 <div>Civico: {this.state.popup.proprietaLocale.Civico}</div>
-                <div>Tipo Locale: {this.state.popup.proprietaLocale.tipo_locale} 
+                <div>Tipo Locale: {this.state.popup.proprietaLocale.tipo_locale}
                     - {this.state.popup.proprietaLocale.tipo_struttura}</div>
                 <div>Zona: {this.state.popup.proprietaLocale.MUNICIPIO}</div>
                 <div className="button-wrapper">
-                <div className="custom-btn" onClick={()=>{this.setState({popup:{status: false}})}}> Visualizza Recensioni</div>
-                  <div className="custom-btn" onClick={()=>{this.setState({popup:{status: false}})}}> Chiudi</div>
+                  <div className="custom-btn" onClick={() => {
+                    this.setState({ popup: { status: false } })
+                    console.log(this.state.valutations)
+                  }}> Visualizza Recensioni</div>
+                  <div className="custom-btn" onClick={() => { this.setState({ popup: { status: false } }) }}> Chiudi</div>
                 </div>
               </div>
             </Popup>)}
 
-        <div className="go-back-container">
-          <div className="custom-btn" onClick={() => {this.props.router("");}}>Torna indietro</div>
-        </div>
-            
-        <div className="zoom-btn-container">
-          <div className="custom-btn" onClick={() => {
-            var a = this.state.zoom[0];
-            if(a < 17){
-              a++;
-              this.setState({zoom: [a] });
-              console.log(this.state.zoom[0]);
-            } else {
-              console.log("ZOOM MASSIMO RAGGIUNTO");
-            }
+          <div className="go-back-container">
+            <div className="custom-btn" onClick={() => { this.props.router(""); }}>Torna indietro</div>
+          </div>
+
+          <div className="zoom-btn-container">
+            <div className="custom-btn" onClick={() => {
+              var a = this.state.zoom[0];
+              if (a < 17) {
+                a++;
+                this.setState({ zoom: [a] });
+                console.log(this.state.zoom[0]);
+              } else {
+                console.log("ZOOM MASSIMO RAGGIUNTO");
+              }
             }}>+</div>
-          <div className="custom-btn" onClick={ () => {
-            var a = this.state.zoom[0];
-            if(a > 11){
-              a--;
-              this.setState({zoom: [a] });
-              console.log(this.state.zoom[0]);
-            } else {
-              console.log("ZOOM MINIMO RAGGIUNTO");
-            }
+            <div className="custom-btn" onClick={() => {
+              var a = this.state.zoom[0];
+              if (a > 11) {
+                a--;
+                this.setState({ zoom: [a] });
+                console.log(this.state.zoom[0]);
+              } else {
+                console.log("ZOOM MINIMO RAGGIUNTO");
+              }
             }}>-</div>
-        </div>
-        
-        <div style={{ textAlign: 'center' }}>
-          <div className="search-bar-container">
-            <input className="search-bar" placeholder='Search Places' id="search" onChange={e => {
-              autocomplete(e);
-            }}></input>
-            <div className="result-setz">
-              {this.state.autocomplete.map(a => (
-                <div style={{ padding: '1px', cursor: 'pointer', backgroundColor: '#fff', borderBottom: '1px solid #d4d4d4' }} onClick={e => {
-                  document.getElementById('search').value = a.properties.insegna;
-                  this.setState({
-                    mapCenter: a.geometry.coordinates,
-                    autocomplete: [],
-                    stato: true,
-                    markers: {
-                      type: "FeatureCollection",
-                      features: [a]
-                    } 
-                  })
-                  markerClicked(a);
-                }}>{a.properties.insegna}</div>
-              ))}
-            </div>
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <div className="search-bar-container">
+              <input className="search-bar" placeholder='Search Places' id="search" onChange={e => {
+                autocomplete(e);
+              }}></input>
+              <div className="result-setz">
+                {this.state.autocomplete.map(a => (
+                  <div style={{ padding: '1px', cursor: 'pointer', backgroundColor: '#fff', borderBottom: '1px solid #d4d4d4' }} onClick={e => {
+                    document.getElementById('search').value = a.properties.insegna;
+                    this.setState({
+                      mapCenter: a.geometry.coordinates,
+                      autocomplete: [],
+                      stato: true,
+                      markers: {
+                        type: "FeatureCollection",
+                        features: [a]
+                      }
+                    })
+                    markerClicked(a);
+                  }}>{a.properties.insegna}</div>
+                ))}
+              </div>
             </div>
           </div>
         </Map>

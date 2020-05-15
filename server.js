@@ -6,8 +6,8 @@ const axios = require('axios');
 var db = {};
 var MongoClient = require('mongodb').MongoClient;
 MongoClient.connect("mongodb+srv://Michele:Arancione6@cluster0-0jqkz.mongodb.net/test?retryWrites=true", { useUnifiedTopology: true }, (err, client) => {
-    db.collection = client.db('test').collection('testdb');
-    if (err) console.log(err);
+  db.collection = client.db('test').collection('testdb');
+  if (err) console.log(err);
 });
 
 const getData = async () => {
@@ -26,45 +26,70 @@ app.use(express.json());
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 //login handler
-app.get('/login', (req, res) => {
-  db.collection.findOne({username: req.body.username, password: req.body.password}, (err, doc)=>{
-    if(err) res.send("400");
-    else res.send("200");
+app.post('/login', (req, res) => {
+  db.collection.findOne({ username: req.body.username, password: req.body.password }, (err, doc) => {
+    if (err) res.send("400");
+    else {
+      if (doc == null) {
+        res.send("300");
+      } else {
+        res.send("200")
+      }
+    }
   })
 });
 //register handler
-app.get('/register', (req, res) => {
-  db.collection.findOne({username:req.body.username, password: req.body.password}, (err, doc) => {
+app.post('/register', (req, res) => {
+  db.collection.findOne({ username: req.body.username, password: req.body.password }, (err, doc) => {
     if (err) res.send("400");
     else {
-      db.collection.insertOne({username: req.body.username, password: req.body.password}, (err, doc) => {
-        if (err) res.send("400");
-        else res.send("200");
-      });
+      db.collection.insertOne(
+        {
+          username: req.body.username,
+          password: req.body.password,
+          nome: req.body.nome,
+          cognome: req.body.cognome,
+          email: req.body.email,
+          zona: req.body.zona
+        }, (err, doc) => {
+          if (err) res.send("400");
+          else res.send("200");
+        });
     }
   })
 })
 //search local by name
-app.get('/search/name', (req, res) => {
-  db.collection.findOne({nomeLocale: req.body.name}, (err, doc) => {
+app.post('/search/name', (req, res) => {
+  db.collection.findOne({ nomelocale: req.body.name }, (err, doc) => {
     if (err) res.send("400");
-    else res.send(doc);
+    else res.json(doc);
   });
 });
 
-app.get('/add/valutation', (req,res)=>{
-  db.collection.findOne({nomeLocale: req.body.name}, (err, doc) => {
+app.post('/add/valutation', (req, res) => {
+  db.collection.findOne({ nomeLocale: req.body.name }, (err, doc) => {
     if (err) res.send("400");
     else {
-      var comments = doc.comments;
-      comments.push({commento: req.body.commento, valutazione: req.body.valutazione, utente: req.body.utente})
-      db.collection.updateOne({nomeLocale: req.body.nome}, { $set: { comments: comments}}, (err,res)=>{
-        if(err) res.send("400")
-        else res.send("200")
-      })
+      if (doc === null) {
+        db.collection.insertOne(
+          {
+            nomelocale: req.body.name,
+            commnets: [{ commento: req.body.commento, valutazione: req.body.valutazione, utente: req.body.utente }]
+          }, (err, doc) => {
+            if (err) res.send("400");
+            else res.send("200");
+          });
+      } else {
+        var comments = doc.comments;
+        comments.push({ commento: req.body.commento, valutazione: req.body.valutazione, utente: req.body.utente })
+        db.collection.updateOne({ nomeLocale: req.body.nome }, { $set: { comments: comments } }, (err, res) => {
+          if (err) res.send("400")
+          else res.send("200")
+        })
+      }
     }
   });
 })
@@ -75,5 +100,5 @@ app.get('/geojson', (req, res) => {
 
 //specify the port were listen to
 app.listen(8081, () => {
-    console.log('server started on port 80');
+  console.log('server started on port 80');
 });
