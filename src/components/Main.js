@@ -3,6 +3,7 @@ import HomePage from './HomePage.js';
 import Header from './Header.js';
 import Maps from './Maps.js';
 import Signup from './Signup.js';
+import LoginModal from './LoginModal.js';
 
 
 class Main extends React.Component {
@@ -39,6 +40,7 @@ class Main extends React.Component {
       const header = <Header router={this.router}/>;
       const maps = <Maps router={this.router}/>;
       const signup = <Signup router={this.router}/>;
+
 
       switch (this.state.components){
         case "main":

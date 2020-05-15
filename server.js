@@ -70,7 +70,7 @@ app.post('/search/name', (req, res) => {
 });
 
 app.post('/add/valutation', (req, res) => {
-  db.collection.findOne({ nomeLocale: req.body.name }, (err, doc) => {
+  db.collection.findOne({ nomelocale: req.body.name }, (err, doc) => {
     if (err) res.send("400");
     else {
       if (doc === null) {
