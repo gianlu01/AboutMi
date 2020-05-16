@@ -9,6 +9,7 @@ import DrawControl from "react-mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import * as turf from '@turf/turf';
 import mIcon from '../icons/marker.svg';
+import ReviewModal from './ReviewModal.js';
 //import Dati from '../data/Dati.json'
 //accessToken: 'pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A';
 //site URL: mapbox://styles/gianlu01/ck5z9olku3d2r1jov9drsa1uu
@@ -154,6 +155,14 @@ class Maps extends React.Component {
       }
     }
 
+    const showModal = () => {
+      this.setState({show: true});
+    }
+
+    const hideModal = () => {
+      this.setState({showModal: false});
+    }
+
 
     return (
       <div>
@@ -195,7 +204,6 @@ class Maps extends React.Component {
           {this.state.popup.status && (
             <Popup coordinates={this.state.popup.coordinates}>
               <div className="custom-popup">
-
                 <div className="popup-title">{this.state.popup.proprietaLocale.insegna}</div>
                 <div>{this.state.popup.proprietaLocale.DescrizioneVia}</div>
                 <div>Civico: {this.state.popup.proprietaLocale.Civico}</div>
@@ -203,13 +211,15 @@ class Maps extends React.Component {
                     - {this.state.popup.proprietaLocale.tipo_struttura}</div>
                 <div>Zona: {this.state.popup.proprietaLocale.MUNICIPIO}</div>
                 <div className="button-wrapper">
-                  <div className="custom-btn" onClick={() => {
-                    this.setState({ popup: { status: false } })
-                    console.log(this.state.valutations)
-                  }}> Visualizza Recensioni</div>
+                  <div className="custom-btn" onClick={showModal}> Visualizza Recensioni</div>
                   <div className="custom-btn" onClick={() => { this.setState({ popup: { status: false } }) }}> Chiudi</div>
                 </div>
               </div>
+              <ReviewModal 
+                show={this.state.show} 
+                onHide={()=>this.setState({show: false})} 
+                router={this.props.router} 
+                placeName={this.state.popup.proprietaLocale.insegna}></ReviewModal>
             </Popup>)}
 
           <div className="go-back-container">
@@ -264,7 +274,6 @@ class Maps extends React.Component {
             </div>
           </div>
         </Map>
-
       </div>
     );
   }

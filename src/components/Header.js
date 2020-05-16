@@ -17,7 +17,6 @@ class Header extends React.Component {
 
 
   render() {
-
     const maps = (<Maps />);
     const header = (<header>
         <Nav router={this.props.router}/>

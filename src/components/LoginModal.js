@@ -33,7 +33,6 @@ class LoginModal extends React.Component {
 
 
   render() {
-    console.log('render')
     return (
 
       <Modal
@@ -115,7 +114,6 @@ class LoginModal extends React.Component {
           <div className="custom-btn" onClikc={()=>{
             this.props.router("signup");
           }}>Registrati</div>
-          {/*<div className="custom-btn" onClick={this.props.onHide}>Torna indietro</div>*/}
         </Modal.Footer>
       </Modal>
 

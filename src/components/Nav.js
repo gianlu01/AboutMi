@@ -27,9 +27,6 @@ class Nav extends React.Component {
       this.setState({showModal: false});
     }
 
-    const loginModal = <Modal router={this.router}/>;
-
-
     return(
       <div>
         <nav>
@@ -48,7 +45,7 @@ class Nav extends React.Component {
               <li><a className="nav-link" onClick={()=>{}}>Lavora con noi </a></li>
               <li><a className="nav-link btn-login" onClick={showModal}>Login</a></li>
             </ul>
-            <Modal show={this.state.show} onHide={()=>this.setState({show: false})} ></Modal>
+            <Modal show={this.state.show} onHide={()=>this.setState({show: false})} router={this.props.router} ></Modal>
           </div>
         </nav >
       {/*
