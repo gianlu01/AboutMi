@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import logo from '../icons/logo.png';
-import Modal from './LoginModal.js';
+import LoginModal from './LoginModal.js';
+import WwuModal from './wwuModal.js';
+import ContactsModal from './ContactsModal.js';
+import CosaFacciamoModal from './CosaFacciamoModal.js';
 import Header from './Header.js';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import ModalTitle from 'react-bootstrap/ModalTitle';
@@ -12,19 +15,30 @@ class Nav extends React.Component {
     super(props);
     this.state = {
         components: "main",
-        show: false
+        showLoginModal: false,
+        showWWUModal: false,
+        showContactsModal: false,
+        showCosaFacciamoModal: false
     }
   }
 
 
   render() {
 
-    const showModal = () => {
-      this.setState({show: true});
+    const showLoginModal = () => {
+      this.setState({showLoginModal: true});
     }
 
-    const hideModal = () => {
-      this.setState({showModal: false});
+    const showWWUModal = () => {
+      this.setState({showWWUModal: true});
+    }
+
+    const showContactsModal = () => {
+      this.setState({showContactsModal: true});
+    }
+
+    const showCosaFacciamoModal = () => {
+      this.setState({showCosaFacciamoModal: true});
     }
 
     return(
@@ -40,12 +54,17 @@ class Nav extends React.Component {
               <span className="bar three"></span>
             </div>
             <ul className="nav-items">
-              <li><a className="nav-link" onClick={() => {}}>Cosa facciamo</a></li>
-              <li><a className="nav-link" onClick={() => {}}>Contatti</a></li>
-              <li><a className="nav-link" onClick={()=>{}}>Lavora con noi </a></li>
-              <li><a className="nav-link btn-login" onClick={showModal}>Login</a></li>
+              <li><a className="nav-link" onClick={showCosaFacciamoModal}>Cosa facciamo</a></li>
+              <li><a className="nav-link" onClick={showContactsModal}>Contatti</a></li>
+              <li><a className="nav-link" onClick={showWWUModal}>Lavora con noi </a></li>
+              <li><a className="nav-link btn-login" onClick={showLoginModal}>Login</a></li>
             </ul>
-            <Modal show={this.state.show} onHide={()=>this.setState({show: false})} router={this.props.router} ></Modal>
+
+            <CosaFacciamoModal show={this.state.showCosaFacciamoModal} onHide={()=>this.setState({showCosaFacciamoModal: false})} ></CosaFacciamoModal>
+            <ContactsModal show={this.state.showContactsModal} onHide={()=>this.setState({showContactsModal: false})} ></ContactsModal>
+            <WwuModal show={this.state.showWWUModal} onHide={()=>this.setState({showWWUModal: false})} contatti={showContactsModal}></WwuModal>
+            <LoginModal show={this.state.showLoginModal} onHide={()=>this.setState({showLoginModal: false})} router={this.props.router} ></LoginModal>
+
           </div>
         </nav >
       {/*
