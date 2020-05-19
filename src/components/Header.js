@@ -46,8 +46,8 @@ class Header extends React.Component {
             </div>
           </div>
         </div>
-        <LoginModal />
-      </header>);
+        <LoginModal login={this.props.login}/>
+      </header>); 
 
     switch (this.state.components) {
       case "header":

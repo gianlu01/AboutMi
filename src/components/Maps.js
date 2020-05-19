@@ -41,7 +41,8 @@ class Maps extends React.Component {
       zoom: [11],
       autocomplete: [],
       geoLocation: [],
-      valutations: {}
+      valutations: [0],
+      commentsAvaible: false
     }
   }
 
@@ -156,7 +157,7 @@ class Maps extends React.Component {
     }
 
     const showModal = () => {
-      this.setState({show: true});
+      this.setState({show: true, commentsAvaible: true});
     }
 
     const hideModal = () => {
@@ -219,7 +220,11 @@ class Maps extends React.Component {
                 show={this.state.show} 
                 onHide={()=>this.setState({show: false})} 
                 router={this.props.router} 
-                placeName={this.state.popup.proprietaLocale.insegna}></ReviewModal>
+                placeName={this.state.popup.proprietaLocale.insegna}
+                comments={this.state.valutations}
+                status={this.state.commentsAvaible}
+                canComment={this.props.status}
+                ></ReviewModal>
             </Popup>)}
 
           <div className="go-back-container">

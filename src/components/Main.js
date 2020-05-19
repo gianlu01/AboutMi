@@ -11,7 +11,8 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          components: "main"
+          components: "main",
+          logged: false,
         }
       }
 
@@ -35,10 +36,14 @@ class Main extends React.Component {
         this.setState({components: route});
       }
 
+      login = (status) => {
+        this.setState({logged: status});
+      }
+
     render() {
       const hompage = <HomePage router={this.router} />;
-      const header = <Header router={this.router}/>;
-      const maps = <Maps router={this.router}/>;
+      const header = <Header router={this.router} login={this.login}/>;
+      const maps = <Maps router={this.router} status={this.state.logged}/>;
       const signup = <Signup router={this.router}/>;
 
 

@@ -24,7 +24,9 @@ class LoginModal extends React.Component {
       })
     }).then(response => {
       response.text().then((text) => {
-        console.log(text);
+        if (text === "200"){
+          this.props.login(true);
+        }
         return text;
       });
     });
@@ -33,6 +35,7 @@ class LoginModal extends React.Component {
 
 
   render() {
+    console.log(this.props)
     return (
 
       <Modal

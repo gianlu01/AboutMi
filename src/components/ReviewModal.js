@@ -19,14 +19,14 @@ class ReviewModal extends React.Component {
         aria-labelledby="contained-modal-title-vcenter"
       >
         <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter" 
-                style={{
-                    fontSize: '1.1rem',
-                    fontWeight: '900',
-                    color:'#777'
-                }}>
-                {this.props.placeName}
-            </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter"
+            style={{
+              fontSize: '1.1rem',
+              fontWeight: '900',
+              color: '#777'
+            }}>
+            {this.props.placeName}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div style={{
@@ -39,7 +39,7 @@ class ReviewModal extends React.Component {
               <div style={{
                 display: 'block',
                 maxWidth: '350%'
-                }}>
+              }}>
                 <label style={{
                   display: 'block',
                   margin: '0 0 .5rem 0',
@@ -48,29 +48,19 @@ class ReviewModal extends React.Component {
                   fontWeight: '400'
                 }}>Recensioni dei Clienti</label>
                 <div style={{
-                    width:'100%',
-                    lineHeight:'3em',
-                    overflow: 'auto',
-                    padding: '5px',
-                    maxHeight: '300px',
-                    }}>
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-                        PROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVAPROVA
-
+                  width: '100%',
+                  lineHeight: '3em',
+                  overflow: 'auto',
+                  padding: '5px',
+                  maxHeight: '300px',
+                }}>
+                  {this.props.status && this.props.comments.comments.map(body => (
+                    <div>
+                      <h1>{body.utente}</h1>
+                      <p>{body.valutazione}</p>
+                      <p>{body.commento}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -86,15 +76,15 @@ class ReviewModal extends React.Component {
             <div style={{
             }}>
               <div style={{
-                  display: 'block',
-                  width: '100%'
-                  }}>
+                display: 'block',
+                width: '100%'
+              }}>
                 <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    width:'100%',
-                    color:'#777',
-                    paddingBottom: '20px'
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                  color: '#777',
+                  paddingBottom: '20px'
                 }}>QUA VA INSERITA LA VALUTAZIONE (0-10)</div>
                 <label style={{
                   display: 'block',
@@ -115,19 +105,21 @@ class ReviewModal extends React.Component {
                   caretColor: '#004ffc',
                   background: '#f1f1f1',
                   fontSize: '.9rem'
-                  }} placeholder="Scrivi il tuo nome utente" onChange={e=>this.setState({username: e.target.value})}></textarea>
-                  <div className="custom-btn" onClick={()=>{}}>Pubblica Recensione</div>
+                }} placeholder="Scrivi il tuo nome utente" onChange={e => this.setState({ username: e.target.value })}></textarea>
+                {this.props.canComment && (
+                  <div className="custom-btn" onClick={() => { }}>Pubblica Recensione</div>
+                ) }
               </div>
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                width:'100%',
-                color:'#777'
-            }}>Per pubblicare una recesione devi prima possedere un account!</div>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+            color: '#777'
+          }}>Per pubblicare una recesione devi prima possedere un account!</div>
         </Modal.Footer>
       </Modal>
 
