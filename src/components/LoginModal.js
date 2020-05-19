@@ -109,10 +109,9 @@ class LoginModal extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <div className="custom-btn" onClick={()=>{
-            this.props.router("signup") /*BENF QUESTO LO TOGLILO PERCHE SERVIVA A ME PER DELLE PROVE, IL PROBLEMA E CHE SE LO METTO NELL'ALTRO PULSANTE NON VA*/
             this.login(this.state.username, this.state.password);
           }}>Accedi</div>
-          <div className="custom-btn" onClikc={()=>{
+          <div className="custom-btn" onClick={()=>{
             this.props.router("signup");
           }}>Registrati</div>
         </Modal.Footer>
