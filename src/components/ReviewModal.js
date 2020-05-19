@@ -7,8 +7,34 @@ class ReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      commento: "",
+      valutazione: 0
     }
   }
+
+  addValutation = () => {
+    console.log("starred")
+    const t = fetch("/add/valutation", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        nomelocale: this.props.placeName,
+        commento: this.state.commento,
+        valutazione: this.state.valutazione,
+        utente: this.props.user
+      })
+    }).then(response => {
+      response.text().then((text) => {
+        if (text === "200"){
+          //this.props.login(true, content);
+        }
+        return text;
+      });
+    });
+    return t;
+  };
 
   render() {
     return (
@@ -66,7 +92,7 @@ class ReviewModal extends React.Component {
             </div>
           </div>
         </Modal.Body>
-        <Modal.Body>
+        {this.props.canComment && <Modal.Body>
           <div style={{
             display: 'flex',
             justifyContent: 'space-between',
@@ -105,14 +131,12 @@ class ReviewModal extends React.Component {
                   caretColor: '#004ffc',
                   background: '#f1f1f1',
                   fontSize: '.9rem'
-                }} placeholder="Scrivi il tuo nome utente" onChange={e => this.setState({ username: e.target.value })}></textarea>
-                {this.props.canComment && (
-                  <div className="custom-btn" onClick={() => { }}>Pubblica Recensione</div>
-                ) }
+                }} placeholder="Scrivi qui la tua recensione" onChange={e => this.setState({ commento: e.target.value })}></textarea>
+                <div className="custom-btn" onClick={() => this.addValutation()}>Pubblica Recensione</div>
               </div>
             </div>
           </div>
-        </Modal.Body>
+        </Modal.Body>}
         <Modal.Footer>
           <div style={{
             display: 'flex',

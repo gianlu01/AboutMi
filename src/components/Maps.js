@@ -224,6 +224,7 @@ class Maps extends React.Component {
                 comments={this.state.valutations}
                 status={this.state.commentsAvaible}
                 canComment={this.props.status}
+                user={this.props.user}
                 ></ReviewModal>
             </Popup>)}
 

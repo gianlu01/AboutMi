@@ -63,7 +63,7 @@ class Nav extends React.Component {
             <CosaFacciamoModal show={this.state.showCosaFacciamoModal} onHide={()=>this.setState({showCosaFacciamoModal: false})} ></CosaFacciamoModal>
             <ContactsModal show={this.state.showContactsModal} onHide={()=>this.setState({showContactsModal: false})} ></ContactsModal>
             <WwuModal show={this.state.showWWUModal} onHide={()=>this.setState({showWWUModal: false})} contatti={showContactsModal}></WwuModal>
-            <LoginModal show={this.state.showLoginModal} onHide={()=>this.setState({showLoginModal: false})} router={this.props.router} ></LoginModal>
+            <LoginModal show={this.state.showLoginModal} onHide={()=>this.setState({showLoginModal: false})} router={this.props.router} login={this.props.login} user={this.props.user}></LoginModal>
 
           </div>
         </nav >

@@ -19,7 +19,7 @@ class Header extends React.Component {
   render() {
     const maps = (<Maps />);
     const header = (<header>
-        <Nav router={this.props.router}/>
+        <Nav router={this.props.router} login={this.props.login} user={this.props.user}/>
         <div className="cover">
           <div className="container">
             <div className="flex-wrapper">
@@ -46,7 +46,6 @@ class Header extends React.Component {
             </div>
           </div>
         </div>
-        <LoginModal login={this.props.login}/>
       </header>); 
 
     switch (this.state.components) {

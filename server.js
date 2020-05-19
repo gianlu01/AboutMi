@@ -46,18 +46,22 @@ app.post('/register', (req, res) => {
   db.collection.findOne({ username: req.body.username, password: req.body.password }, (err, doc) => {
     if (err) res.send("400");
     else {
-      db.collection.insertOne(
-        {
-          username: req.body.username,
-          password: req.body.password,
-          nome: req.body.nome,
-          cognome: req.body.cognome,
-          email: req.body.email,
-          zona: req.body.zona
-        }, (err, doc) => {
-          if (err) res.send("400");
-          else res.send("200");
-        });
+      if (doc === null) {
+        db.collection.insertOne(
+          {
+            username: req.body.username,
+            password: req.body.password,
+            nome: req.body.nome,
+            cognome: req.body.cognome,
+            email: req.body.email,
+            zona: req.body.zona
+          }, (err, doc) => {
+            if (err) res.send("400");
+            else res.send("200");
+          });
+      }else{
+        res.send("300")
+      }
     }
   })
 })
@@ -70,13 +74,13 @@ app.post('/search/name', (req, res) => {
 });
 
 app.post('/add/valutation', (req, res) => {
-  db.collection.findOne({ nomelocale: req.body.name }, (err, doc) => {
+  db.collection.findOne({ nomelocale: req.body.nomelocale }, (err, doc) => {
     if (err) res.send("400");
     else {
       if (doc === null) {
         db.collection.insertOne(
           {
-            nomelocale: req.body.name,
+            nomelocale: req.body.nomelocale,
             commnets: [{ commento: req.body.commento, valutazione: req.body.valutazione, utente: req.body.utente }]
           }, (err, doc) => {
             if (err) res.send("400");
@@ -85,9 +89,10 @@ app.post('/add/valutation', (req, res) => {
       } else {
         var comments = doc.comments;
         comments.push({ commento: req.body.commento, valutazione: req.body.valutazione, utente: req.body.utente })
-        db.collection.updateOne({ nomeLocale: req.body.nome }, { $set: { comments: comments } }, (err, res) => {
-          if (err) res.send("400")
-          else res.send("200")
+        console.log(comments)
+        db.collection.updateOne({ nomelocale: req.body.nomelocale }, { $set: { comments: comments } }, (err, res) => {
+          if (err) res.send("400");
+          else console.log(res)
         })
       }
     }
