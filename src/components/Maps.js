@@ -219,6 +219,7 @@ class Maps extends React.Component {
                 </div>
               </div>
               <ReviewModal
+                router={this.props.router}
                 show={this.state.show}
                 onHide={() => this.setState({ show: false })}
                 router={this.props.router}

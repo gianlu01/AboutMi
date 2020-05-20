@@ -1,4 +1,5 @@
 import React from 'react';
+import Toast from 'react-bootstrap/Toast';
 
 class Signup extends React.Component {
 
@@ -12,6 +13,7 @@ class Signup extends React.Component {
       email: "",
       password: "",
       zona: "",
+      toast: false
     };
   }
 
@@ -31,7 +33,9 @@ class Signup extends React.Component {
       })
     }).then(response => {
       response.text().then((text) => {
-        console.log(text);
+        if(text==='200'){
+          this.setState({toast: true})
+        }
         return text;
       });
     });
@@ -63,6 +67,15 @@ class Signup extends React.Component {
               </section>
               <section className="signup-form">
               <div className="container">
+              {this.state.toast && 
+                <Toast>
+                  <Toast.Header>
+                    <strong className="mr-auto">Perfetto!</strong>
+                  </Toast.Header>
+                  <Toast.Body>Hai completato la restistazione, ora puoi tornare alla HomePage ed effettuare il Login!</Toast.Body>
+                  <Toast.Body style={{display: 'flex', alignItems: 'center'}}><div className="custom-btn" onClick={() => {this.props.router("");}}>Torna indietro</div></Toast.Body>
+                </Toast>
+              }
                 <p>Registarsi è semplice e gratuito, ti basta solo Nome, Cognome e Email!</p>
                 <input placeholder="Nome" onChange={e => {this.setState({nome: e.target.value})}}></input>
                 <input placeholder="Cognome" onChange={e => {this.setState({cognome: e.target.value})}}></input>

@@ -24,10 +24,11 @@ class LoginModal extends React.Component {
     }).then(response => {
       response.text().then((text) => {
         if (text === "200"){
-          document.getElementById("login-error").innerHTML = "You're logged"
+          document.getElementById("login-error").innerHTML = "Login Effettuato con successo!"
           this.props.login(true, content);
+          this.props.router("maps");
         }else{
-          document.getElementById("login-error").innerHTML = "Check you're username and password than retry"
+          document.getElementById("login-error").innerHTML = "Controlla il tuo username o la tua password quindi, riprova."
         }
         return text;
       });
@@ -107,7 +108,9 @@ class LoginModal extends React.Component {
               height: '100%',
               padding: '0 50px 0 50px'
             }}>
-              <p id="login-error">Compila i seguenti campi per accedere al sito e poter commentare.</p>
+              <p id="login-error" style={{fontWeight: '900', color: '#777'}}>
+                Compila i seguenti campi per accedere al sito e poter commentare. 
+                Effettuando il Login accederai direttamente alla mappa!</p>
             </div>
           </div>
         </Modal.Body>
