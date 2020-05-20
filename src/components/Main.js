@@ -3,7 +3,6 @@ import HomePage from './HomePage.js';
 import Header from './Header.js';
 import Maps from './Maps.js';
 import Signup from './Signup.js';
-import LoginModal from './LoginModal.js';
 
 
 class Main extends React.Component {
@@ -51,16 +50,12 @@ class Main extends React.Component {
     switch (this.state.components) {
       case "main":
         return (<React.Fragment>{header}{hompage}</React.Fragment>);
-        break;
       case "maps":
         return (<React.Fragment>{maps}</React.Fragment>);
-        break;
       case "signup":
         return (<React.Fragment>{signup}</React.Fragment>);
-        break;
       default:
         return (<React.Fragment>{header}{hompage}</React.Fragment>);
-        break;
     }
 
   }

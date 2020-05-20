@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import logo from '../icons/logo.png';
 import LoginModal from './LoginModal.js';
 import WwuModal from './wwuModal.js';
 import ContactsModal from './ContactsModal.js';
 import CosaFacciamoModal from './CosaFacciamoModal.js';
-import Header from './Header.js';
-import ModalHeader from 'react-bootstrap/ModalHeader';
-import ModalTitle from 'react-bootstrap/ModalTitle';
-import ModalBody from 'react-bootstrap/ModalBody';
 
 class Nav extends React.Component {
 
@@ -54,10 +50,10 @@ class Nav extends React.Component {
               <span className="bar three"></span>
             </div>
             <ul className="nav-items">
-              <li><a className="nav-link" onClick={showCosaFacciamoModal}>Cosa facciamo</a></li>
-              <li><a className="nav-link" onClick={showContactsModal}>Contatti</a></li>
-              <li><a className="nav-link" onClick={showWWUModal}>Lavora con noi </a></li>
-              <li><a className="nav-link btn-login" onClick={showLoginModal}>Login</a></li>
+              <li><a className="nav-link" onClick={showCosaFacciamoModal} href="#1">Cosa facciamo</a></li>
+              <li><a className="nav-link" onClick={showContactsModal} href="#2">Contatti</a></li>
+              <li><a className="nav-link" onClick={showWWUModal} href="#3">Lavora con noi </a></li>
+              <li><a className="nav-link btn-login" onClick={showLoginModal} href="#4">Login</a></li>
             </ul>
 
             <CosaFacciamoModal show={this.state.showCosaFacciamoModal} onHide={()=>this.setState({showCosaFacciamoModal: false})} ></CosaFacciamoModal>

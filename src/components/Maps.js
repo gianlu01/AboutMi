@@ -1,6 +1,5 @@
 import React from "react";
 import ReactMapboxGl, {
-  Marker,
   Layer,
   Feature,
   Popup
@@ -57,9 +56,16 @@ class Maps extends React.Component {
       })
     }).then(response => {
       response.json().then((text) => {
-       this.setState({
-         valutations: text
-       });
+        if (text != null) {
+          this.setState({
+            valutations: text,
+            commentsAvaible: true
+          });
+        }else{
+          this.setState({
+            commentsAvaible: false
+          });
+        }
         return text;
       });
     });
@@ -96,7 +102,7 @@ class Maps extends React.Component {
     const onDrawCreate = ({ features }) => {
       var c = this.state.markers;
       for (var u = 0; u < c.features.length; u++) {
-        if (c.features[u].geometry.coordinates.length == 0) c.features.splice(u, 1);
+        if (c.features[u].geometry.coordinates.length === 0) c.features.splice(u, 1);
       }
       var result = turf.pointsWithinPolygon(c, this.drawControl.draw.getAll());
       if (result.features.length <= 0) {
@@ -143,11 +149,11 @@ class Maps extends React.Component {
     const autocomplete = (e) => {
       var c = [];
       this.state.appoggio.features.map(itemPlace => {
-        if (itemPlace.properties.insegna.toUpperCase().substring(0, e.target.value.length) == e.target.value.toUpperCase()) {
+        if (itemPlace.properties.insegna.toUpperCase().substring(0, e.target.value.length) === e.target.value.toUpperCase()) {
           c.push(itemPlace);
         }
       })
-      if (e.target.value == '') {
+      if (e.target.value === '') {
         this.setState({ autocomplete: [] })
       } else {
         this.setState({
@@ -157,17 +163,12 @@ class Maps extends React.Component {
     }
 
     const showModal = () => {
-      this.setState({show: true, commentsAvaible: true});
-    }
-
-    const hideModal = () => {
-      this.setState({showModal: false});
+      this.setState({ show: true});
     }
 
 
     return (
       <div>
-
         <Map style="mapbox://styles/mapbox/streets-v9"
           containerStyle={{
             height: "100vh",
@@ -177,10 +178,11 @@ class Maps extends React.Component {
           zoom={this.state.zoom}>
           <Layer type="symbol" id="marker" layout={layout} images={images} >
             {this.state.stato && (
-              this.state.markers.features.map(point => (
+              this.state.markers.features.map((point, i) => (
                 <Feature style={{ cursor: 'pointer' }}
                   coordinates={point.geometry.coordinates}
                   onClick={() => { markerClicked(point) }}
+                  key={i}
                 />
               )
               )
@@ -216,16 +218,16 @@ class Maps extends React.Component {
                   <div className="custom-btn" onClick={() => { this.setState({ popup: { status: false } }) }}> Chiudi</div>
                 </div>
               </div>
-              <ReviewModal 
-                show={this.state.show} 
-                onHide={()=>this.setState({show: false})} 
-                router={this.props.router} 
-                placeName={this.state.popup.proprietaLocale.insegna}
+              <ReviewModal
+                show={this.state.show}
+                onHide={() => this.setState({ show: false })}
+                router={this.props.router}
+                placename={this.state.popup.proprietaLocale.insegna}
                 comments={this.state.valutations}
                 status={this.state.commentsAvaible}
                 canComment={this.props.status}
                 user={this.props.user}
-                ></ReviewModal>
+              ></ReviewModal>
             </Popup>)}
 
           <div className="go-back-container">
@@ -261,8 +263,8 @@ class Maps extends React.Component {
                 autocomplete(e);
               }}></input>
               <div className="result-setz">
-                {this.state.autocomplete.map(a => (
-                  <div style={{ padding: '1px', cursor: 'pointer', backgroundColor: '#fff', borderBottom: '1px solid #d4d4d4' }} onClick={e => {
+                {this.state.autocomplete.map((a, i) => (
+                  <div key={i} style={{ padding: '1px', cursor: 'pointer', backgroundColor: '#fff', borderBottom: '1px solid #d4d4d4' }} onClick={e => {
                     document.getElementById('search').value = a.properties.insegna;
                     this.setState({
                       mapCenter: a.geometry.coordinates,

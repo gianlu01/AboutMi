@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 
 class ReviewModal extends React.Component {
 
@@ -20,7 +19,7 @@ class ReviewModal extends React.Component {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        nomelocale: this.props.placeName,
+        nomelocale: this.props.placename,
         commento: this.state.commento,
         valutazione: this.state.valutazione,
         utente: this.props.user
@@ -28,7 +27,6 @@ class ReviewModal extends React.Component {
     }).then(response => {
       response.text().then((text) => {
         if (text === "200"){
-          //this.props.login(true, content);
         }
         return text;
       });
@@ -51,7 +49,7 @@ class ReviewModal extends React.Component {
               fontWeight: '900',
               color: '#777'
             }}>
-            {this.props.placeName}
+            {this.props.placename}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -80,8 +78,8 @@ class ReviewModal extends React.Component {
                   padding: '5px',
                   maxHeight: '300px',
                 }}>
-                  {this.props.status && this.props.comments.comments.map(body => (
-                    <div>
+                  {this.props.status && this.props.comments.comments.map((body, i) => (
+                    <div key={i}>
                       <h1>{body.utente}</h1>
                       <p>{body.valutazione}</p>
                       <p>{body.commento}</p>

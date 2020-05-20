@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 
 class LoginModal extends React.Component {
 
@@ -25,7 +24,10 @@ class LoginModal extends React.Component {
     }).then(response => {
       response.text().then((text) => {
         if (text === "200"){
+          document.getElementById("login-error").innerHTML = "You're logged"
           this.props.login(true, content);
+        }else{
+          document.getElementById("login-error").innerHTML = "Check you're username and password than retry"
         }
         return text;
       });

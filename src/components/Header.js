@@ -1,8 +1,6 @@
 import React from 'react';
 import Nav from './Nav.js';
-import LoginModal from './LoginModal.js';
 import Maps from './Maps.js';
-import Signup from './Signup.js';
 
 class Header extends React.Component {
 
@@ -51,13 +49,10 @@ class Header extends React.Component {
     switch (this.state.components) {
       case "header":
         return(header);
-        break;
       case "maps":
         return(maps);
-        break;
       default:
         return(header);
-        break;
     }
   }
 
