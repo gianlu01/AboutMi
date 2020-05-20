@@ -81,7 +81,7 @@ app.post('/add/valutation', (req, res) => {
         db.collection.insertOne(
           {
             nomelocale: req.body.nomelocale,
-            commnets: [{ commento: req.body.commento, valutazione: req.body.valutazione, utente: req.body.utente }]
+            comments: [{ commento: req.body.commento, valutazione: req.body.valutazione, utente: req.body.utente }]
           }, (err, doc) => {
             if (err) res.send("400");
             else res.send("200");
