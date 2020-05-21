@@ -15,6 +15,23 @@ body {
   font-family: "Montserrat", sans-serif !important;
 }
 
+body::-webkit-scrollbar {
+  width: 0.7em;
+  background: transparent;
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: none;
+  background: transparent;
+}
+ 
+body::-webkit-scrollbar-thumb {
+  scrollbar-color: $colorPrimary;
+  background-color: $colorPrimary;
+  outline: 2px solid slategrey;
+  border-radius: 10px;
+}
+
 #root {
   height: 100%;
 }

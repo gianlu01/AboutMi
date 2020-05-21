@@ -90,13 +90,7 @@ class ReviewModal extends React.Component {
                     fontWeight: '400',
                     width: '100%'
                   }}>Recensioni dei Clienti</label>
-                  <div style={{
-                    width: '100%',
-                    lineHeight: '3em',
-                    overflow: 'auto',
-                    padding: '5px',
-                    maxHeight: '300px',
-                  }}>
+                  <div className="review-container">
                     {this.props.status && this.props.comments.comments.map((body, i) => (
                       <Card>
                         <Card.Header as="h5">{body.utente}</Card.Header>
@@ -160,7 +154,8 @@ class ReviewModal extends React.Component {
           <Modal.Footer style={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'flex-start'
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start'
           }}>
             <div style={{
               width: '100%',

@@ -1,0 +1,23 @@
+.review-container{
+    width: 100%;
+    overflow: auto;
+    padding: 5px;
+    max-height: 300px;
+}
+
+.review-container::-webkit-scrollbar {
+    width: 0.7em;
+    background: transparent;
+  }
+   
+  .review-container::-webkit-scrollbar-track {
+    box-shadow: none;
+    background: transparent;
+  }
+   
+  .review-container::-webkit-scrollbar-thumb {
+    scrollbar-color: $colorPrimary;
+    background-color: $colorPrimary;
+    outline: 2px solid slategrey;
+    border-radius: 10px;
+  }
