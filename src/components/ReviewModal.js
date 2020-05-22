@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
 import Toast from 'react-bootstrap/Toast';
+import StarRatings from 'react-star-ratings';
 
 class ReviewModal extends React.Component {
 
@@ -10,8 +11,15 @@ class ReviewModal extends React.Component {
     this.state = {
       commento: "",
       valutazione: 0,
-      toastNotification: false
+      toastNotification: false,
+      rating: 0
     }
+  }
+
+  changeRating = (newRating) => {
+    this.setState({
+      rating: newRating
+    });
   }
 
   addValutation = () => {
@@ -24,15 +32,15 @@ class ReviewModal extends React.Component {
       body: JSON.stringify({
         nomelocale: this.props.placename,
         commento: this.state.commento,
-        valutazione: this.state.valutazione,
+        valutazione: this.state.rating,
         utente: this.props.user
       })
     }).then(response => {
       response.text().then((text) => {
-        if (text === "200"){
+        if (text === "200") {
           alert("Commento pubblicato con successo");
           console.log("toast")
-          this.setState({toastNotification: true})
+          this.setState({ toastNotification: true })
         }
         return text;
       });
@@ -60,7 +68,7 @@ class ReviewModal extends React.Component {
               </Toast.Header>
               <Toast.Body>See? Just like this.</Toast.Body>
             </Toast>
-          </div> */} 
+          </div> */}
         <Modal
           {...this.props}
           size="lg"
@@ -78,32 +86,36 @@ class ReviewModal extends React.Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-                <div style={{
-                  display: 'block',
-                  width: '100%'
-                }}>
-                  <label style={{
-                    display: 'block',
-                    margin: '0 0 .5rem 0',
-                    color: '#777',
-                    fontSize: '1.1rem',
-                    fontWeight: '400',
-                    width: '100%'
-                  }}>Recensioni dei Clienti</label>
-                  <div className="review-container">
-                    {this.props.status && this.props.comments.comments.map((body, i) => (
-                      <Card>
-                        <Card.Header as="h5">{body.utente}</Card.Header>
-                        <Card.Body>
-                          <Card.Title>{body.valutazione}</Card.Title>
-                          <Card.Text>
-                          {body.commento}
-                          </Card.Text>
-                        </Card.Body>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
+            <div style={{
+              display: 'block',
+              width: '100%'
+            }}>
+              <label style={{
+                display: 'block',
+                margin: '0 0 .5rem 0',
+                color: '#777',
+                fontSize: '1.1rem',
+                fontWeight: '400',
+                width: '100%'
+              }}>Recensioni dei Clienti</label>
+              <div className="review-container">
+                {this.props.status && this.props.comments.comments.map((body, i) => (
+                  <Card>
+                    <Card.Header as="h5">{body.utente}</Card.Header>
+                    <Card.Body>
+                      <StarRatings
+                        rating={body.valutazione}
+                        starDimension="40px"
+                        starSpacing="15px"
+                      />
+                      <Card.Text>
+                        {body.commento}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                ))}
+              </div>
+            </div>
           </Modal.Body>
           {this.props.canComment && <Modal.Body>
             <div style={{
@@ -125,6 +137,13 @@ class ReviewModal extends React.Component {
                     color: '#777',
                     paddingBottom: '20px'
                   }}>QUA VA INSERITA LA VALUTAZIONE (0-10)</div>
+                  <StarRatings
+                    rating={this.state.rating}
+                    starRatedColor="blue"
+                    changeRating={this.changeRating}
+                    numberOfStars={5}
+                    name='rating'
+                  />
                   <label style={{
                     display: 'block',
                     margin: '0 0 .5rem 0',
@@ -150,22 +169,22 @@ class ReviewModal extends React.Component {
               </div>
             </div>
           </Modal.Body>}
-          { !this.props.canComment &&
-          <Modal.Footer style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start'
-          }}>
-            <div style={{
-              width: '100%',
-              color: '#777',
-              fontWeight: '900'
-            }}>Per pubblicare una recesione devi prima possedere un account!</div>
-            <div className="custom-btn" onClick={() => { this.props.router("");}}>Accedi o Registrati</div>
-          </Modal.Footer>}
+          {!this.props.canComment &&
+            <Modal.Footer style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start'
+            }}>
+              <div style={{
+                width: '100%',
+                color: '#777',
+                fontWeight: '900'
+              }}>Per pubblicare una recesione devi prima possedere un account!</div>
+              <div className="custom-btn" onClick={() => { this.props.router(""); }}>Accedi o Registrati</div>
+            </Modal.Footer>}
         </Modal>
-        </div>  
+      </div>
     );
   }
 

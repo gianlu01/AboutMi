@@ -9,6 +9,7 @@ import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import * as turf from '@turf/turf';
 import mIcon from '../icons/marker.svg';
 import ReviewModal from './ReviewModal.js';
+import StarRatings from 'react-star-ratings';
 //import Dati from '../data/Dati.json'
 //accessToken: 'pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A';
 //site URL: mapbox://styles/gianlu01/ck5z9olku3d2r1jov9drsa1uu
@@ -29,6 +30,7 @@ class Maps extends React.Component {
     super(props);
     this.state = {
       stato: false,
+      rating: 0,
       markers: {},
       appoggio: {},
       mapCenter: [9.19, 45.466944],
@@ -61,7 +63,8 @@ class Maps extends React.Component {
             valutations: text,
             commentsAvaible: true
           });
-        }else{
+          this.avarage();
+        } else {
           this.setState({
             commentsAvaible: false
           });
@@ -70,6 +73,14 @@ class Maps extends React.Component {
       });
     });
   };
+
+  avarage = () => {
+    var c = 0;
+    this.state.valutations.comments.map(item => {
+      c += item.valutazione;
+    })
+    this.setState({ rating: (c / this.state.valutations.comments.length) });
+  }
 
   componentDidMount() {
     fetch('https://michelebanfi.github.io/datasethosting/economia_locale_pubblico_spettacolo.geojson', {
@@ -163,7 +174,7 @@ class Maps extends React.Component {
     }
 
     const showModal = () => {
-      this.setState({ show: true});
+      this.setState({ show: true });
     }
 
 
@@ -213,6 +224,11 @@ class Maps extends React.Component {
                 <div>Tipo Locale: {this.state.popup.proprietaLocale.tipo_locale}
                     - {this.state.popup.proprietaLocale.tipo_struttura}</div>
                 <div>Zona: {this.state.popup.proprietaLocale.MUNICIPIO}</div>
+                <StarRatings
+                  rating={this.state.rating}
+                  starDimension="40px"
+                  starSpacing="15px"
+                />
                 <div className="button-wrapper">
                   <div className="custom-btn" onClick={showModal}> Visualizza Recensioni</div>
                   <div className="custom-btn" onClick={() => { this.setState({ popup: { status: false } }) }}> Chiudi</div>
