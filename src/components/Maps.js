@@ -251,9 +251,9 @@ class Maps extends React.Component {
             <div className="custom-btn" onClick={() => { this.props.router(""); }}>Torna indietro</div>
           </div>
 
-          <div className="welcome-text">
+          <div className="welcome-text-container">
             {!this.props.status && <div className="custom-btn" onClick={() => { this.props.router(""); }}>Accedi</div>}
-            {this.props.status && <div>Benvenuto, </div>}
+            {this.props.status && <div className="welcome-text">Benvenuto, {this.props.user}</div>}
           </div>
 
           <div className="zoom-btn-container">

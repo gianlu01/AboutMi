@@ -136,10 +136,11 @@ class ReviewModal extends React.Component {
                     width: '100%',
                     color: '#777',
                     paddingBottom: '20px'
-                  }}>QUA VA INSERITA LA VALUTAZIONE (0-10)</div>
+                  }}>QUA VA INSERITA LA VALUTAZIONE (0-5)</div>
                   <StarRatings
                     rating={this.state.rating}
-                    starRatedColor="blue"
+                    starHoverColor="#004ffc"
+                    starRatedColor="#1541ab"
                     changeRating={this.changeRating}
                     numberOfStars={5}
                     name='rating'

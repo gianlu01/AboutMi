@@ -26,6 +26,9 @@ import * as React from 'react';
 var isEqual = require('deep-equal');
 import diff from './util/diff';
 var eventToHandler = {
+    touchstart: 'onTouchStart',
+    touchend: 'onTouchEnd',
+    touchcancel: 'onTouchCancel',
     mousemove: 'onMouseMove',
     mouseenter: 'onMouseEnter',
     mouseleave: 'onMouseLeave',
