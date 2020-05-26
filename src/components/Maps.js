@@ -10,6 +10,7 @@ import * as turf from '@turf/turf';
 import mIcon from '../icons/marker.svg';
 import ReviewModal from './ReviewModal.js';
 import StarRatings from 'react-star-ratings';
+import Toast from 'react-bootstrap/Toast';
 //import Dati from '../data/Dati.json'
 //accessToken: 'pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A';
 //site URL: mapbox://styles/gianlu01/ck5z9olku3d2r1jov9drsa1uu
@@ -24,6 +25,7 @@ const layout = { "icon-image": "icon" }
 const image = new Image(20, 20);
 image.src = mIcon;
 const images = ["icon", image];
+const starIcon = "m61 61v-24c0-.066-.007-.131-.02-.196l-1.98-9.903v-5.901h-2v5.901l-1.98 9.902c-.013.066-.02.131-.02.197v3.074l-4-5.167v-10.907h2v-2h-2v-5c0-.066-.007-.131-.02-.196l-1.98-9.903v-5.901h-2v5.901l-1.98 9.902c-.013.066-.02.131-.02.197v5h-2v-5c0-.066-.007-.131-.02-.196l-1.98-9.903v-5.901h-2v5.901l-1.98 9.902c-.003.013-.002.027-.004.041l-4.224-5.457c-.379-.489-1.203-.489-1.582 0l-4.224 5.457c-.002-.013-.001-.027-.004-.041l-1.982-9.902v-5.901h-2v5.901l-1.98 9.902c-.013.066-.02.131-.02.197v5h-2v-5c0-.066-.007-.131-.02-.196l-1.98-9.903v-5.901h-2v5.901l-1.98 9.902c-.013.066-.02.131-.02.197v5h-2v2h2v10.908l-4 5.167v-3.075c0-.066-.007-.131-.02-.196l-1.98-9.903v-5.901h-2v5.901l-1.98 9.902c-.013.066-.02.131-.02.197v24h-2v2h3 4 6 4 4 4 12 4 4 4 6 4 3v-2zm-2-8h-2v-9h2zm-2 2h2v2h-2zm1-22.901 1 5v4.901h-2v-4.901zm-3 11.243v17.658h-4v-22.824zm-14 9.658h-2v-29h2zm-2 2h2v2h-2zm4-27.158 2 2.583v30.575h-2zm4 27.158h2v2h-2zm2-2h-2v-29h2zm-2-35.901 1-5 1 5v4.901h-2zm-2 6.901v3.158l-2-2.583v-.575zm-5-11.901 1 5v4.901h-2v-4.901zm-8 1.534 5 6.459v1.908h-2v2h2v37h-2v-11c0-1.654-1.346-3-3-3s-3 1.346-3 3v11h-2v-37h2v-2h-2v-1.908zm1 47.367h-2v-11c0-.551.448-1 1-1s1 .449 1 1zm-18-6h2v2h-2zm4-24.574 2-2.583v33.157h-2zm6 22.574h-2v-29h2zm-2 2h2v2h-2zm0-37.901 1-5 1 5v4.901h-2zm-2 6.901v.574l-2 2.583v-3.157zm-6-6.901 1-5 1 5v4.901h-2zm2 6.901v29h-2v-29zm-4 14.176v22.824h-4v-17.658zm-6 14.824h-2v-9h2zm0 2v2h-2v-2zm-1-22.901 1 5v4.901h-2v-4.901zm-1 28.901v-2h2v2zm10 0v-2h2v2zm8 0v-2h2v2zm16 0v-2h2v2zm8 0v-2h2v2zm10 0v-2h2v2z";
 
 class Maps extends React.Component {
   constructor(props) {
@@ -43,7 +45,8 @@ class Maps extends React.Component {
       autocomplete: [],
       geoLocation: [],
       valutations: [0],
-      commentsAvaible: false
+      commentsAvaible: false,
+      reviewToast: false
     }
   }
 
@@ -173,10 +176,13 @@ class Maps extends React.Component {
       }
     }
 
-    const showModal = () => {
-      this.setState({ show: true });
+    const showModal = (value) => {
+      this.setState({ show: value });
     }
 
+    const ShowReviewToast = () =>{
+      this.setState({ reviewToast: true });
+    }
 
     return (
       <div>
@@ -226,8 +232,10 @@ class Maps extends React.Component {
                 <div>Zona: {this.state.popup.proprietaLocale.MUNICIPIO}</div>
                 <StarRatings
                   rating={this.state.rating}
-                  starDimension="40px"
-                  starSpacing="15px"
+                  starDimension="35px"
+                  starSpacing="5px"
+                  svgIconPath= {starIcon}
+                  svgIconViewBox="0 0 65 65"
                 />
                 <div className="button-wrapper">
                   <div className="custom-btn" onClick={showModal}> Visualizza Recensioni</div>
@@ -244,8 +252,27 @@ class Maps extends React.Component {
                 status={this.state.commentsAvaible}
                 canComment={this.props.status}
                 user={this.props.user}
+                showReviewToast={ShowReviewToast}
               ></ReviewModal>
             </Popup>)}
+
+            {this.state.reviewToast && 
+              <Toast style={{
+                position: "absolute",
+                zIndex: "9999",
+                margin: "20px",
+                bottom: 0
+              }}
+
+              onClose={() => this.setState({ reviewToast: false })} show={this.state.reviewToast} delay={5000} autohide
+
+              >
+                <Toast.Header>
+                  <strong className="mr-auto">Perfetto</strong>
+                </Toast.Header>
+                <Toast.Body>Il tuo commento è stato pubblicato con successo! Grazie della recensione.</Toast.Body>
+              </Toast>
+            }
 
           <div className="go-back-container">
             <div className="custom-btn" onClick={() => { this.props.router(""); }}>Torna indietro</div>
@@ -281,7 +308,7 @@ class Maps extends React.Component {
 
           <div style={{ textAlign: 'center' }}>
             <div className="search-bar-container">
-              <input className="search-bar" placeholder='Search Places' id="search" onChange={e => {
+              <input className="search-bar" autocomplete="off" placeholder='Search Places' id="search" onChange={e => {
                 autocomplete(e);
               }}></input>
               <div className="result-setz">

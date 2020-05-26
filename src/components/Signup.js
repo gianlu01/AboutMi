@@ -72,7 +72,7 @@ class Signup extends React.Component {
                   <Toast.Header>
                     <strong className="mr-auto">Perfetto!</strong>
                   </Toast.Header>
-                  <Toast.Body>Hai completato la restistazione, ora puoi tornare alla HomePage ed effettuare il Login!</Toast.Body>
+                  <Toast.Body>Hai completato la registrazione, ora puoi tornare alla HomePage ed effettuare il Login!</Toast.Body>
                   <Toast.Body style={{display: 'flex', alignItems: 'center'}}><div className="custom-btn" onClick={() => {this.props.router("");}}>Torna indietro</div></Toast.Body>
                 </Toast>
               }
