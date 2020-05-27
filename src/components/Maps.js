@@ -180,7 +180,7 @@ class Maps extends React.Component {
       this.setState({ show: value });
     }
 
-    const ShowReviewToast = () =>{
+    const ShowReviewToast = () => {
       this.setState({ reviewToast: true });
     }
 
@@ -234,7 +234,7 @@ class Maps extends React.Component {
                   rating={this.state.rating}
                   starDimension="35px"
                   starSpacing="5px"
-                  svgIconPath= {starIcon}
+                  svgIconPath={starIcon}
                   svgIconViewBox="0 0 65 65"
                 />
                 <div className="button-wrapper">
@@ -256,23 +256,23 @@ class Maps extends React.Component {
               ></ReviewModal>
             </Popup>)}
 
-            {this.state.reviewToast && 
-              <Toast style={{
-                position: "absolute",
-                zIndex: "9999",
-                margin: "20px",
-                bottom: 0
-              }}
+          {this.state.reviewToast &&
+            <Toast style={{
+              position: "absolute",
+              zIndex: "9999",
+              margin: "20px",
+              bottom: 0
+            }}
 
               onClose={() => this.setState({ reviewToast: false })} show={this.state.reviewToast} delay={5000} autohide
 
-              >
-                <Toast.Header>
-                  <strong className="mr-auto">Perfetto</strong>
-                </Toast.Header>
-                <Toast.Body>Il tuo commento è stato pubblicato con successo! Grazie della recensione.</Toast.Body>
-              </Toast>
-            }
+            >
+              <Toast.Header>
+                <strong className="mr-auto">Perfetto</strong>
+              </Toast.Header>
+              <Toast.Body>Il tuo commento è stato pubblicato con successo! Grazie della recensione.</Toast.Body>
+            </Toast>
+          }
 
           <div className="go-back-container">
             <div className="custom-btn" onClick={() => { this.props.router(""); }}>Torna indietro</div>
@@ -280,7 +280,7 @@ class Maps extends React.Component {
 
           <div className="welcome-text-container">
             {!this.props.status && <div className="custom-btn" onClick={() => { this.props.router(""); }}>Accedi</div>}
-            {this.props.status && <div className="welcome-text">Benvenuto, {this.props.user}</div>}
+            {this.props.status && <div className="welcome-text">Bentornato, {this.props.user}</div>}
           </div>
 
           <div className="zoom-btn-container">

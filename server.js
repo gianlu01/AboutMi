@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const path = require('path');
 const axios = require('axios');
 var db = {};
+
 var MongoClient = require('mongodb').MongoClient;
 MongoClient.connect("mongodb+srv://Michele:Arancione6@cluster0-0jqkz.mongodb.net/test?retryWrites=true", { useUnifiedTopology: true }, (err, client) => {
   db.collection = client.db('test').collection('testdb');
@@ -59,7 +60,7 @@ app.post('/register', (req, res) => {
             if (err) res.send("400");
             else res.send("200");
           });
-      }else{
+      } else {
         res.send("300")
       }
     }
@@ -88,16 +89,33 @@ app.post('/add/valutation', (req, res) => {
           });
       } else {
         var comments = doc.comments;
-        comments.push({ commento: req.body.commento, valutazione: req.body.valutazione, utente: req.body.utente })
-        console.log(comments)
-        db.collection.updateOne({ nomelocale: req.body.nomelocale }, { $set: { comments: comments } }, (err, res) => {
-          if (err) res.send("400");
-          else console.log(res)
-        })
+        if (check(doc.comments, req.body.utente)) {
+          comments.push({ commento: req.body.commento, valutazione: req.body.valutazione, utente: req.body.utente })
+          db.collection.updateOne({ nomelocale: req.body.nomelocale }, { $set: { comments: comments } }, (err, res) => {
+            if (err) res.send("400");
+            else console.log(res)
+          })
+        } else {
+          res.send("300");
+        }
       }
     }
   });
 })
+
+check = (comments, user) => {
+  let found = false;
+  comments.map(item => {
+    if (item.utente === user) {
+      found = true;
+    }
+  })
+  if (found) {
+    return false
+  } else {
+    return true
+  }
+}
 
 app.get('/geojson', (req, res) => {
   res.send(getData());

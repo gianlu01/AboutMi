@@ -45,6 +45,8 @@ class ReviewModal extends React.Component {
           alert("Commento pubblicato con successo");
           console.log("toast")
           this.setState({ toastNotification: true })
+        } else {
+          console.log(text)
         }
         return text;
       });
@@ -53,7 +55,6 @@ class ReviewModal extends React.Component {
   };
 
   render() {
-    console.log(this.props)
     return (
       <div>
         {/*
@@ -105,7 +106,7 @@ class ReviewModal extends React.Component {
               <div className="review-container">
                 {this.props.status && this.props.comments.comments.map((body, i) => (
                   <Card style={{
-                    marginBottom:"10px"
+                    marginBottom: "10px"
                   }}>
                     <Card.Header as="h5">{body.utente}</Card.Header>
                     <Card.Body>
@@ -113,12 +114,12 @@ class ReviewModal extends React.Component {
                         rating={body.valutazione}
                         starDimension="35px"
                         starSpacing="15px"
-                        svgIconPath= {starIcon}
+                        svgIconPath={starIcon}
                         svgIconViewBox="0 0 65 65"
                       />
                       <Card.Text
                         style={{
-                          marginTop:"10px"
+                          marginTop: "10px"
                         }}
                       >
                         {body.commento}
@@ -156,7 +157,7 @@ class ReviewModal extends React.Component {
                     changeRating={this.changeRating}
                     numberOfStars={5}
                     name='rating'
-                    svgIconPath= {starIcon}
+                    svgIconPath={starIcon}
                     svgIconViewBox="0 0 65 65"
                   />
                   <textarea style={{
