@@ -170,7 +170,8 @@ class ReviewModal extends React.Component {
                     outline: 'none',
                     caretColor: '#004ffc',
                     background: '#f1f1f1',
-                    fontSize: '.9rem'
+                    fontSize: '.9rem',
+                    marginTop: "20px"
                   }} placeholder="Scrivi qui la tua recensione" onChange={e => this.setState({ commento: e.target.value })}></textarea>
                   <div className="custom-btn" onClick={() => this.addValutation()}>Pubblica Recensione</div>
                 </div>
