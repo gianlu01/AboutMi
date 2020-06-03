@@ -29,16 +29,19 @@
 .go-back-container{
   width: 15%;
   height: 70px;
-  position: absolute;
+  position: relative;
   padding: 11px 0 0 50px;
+  z-index: 999;
 
 }
 
 .welcome-text-container{
-  width: 100%;
+  width: 20%;
   height: 55px;
   position: absolute;
   display: inline-block;
+  top: 0;
+  right: 0;
   .welcome-text{
     position:absolute;
     font-size: 0.95rem;
