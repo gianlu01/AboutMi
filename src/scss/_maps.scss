@@ -1,23 +1,24 @@
 .search-bar-container{
   padding: 11px 0 0 0;
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
   .search-bar{
     outline: none;
     width: 250px;
     max-width: 500px;
-    position: relative;
+    position: absolute;
     border-radius: 4px;
     background: #fff;
     border: solid 2px $colorPrimary;
     transition-duration: 1s;
     padding: 10px;
-    .result-set{
-      z-index: 99;
-      overflow-x: hidden;
-    }
   }
-  
+  .result-set{
+    position: relative;
+    z-index: 9999;
+    overflow-x: hidden;
+  }
 }
 
 .search-bar:hover{
@@ -30,9 +31,9 @@
   width: 15%;
   height: 70px;
   position: relative;
-  padding: 11px 0 0 50px;
+  top: 11px;
+  left: 50px;
   z-index: 999;
-
 }
 
 .welcome-text-container{

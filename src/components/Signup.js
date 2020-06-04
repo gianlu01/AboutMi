@@ -13,7 +13,8 @@ class Signup extends React.Component {
       email: "",
       password: "",
       zona: "",
-      toast: false
+      successToast: false,
+      errorToast: false
     };
   }
 
@@ -34,7 +35,9 @@ class Signup extends React.Component {
     }).then(response => {
       response.text().then((text) => {
         if(text==='200'){
-          this.setState({toast: true})
+          this.setState({successToast: true})
+        } else {
+          this.setState({errorToast: true})
         }
         return text;
       });
@@ -67,15 +70,6 @@ class Signup extends React.Component {
               </section>
               <section className="signup-form">
               <div className="container">
-              {this.state.toast && 
-                <Toast>
-                  <Toast.Header>
-                    <strong className="mr-auto">Perfetto!</strong>
-                  </Toast.Header>
-                  <Toast.Body>Hai completato la registrazione, ora puoi tornare alla HomePage ed effettuare il Login!</Toast.Body>
-                  <Toast.Body style={{display: 'flex', alignItems: 'center'}}><div className="custom-btn" onClick={() => {this.props.router("");}}>Torna indietro</div></Toast.Body>
-                </Toast>
-              }
                 <p>Registarsi è semplice e gratuito, ti basta solo Nome, Cognome e Email!</p>
                 <input placeholder="Nome" onChange={e => {this.setState({nome: e.target.value})}}></input>
                 <input placeholder="Cognome" onChange={e => {this.setState({cognome: e.target.value})}}></input>
@@ -86,6 +80,41 @@ class Signup extends React.Component {
                 <div className="custom-btn" onClick={()=> this.register()}>Registrati</div>
               </div>
               </section>
+
+              {this.state.successToast && 
+                <Toast style={{
+                  position: "absolute",
+                  zIndex: "9999",
+                  margin: "20px",
+                  bottom: 0
+                }}
+                  onClose={() => this.setState({ successToast: false })} show={this.state.successToast} delay={30000} autohide
+                >
+                  <Toast.Header>
+                    <strong className="mr-auto">Perfetto!</strong>
+                  </Toast.Header>
+                  <Toast.Body>Hai completato la registrazione, ora puoi tornare alla HomePage ed effettuare il Login!</Toast.Body>
+                  <Toast.Body><div className="custom-btn" onClick={() => {this.props.router("");}}>Torna indietro</div></Toast.Body>
+                </Toast>
+              }
+
+              {this.state.errorToast && 
+                <Toast style={{
+                  position: "absolute",
+                  zIndex: "9999",
+                  margin: "20px",
+                  bottom: 0
+                }}
+                  onClose={() => this.setState({ errorToast: false })} show={this.state.errorToast} delay={10000} autohide
+                >
+                  <Toast.Header>
+                    <strong className="mr-auto">Attenzione!</strong>
+                  </Toast.Header>
+                  <Toast.Body>Errore durante la registrazione. Esiste gia un utente con questa <strong>email</strong> o con questo 
+                  <strong> username</strong>!</Toast.Body>
+                </Toast>
+              }
+
         </main>
     );
   }

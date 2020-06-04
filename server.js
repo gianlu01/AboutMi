@@ -44,24 +44,33 @@ app.post('/login', (req, res) => {
 });
 //register handler
 app.post('/register', (req, res) => {
-  db.collection.findOne({ username: req.body.username, password: req.body.password }, (err, doc) => {
+  db.collection.findOne({ username: req.body.username }, (err, doc) => {
     if (err) res.send("400");
     else {
       if (doc === null) {
-        db.collection.insertOne(
-          {
-            username: req.body.username,
-            password: req.body.password,
-            nome: req.body.nome,
-            cognome: req.body.cognome,
-            email: req.body.email,
-            zona: req.body.zona
-          }, (err, doc) => {
-            if (err) res.send("400");
-            else res.send("200");
-          });
+        db.collection.findOne({ email: req.body.email }, (err, doc2) => {
+          if (err) res.send("400");
+          else {
+            if (doc2 === null) {
+              db.collection.insertOne(
+                {
+                  username: req.body.username,
+                  password: req.body.password,
+                  nome: req.body.nome,
+                  cognome: req.body.cognome,
+                  email: req.body.email,
+                  zona: req.body.zona
+                }, (err, doc) => {
+                  if (err) res.send("400");
+                  else res.send("200");
+                });
+            } else {
+              res.send("301") //esiste gia una email
+            }
+          }
+        })
       } else {
-        res.send("300")
+        res.send("300") //esiste gia un utente
       }
     }
   })

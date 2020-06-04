@@ -746,7 +746,7 @@ section.section-eventi .container .text-wrapper {
 }
 
 .welcome-text-container {
-  width: 20%;
+  width: 100%;
   height: 55px;
   position: absolute;
   display: inline-block;

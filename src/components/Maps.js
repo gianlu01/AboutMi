@@ -46,7 +46,8 @@ class Maps extends React.Component {
       geoLocation: [],
       valutations: [0],
       commentsAvaible: false,
-      reviewToast: false
+      reviewToast: false,
+      NoLocalToast: false
     }
   }
 
@@ -120,11 +121,12 @@ class Maps extends React.Component {
       }
       var result = turf.pointsWithinPolygon(c, this.drawControl.draw.getAll());
       if (result.features.length <= 0) {
-        alert("Nessun locale trovato")
+        this.setState({NoLocalToast: true});
       } else {
         this.setState({
           stato: true,
-          markers: result
+          markers: result,
+          NoLocalToast: false
         });
       }
     };
@@ -274,6 +276,22 @@ class Maps extends React.Component {
             </Toast>
           }
 
+          {this.state.NoLocalToast &&
+            <Toast style={{
+              position: "absolute",
+              zIndex: "9999",
+              margin: "20px",
+              bottom: 0
+            }}
+              onClose={() => this.setState({ NoLocalToast: false })} show={this.state.NoLocalToast} delay={5000} autohide
+            >
+              <Toast.Header>
+                <strong className="mr-auto">Attenzione!</strong>
+              </Toast.Header>
+              <Toast.Body>Non siamo riusciti a trovare un locale nell'area da te selezionata!</Toast.Body>
+            </Toast>
+          }
+
           <div className="go-back-container">
             <div className="custom-btn" onClick={() => { this.props.router(""); }}>Torna indietro</div>
           </div>
@@ -311,18 +329,23 @@ class Maps extends React.Component {
               <input className="search-bar" autocomplete="off" placeholder='Search Places' id="search" onChange={e => {
                 autocomplete(e);
               }}></input>
-              <div className="result-setz">
+              <div className="result-set">
                 {this.state.autocomplete.map((a, i) => (
-                  <div key={i} style={{ padding: '1px', cursor: 'pointer', backgroundColor: '#fff', borderBottom: '1px solid #d4d4d4' }} onClick={e => {
-                    document.getElementById('search').value = a.properties.insegna;
-                    this.setState({
-                      mapCenter: a.geometry.coordinates,
-                      autocomplete: [],
-                      stato: true,
-                      markers: {
-                        type: "FeatureCollection",
-                        features: [a]
-                      }
+                  <div key={i} style={{ 
+                    padding: '1px', 
+                    cursor: 'pointer', 
+                    backgroundColor: '#fff', 
+                    borderBottom: '1px solid #d4d4d4' }} onClick={
+                      e => {
+                      document.getElementById('search').value = a.properties.insegna;
+                      this.setState({
+                        mapCenter: a.geometry.coordinates,
+                        autocomplete: [],
+                        stato: true,
+                        markers: {
+                          type: "FeatureCollection",
+                          features: [a]
+                        }
                     })
                     markerClicked(a);
                   }}>{a.properties.insegna}</div>
