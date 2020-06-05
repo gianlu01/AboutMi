@@ -47,7 +47,8 @@ class Maps extends React.Component {
       valutations: [0],
       commentsAvaible: false,
       reviewToast: false,
-      NoLocalToast: false
+      NoLocalToast: false,
+      duplicatedCommentToast: false
     }
   }
 
@@ -184,6 +185,12 @@ class Maps extends React.Component {
 
     const ShowReviewToast = () => {
       this.setState({ reviewToast: true });
+      this.setState({ duplicatedCommentToast: false });
+    }
+
+    const ShowDuplicatedCommentToast = () => {
+      this.setState({ reviewToast: false });
+      this.setState({ duplicatedCommentToast: true });
     }
 
     return (
@@ -255,6 +262,7 @@ class Maps extends React.Component {
                 canComment={this.props.status}
                 user={this.props.user}
                 showReviewToast={ShowReviewToast}
+                showDuplicatedCommentToast={ShowDuplicatedCommentToast}
               ></ReviewModal>
             </Popup>)}
 
@@ -273,6 +281,24 @@ class Maps extends React.Component {
                 <strong className="mr-auto">Perfetto</strong>
               </Toast.Header>
               <Toast.Body>Il tuo commento è stato pubblicato con successo! Grazie della recensione.</Toast.Body>
+            </Toast>
+          }
+
+          {this.state.duplicatedCommentToast &&
+            <Toast style={{
+              position: "absolute",
+              zIndex: "9999",
+              margin: "20px",
+              bottom: 0
+            }}
+
+              onClose={() => this.setState({ duplicatedCommentToast: false })} show={this.state.duplicatedCommentToast} delay={5000} autohide
+
+            >
+              <Toast.Header>
+                <strong className="mr-auto">Attenzione!</strong>
+              </Toast.Header>
+              <Toast.Body>Hai gia recensito questo locale!</Toast.Body>
             </Toast>
           }
 

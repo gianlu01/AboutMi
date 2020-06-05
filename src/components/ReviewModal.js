@@ -13,7 +13,6 @@ class ReviewModal extends React.Component {
     this.state = {
       commento: "",
       valutazione: 0,
-      toastNotification: false,
       rating: 0
     }
   }
@@ -27,7 +26,7 @@ class ReviewModal extends React.Component {
 
   addValutation = () => {
     console.log("starred")
-    this.props.showReviewToast(true);
+    
     const t = fetch("/add/valutation", {
       method: "POST",
       headers: {
@@ -44,9 +43,12 @@ class ReviewModal extends React.Component {
         if (text === "200") {
           alert("Commento pubblicato con successo");
           console.log("toast")
-          this.setState({ toastNotification: true })
+          this.props.showReviewToast(true);
+          this.props.showDuplicatedCommentToast(false);
         } else {
           console.log(text)
+          this.props.showReviewToast(false);
+          this.props.showDuplicatedCommentToast(true);
         }
         return text;
       });
