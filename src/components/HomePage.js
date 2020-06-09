@@ -11,12 +11,12 @@ class HomePage extends React.Component {
 
 
         return (
-            <main>
+            <main id="site">
                 <section className="section-bar">
                     <div className="bg-filter"></div>
                     <div className="container">
                         <div className="text-wrapper">
-                            <h2 className="h2-title">Aperitivo a Milano!?</h2>
+                            <h2 className="h2-title">Aperitivo a Milano</h2>
                             <p className="paragraph">Ricerca il Bar più adatto a te tra tutti quelli nella città di Milano. Organizza un apertivo con i tuoi amici e goditi la città meneghina.</p>
                             <div className="custom-btn" onClick={() => {this.props.router("maps");}}>Vedi mappa</div>
                         </div>
@@ -26,7 +26,7 @@ class HomePage extends React.Component {
                     <div className="bg-filter"></div>
                     <div className="container">
                         <div className="text-wrapper">
-                            <h2 className="h2-title">Sabato sera a Milano?</h2>
+                            <h2 className="h2-title">Sabato sera a Milano</h2>
                             <p className="paragraph">Diverti e svagati nella movida milanese assieme ai tuoi amici: ricerca il locale o discoteca più adatto a te e ai gusti dei tuoi soci!</p>
                             <div className="custom-btn" onClick={() => {this.props.router("maps");}}>Vedi mappa</div>
                         </div>

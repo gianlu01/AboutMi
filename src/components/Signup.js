@@ -64,7 +64,7 @@ class Signup extends React.Component {
                     </div>
                     <div className="column">
                       <h3>Contribuire</h3>
-                      <p>Interagendo con il nostro sito darai la possibilità ai locali meneghini di milgiorarsi creando l'ambiente perfetto per te e per gli altri.</p>
+                      <p>Interagendo con il nostro sito darai la possibilità ai locali meneghini di migliorarsi  creando l'ambiente perfetto per te e per gli altri.</p>
                     </div>
                 </div>
               </section>

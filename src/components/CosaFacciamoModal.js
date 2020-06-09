@@ -55,8 +55,8 @@ class CosaFacciamoModal extends React.Component {
                         <li>Mongo DB Compass</li>
                         <li>Amazon AWS</li>
                     </ul>
-                    Grazie all'utilizzo di esse siamo riusciti a sviluppare questo sito per poterlo esporre al nostro orale di maturità, inotlre grazie ad esso speriamo 
-                    di poter aiutare tanti cittandini Milanesi, tanti giovani e magari anche tanti turisti in cerca di buon cibo, dirnk e divertimento!
+                    Grazie all'utilizzo di esse siamo riusciti a sviluppare questo sito per poterlo esporre al nostro orale di maturità. Inoltre grazie ad esso speriamo 
+                    di poter aiutare tanti cittandini Milanesi, tanti giovani e magari anche tanti turisti in cerca di buon cibo, drink e divertimento!
                 </label>
               </div>
             </div>

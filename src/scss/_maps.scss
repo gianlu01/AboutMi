@@ -3,6 +3,7 @@
   position: relative;
   display: inline-flex;
   justify-content: center;
+  top: -72px;
   .search-bar{
     outline: none;
     width: 250px;
@@ -18,6 +19,7 @@
     position: relative;
     z-index: 9999;
     overflow-x: hidden;
+    top: 44px;
   }
 }
 

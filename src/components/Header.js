@@ -13,7 +13,6 @@ class Header extends React.Component {
   }
 
 
-
   render() {
     const maps = (<Maps />);
     const header = (<header>
@@ -24,7 +23,7 @@ class Header extends React.Component {
               <div className="text-wrapper">
                 <span className="brand">ABOUTMI</span>
                 <h1 className="h1-title-dark">Esplora Milano tra Bar, Pub, Ristoranti e Discoteche.</h1>
-                <div className="custom-btn">Visita il sito</div>
+                <a href="#site"><div className="custom-btn" >Visita il sito</div></a>
               </div>
               <div className="card-wrapper">
                 <div className="card">
