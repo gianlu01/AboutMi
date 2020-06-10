@@ -1,15 +1,23 @@
+//import delle librerie necessarie al sever
 const express = require('express');
+//instanza in app del metodo .express()
 const app = express();
+//helmet: libreria che implementa alcune feature di sicurezza
 const helmet = require('helmet');
+//libreria nativa di node, per l'utilizzo delle path
 const path = require('path');
+
 const axios = require('axios');
 var db = {};
 
+//import dell'SDK e la connessione
 var MongoClient = require('mongodb').MongoClient;
-MongoClient.connect("mongodb+srv://Michele:Arancione6@cluster0-0jqkz.mongodb.net/test?retryWrites=true", { useUnifiedTopology: true }, (err, client) => {
+MongoClient.connect("mongodb+srv://Michele:<password>6@cluster0-0jqkz.mongodb.net/test?retryWrites=true", { useUnifiedTopology: true }, (err, client) => {
   db.collection = client.db('test').collection('testdb');
   if (err) console.log(err);
 });
+
+
 
 const getData = async () => {
   try {
@@ -23,13 +31,15 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 //helmet provides a security features
 app.use(helmet());
+
+//diciamo a express di utilizzare il formato JSON per lo scambio di dati tra client e server
 app.use(express.json());
 
-
+//rotta di default alla quale resitutire la build di react
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-//login handler
+//rotta dalla quale ricevere le informazioni per il login
 app.post('/login', (req, res) => {
   db.collection.findOne({ username: req.body.username, password: req.body.password }, (err, doc) => {
     if (err) res.send("400");
@@ -130,7 +140,7 @@ app.get('/geojson', (req, res) => {
   res.send(getData());
 });
 
-//specify the port were listen to
+//specifchiamo la porta su cui rimanere in ascolto
 app.listen(8081, () => {
   console.log('server started on port 80');
 });
