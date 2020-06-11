@@ -64,13 +64,13 @@ class Signup extends React.Component {
                     </div>
                     <div className="column">
                       <h3>Contribuire</h3>
-                      <p>Interagendo con il nostro sito darai la possibilità ai locali meneghini di migliorarsi  creando l'ambiente perfetto per te e per gli altri.</p>
+                      <p>Interagendo con il nostro sito darai la possibilità ai locali meneghini di migliorarsi creando l'ambiente perfetto per te e per gli altri.</p>
                     </div>
                 </div>
               </section>
               <section className="signup-form">
               <div className="container">
-                <p>Registarsi è semplice e gratuito, ti basta solo Nome, Cognome e Email!</p>
+                <p>Registarsi è semplice e gratuito, ti basta solo Nome, Cognome, Username e Email!</p>
                 <input placeholder="Nome" onChange={e => {this.setState({nome: e.target.value})}}></input>
                 <input placeholder="Cognome" onChange={e => {this.setState({cognome: e.target.value})}}></input>
                 <input placeholder="Username" onChange={e => {this.setState({username: e.target.value})}}></input>
@@ -110,7 +110,7 @@ class Signup extends React.Component {
                   <Toast.Header>
                     <strong className="mr-auto">Attenzione!</strong>
                   </Toast.Header>
-                  <Toast.Body>Errore durante la registrazione. Esiste gia un utente con questa <strong>email</strong> o con questo 
+                  <Toast.Body>Errore durante la registrazione. Esiste già un utente con questa <strong>email</strong> o con questo 
                   <strong> username</strong>!</Toast.Body>
                 </Toast>
               }

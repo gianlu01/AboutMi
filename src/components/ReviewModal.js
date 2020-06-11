@@ -59,23 +59,6 @@ class ReviewModal extends React.Component {
   render() {
     return (
       <div>
-        {/*
-          this.state.toastNotification && 
-          <div style={{ position: 'absolute',minHeight: '100px', zIndex: '9999'}}>
-            <Toast
-              style={{
-                position: 'absolute',
-                top: 0,
-                right: 0,
-              }}>
-              <Toast.Header>
-                <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-                <strong className="mr-auto">Bootstrap</strong>
-                <small>just now</small>
-              </Toast.Header>
-              <Toast.Body>See? Just like this.</Toast.Body>
-            </Toast>
-          </div> */}
         <Modal
           {...this.props}
           size="lg"
@@ -192,13 +175,12 @@ class ReviewModal extends React.Component {
                 width: '100%',
                 color: '#777',
                 fontWeight: '900'
-              }}>Per pubblicare una recesione devi prima possedere un account!</div>
+              }}>Per pubblicare una recensione devi prima possedere un account!</div>
               <div className="custom-btn" onClick={() => { this.props.router(""); }}>Accedi o Registrati</div>
             </Modal.Footer>}
         </Modal>
       </div>
     );
   }
-
 }
 export default ReviewModal;

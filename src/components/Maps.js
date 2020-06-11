@@ -215,14 +215,6 @@ class Maps extends React.Component {
             )}
           </Layer>
 
-          {/*geolocalizzazione
-
-          <Layer type="symbol" id="marker" layout={layout} images={images} >
-            <Feature style={{ cursor: 'pointer' }} coordinates={this.state.geoLocation}/>  
-          </Layer> 
-
-          */}
-
           <DrawControl
             onDrawCreate={onDrawCreate}
             onDrawDelete={onDrawDelete}

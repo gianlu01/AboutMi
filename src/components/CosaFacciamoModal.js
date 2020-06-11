@@ -51,7 +51,7 @@ class CosaFacciamoModal extends React.Component {
                     <ul>
                         <li>Node JS</li>
                         <li>React JS</li>
-                        <li>SCSS</li>
+                        <li>SASS</li>
                         <li>Mongo DB Compass</li>
                         <li>Amazon AWS</li>
                     </ul>

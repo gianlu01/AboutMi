@@ -63,19 +63,6 @@ class Nav extends React.Component {
 
           </div>
         </nav >
-      {/*
-        <Modal show={this.state.show} onHide={hideModal}>
-          <ModalHeader closeButton>
-            <ModalTitle>
-              Login Modal
-            </ModalTitle>
-          </ModalHeader>
-          <ModalBody>
-            <p> Prova Modal </p>
-          </ModalBody>
-        </Modal> 
-        
-        */}
       </div>
       );
   }

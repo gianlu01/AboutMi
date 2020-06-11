@@ -27,7 +27,7 @@ class Header extends React.Component {
               </div>
               <div className="card-wrapper">
                 <div className="card">
-                  <p>Scopri gli eventi più adatti a te nella tua zona!</p>
+                  <p>Scopri i locali più adatti a te nella tua zona!</p>
                   <div className="custom-btn" onClick={() => {this.props.router("maps");}}>Vedi mappa</div>
                 </div>
               </div>
