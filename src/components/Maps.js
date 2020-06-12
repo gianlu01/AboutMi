@@ -12,12 +12,11 @@ import ReviewModal from './ReviewModal.js';
 import StarRatings from 'react-star-ratings';
 import Toast from 'react-bootstrap/Toast';
 //import Dati from '../data/Dati.json'
-//accessToken: 'pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A';
 //site URL: mapbox://styles/gianlu01/ck5z9olku3d2r1jov9drsa1uu
 //geoJson URL: http://dati.comune.milano.it/dataset/ds252-economia-locali-pubblico-spettacolo/resource/e5e1c5ed-03b9-415e-9880-a2c163e4973f/view/76fa6876-f208-440f-a57c-6b3d71e52278
 
 const Map = ReactMapboxGl({
-  accessToken: "pk.eyJ1IjoiZ2lhbmx1MDEiLCJhIjoiY2s1ejQ0a2gyMDY5NjNtcWp5cGF4Y21wMiJ9.S2-22wqQvv8B0aiya-Mh7A",
+  accessToken: "<Access Token>",
   minZoom: 11,
   maxZoom: 17
 });
